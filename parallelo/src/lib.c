@@ -112,4 +112,34 @@ void merge_sort(int* data,int left,int right){
 }
 
 
+void merge_sort_omp(int* data,int left,int right){
+  if(left < right) {
+    int center = (left + right) / 2;
 
+    // Usa tasks solo se la dimensione giustifica l'overhead
+    if(right - left >= MIN_ACTIVATION) {
+      #pragma omp task shared(data) firstprivate(left, center)
+      merge_sort_omp(data, left, center);
+
+      #pragma omp task shared(data) firstprivate(center, right)  
+      merge_sort_omp(data, center + 1, right);
+
+      #pragma omp taskwait  // Attende completamento entrambi i task
+    } else {
+      // Per array piccoli, usa versione sequenziale
+      merge_sort(data, left, center);
+      merge_sort(data, center + 1, right);
+    }
+
+    merge(data, left, center, right);
+  }
+
+}
+
+void merge_sort_omp_start(int* data,int left,int right){
+#pragma omp parallel
+    {
+        #pragma omp single  // Solo un thread crea i task iniziali
+        merge_sort_omp(data, left , right);
+    }
+}

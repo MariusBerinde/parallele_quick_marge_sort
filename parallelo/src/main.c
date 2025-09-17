@@ -7,8 +7,8 @@ float tdiff(struct timeval *start,struct timeval *end){
 
 
 void mini_test_quick_sort(){
-    int MAX=7;
-	int v[]={5,4,4,3,2,1,11};
+	int MAX=6;
+	int v[]={5,4,3,2,1,11};
 	printf("[%s]: Vettore prima dell'ordinamento :",__func__);
   
   
@@ -77,7 +77,7 @@ void big_test_merge_sort(){
 
   gettimeofday(&start, NULL);
 
-	merge_sort(data,0,MAX-1);
+	merge_sort_omp_start(data,0,MAX-1);
 
   gettimeofday(&end, NULL);
   non_ordinalto=1;
@@ -92,13 +92,13 @@ void big_test_merge_sort(){
     printf("[%s] errore con merge sort\n",__func__);
   else{
 
-    printf("[%s] merge sort ok, tempo di esecuzione ordinamento : %0.6f effettuato con %d elementi\n",__func__, tdiff(&start, &end),MAX);
+    printf("[%s] merge sort ok, tempo di esecuzione ordinamento : %0.6f effettuato con %d elementi e %d threads\n",__func__, tdiff(&start, &end),MAX,omp_get_max_threads());
 	}
 
 }
 
 void test_big_quick_sort(){
-  int MAX=1<<15; //2^19 elementi 
+  int MAX=1<<19; //2^19 elementi 
 //  int MAX=7; //2^19 elementi 
    system("cls");
     srand(time(0));
@@ -151,12 +151,11 @@ void test_big_quick_sort(){
   if(non_ordinalto==0)
     printf("[%s] errore con quick sort\n",__func__);
   else{
-    printf("[%s] quick sort ok, tempo di esecuzione ordinamento : %0.6f effettuato con %d elementi\n",__func__, tdiff(&start, &end),MAX);
+    printf("[%s] quick sort ok, tempo di esecuzione ordinamento : %0.6f effettuato con %d elementi e %d threads\n",__func__, tdiff(&start, &end),MAX, omp_get_max_threads());
 	}
-
 }
 int main(){
-//	mini_test_quick_sort();
+	//mini_test_quick_sort();
  // mini_test_merge();
 
   
