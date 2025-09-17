@@ -1,18 +1,24 @@
-OUT = out
-SRC = src
+CC = gcc
+CFLAGS = -Wall -g
+SRCDIR = src
+OUTDIR = out
+SOURCES = $(SRCDIR)/main.c $(SRCDIR)/lib.c
+TARGET = $(OUTDIR)/main.exe
 
-compila:
-	gcc $(SRC)/main.c $(SRC)/lib.c  -o $(OUT)/main
+# Crea la directory out se non esiste e compila
+$(TARGET): $(SOURCES) | $(OUTDIR)
+	$(CC) $(CFLAGS) -o $(TARGET) $(SOURCES)
 
-esegui:compila
-	./out/main
+# Crea la directory out
+$(OUTDIR):
+	if not exist $(OUTDIR) mkdir $(OUTDIR)
 
-
-compila_lib:
-	gcc src/lib.c -o out/lib
-
-lib:compila_lib
-	./out/lib
-
+# Pulisce i file generati
 clean:
-	rv -v -c out/*
+	rm -I $(OUTDIR)/*
+
+# Esegue il programma
+run: $(TARGET)
+	$(TARGET)
+
+.PHONY: clean run
