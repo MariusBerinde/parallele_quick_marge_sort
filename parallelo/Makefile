@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -g -fopenmp
+CFLAGS = -Wall -g -fopenmp -O3
 SRCDIR = src
 OUTDIR = out
 SOURCES = $(SRCDIR)/main.c $(SRCDIR)/lib.c

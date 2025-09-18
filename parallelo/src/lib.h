@@ -11,10 +11,12 @@ void quick_sort(int *data,int basso,int alto);
 
 void merge(int* data,int low,int mid,int high);
 
-
 void merge_sort(int* data,int left,int right);
 
 void merge_sort_omp(int* data,int left,int right);
 
-
 void merge_sort_omp_start(int* data,int left,int right);
+
+void quick_sort_omp_start(int *data,int basso,int alto);
+
+void quick_sort_omp(int *data,int basso,int alto);

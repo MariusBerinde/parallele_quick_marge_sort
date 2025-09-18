@@ -30,6 +30,7 @@ int partition(int *data,int basso,int alto){
 }
 
 
+
 /** implementazione di quick sort ricorsivo**/
 
 void quick_sort(int *data,int basso,int alto){
@@ -38,6 +39,36 @@ void quick_sort(int *data,int basso,int alto){
     quick_sort(data,basso,pivot-1);
     quick_sort(data,pivot+1,alto);
   }
+
+}
+
+
+void quick_sort_omp(int *data,int basso,int alto){
+  if(basso<alto){
+    int pivot = partition(data,basso,alto);
+  if(alto - basso >= MIN_ACTIVATION) {
+      #pragma omp task shared(data) firstprivate(basso)
+      quick_sort_omp(data,basso,pivot-1);
+
+      #pragma omp task shared(data) firstprivate(alto)
+      quick_sort_omp(data,pivot+1,alto);
+
+      #pragma omp taskwait
+
+    }else{
+
+    quick_sort(data,basso,pivot-1);
+    quick_sort(data,pivot+1,alto);
+    }
+  }
+
+}
+void quick_sort_omp_start(int *data,int basso,int alto){
+#pragma omp parallel
+    {
+        #pragma omp single  // Solo un thread crea i task iniziali
+        quick_sort_omp(data, basso , alto);
+    }
 
 }
 
