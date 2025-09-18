@@ -121,23 +121,25 @@ void merge(int* data,int low,int mid,int high){
 
 }
 
-void merge_omp(int* src, int* restrict dst, int left, int mid, int right){
+void merge_omp(int* restrict src, int* restrict dst, int left, int mid, int right){
 
-    int i = left, j = mid + 1, k = left;
+  int i = left, j = mid + 1, k = left;
 
-    while (i <= mid && j <= right) {
-        if (src[i] <= src[j]) dst[k++] = src[i++];
-        else                  dst[k++] = src[j++];
-    }
-    while (i <= mid)  dst[k++] = src[i++];
-    while (j <= right) dst[k++] = src[j++];
+  while (i <= mid && j <= right) {
+    if (src[i] <= src[j])
+      dst[k++] = src[i++];
+    else
+      dst[k++] = src[j++];
+  }
+  while (i <= mid)  dst[k++] = src[i++];
+  while (j <= right) dst[k++] = src[j++];
 }
 
 /**
   * main corp of merge sort :
-  * data Ã¨ l'array dei dati 
-  * left Ã¨ l'estremo inferiore su cui effettuare l'ordinamento
-  * right Ã¨ l'estremo superiore su cui effettuare l'ordinamento
+  * data è l'array dei dati 
+  * left è l'estremo inferiore su cui effettuare l'ordinamento
+  * right è l'estremo superiore su cui effettuare l'ordinamento
 */
 void merge_sort(int* data,int left,int right){
   if(left<right){
@@ -148,17 +150,17 @@ void merge_sort(int* data,int left,int right){
     //indipendente
     merge_sort(data,center+1,right);
     //qui collect di dati 
-    merge(data,left,center,right); // Ã¨ possibile parallellelizzarla
+    merge(data,left,center,right); // è possibile parallellelizzarla
     
   }
 }
 
 
-void merge_sort_omp(int* data,int *tmp_buffer,int level,int left,int right){
+void merge_sort_omp(int* restrict data,int* restrict tmp_buffer,int level,int left,int right){
 	if(left < right) {
 		int center = (left + right) / 2;
 
-		if(right - left >= MIN_ACTIVATION) {
+		if(right - left >= MIN_ACTIVATION && level < 5) {
 			#pragma omp task shared(data) firstprivate(left, center)
 			merge_sort_omp(data,tmp_buffer,level+1, left, center);
 

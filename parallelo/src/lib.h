@@ -22,4 +22,9 @@ void quick_sort_omp(int *data,int basso,int alto);
 
 void merge_omp(int* restrict src, int* restrict dst, int left, int mid, int right);
 
+/** entry point for the function that perform the merge sort using omp library 
+ * data : the buffer 
+ * left : the base of the position where the algoritm 
+ * right: the top position
+ */
 void merge_sort_omp_start(int* data,int left,int right);
