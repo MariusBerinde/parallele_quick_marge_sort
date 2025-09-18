@@ -84,7 +84,6 @@ void merge(int* data,int low,int mid,int high){
   int n2 = high-mid;
   int tmpLeft[n1],tmpRight[n2];
 
-  // sono in lettura dei dati quindi posso caricare in contemporanea left e right  possono essere messi in delle sections 
   for (i=0;i<n1;i++) {
     tmpLeft[i] = data[low+i];
   }
@@ -122,6 +121,18 @@ void merge(int* data,int low,int mid,int high){
 
 }
 
+void merge_omp(int* src, int* restrict dst, int left, int mid, int right){
+
+    int i = left, j = mid + 1, k = left;
+
+    while (i <= mid && j <= right) {
+        if (src[i] <= src[j]) dst[k++] = src[i++];
+        else                  dst[k++] = src[j++];
+    }
+    while (i <= mid)  dst[k++] = src[i++];
+    while (j <= right) dst[k++] = src[j++];
+}
+
 /**
   * main corp of merge sort :
   * data Ã¨ l'array dei dati 
@@ -143,34 +154,51 @@ void merge_sort(int* data,int left,int right){
 }
 
 
-void merge_sort_omp(int* data,int left,int right){
-  if(left < right) {
-    int center = (left + right) / 2;
+void merge_sort_omp(int* data,int *tmp_buffer,int level,int left,int right){
+	if(left < right) {
+		int center = (left + right) / 2;
 
-    // Usa tasks solo se la dimensione giustifica l'overhead
-    if(right - left >= MIN_ACTIVATION) {
-      #pragma omp task shared(data) firstprivate(left, center)
-      merge_sort_omp(data, left, center);
+		if(right - left >= MIN_ACTIVATION) {
+			#pragma omp task shared(data) firstprivate(left, center)
+			merge_sort_omp(data,tmp_buffer,level+1, left, center);
 
-      #pragma omp task shared(data) firstprivate(center, right)  
-      merge_sort_omp(data, center + 1, right);
+			#pragma omp task shared(data) firstprivate(center, right)  
+			merge_sort_omp(data,tmp_buffer,level+1 ,center + 1, right);
 
-      #pragma omp taskwait  // Attende completamento entrambi i task
-    } else {
-      // Per array piccoli, usa versione sequenziale
-      merge_sort(data, left, center);
-      merge_sort(data, center + 1, right);
-    }
+			#pragma omp taskwait  
+		} else {
+			// Per array piccoli, usa versione sequenziale
+			merge_sort(data, left, center);
+			merge_sort(data, center + 1, right);
+		}
 
-    merge(data, left, center, right);
-  }
+		if (level % 2 == 0) {
+			merge_omp(data, tmp_buffer, left, center, right);
+		} else {
+			merge_omp(tmp_buffer, data, left, center, right);
+		}
+
+
+	}
 
 }
 
+
+
 void merge_sort_omp_start(int* data,int left,int right){
-#pragma omp parallel
+    int n = right-left+1;
+    int* tmp_buffer;
+    posix_memalign((void**)&tmp_buffer, 64, n * sizeof(int));
+
+    #pragma omp parallel 
     {
-        #pragma omp single  // Solo un thread crea i task iniziali
-        merge_sort_omp(data, left , right);
+        #pragma omp single  
+        merge_sort_omp(data,tmp_buffer,0, left , right);
     }
+
+    // Se il risultato finale Š in tmp_buffer, copia in data
+    // Dopo livello 0 (pari)  scrive in tmp_buffer
+    memcpy(data, tmp_buffer, n * sizeof(int));
+
+    free(tmp_buffer);
 }

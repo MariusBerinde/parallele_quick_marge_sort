@@ -68,7 +68,7 @@ void gen_random_numbers(int *array, int len, int min, int max){
 */
 void big_test_merge_sort(){
   int MAX=1<<20; //2^19 elementi 
-   system("cls");
+   //system("cls");
     srand(time(0));
   int data[MAX];
   gen_random_numbers(data,MAX,0,2*MAX);
@@ -110,7 +110,7 @@ void big_test_merge_sort(){
 
 void test_big_quick_sort(){
   int MAX=1<<19; //2^19 elementi 
-   system("cls");
+   //system("cls");
     srand(time(0));
   int data[MAX];
   gen_random_numbers(data,MAX,0,2*MAX);
@@ -179,7 +179,6 @@ void ben_quick_sort_mpi(){
 	float speed_up = 0;
 	float eff = 0;
 
-	system("cls");
 	srand(time(0));
 	int data_seq[SIZE];
 	int data_parall[SIZE];
@@ -237,7 +236,6 @@ void ben_merge_sort_mpi(){
 	float speed_up = 0;
 	float eff = 0;
 
-	system("cls");
 	srand(time(0));
 	int data_seq[SIZE];
 	int data_parall[SIZE];
@@ -271,8 +269,8 @@ void ben_merge_sort_mpi(){
   printf("numero thread = %d\n", nr_threads);
   printf("tempo di esecuzione sequenziale %0.6f\n", execution_time_sequenzial);
   printf("tempo di esecuzione parallelo %0.6f\n", execution_time_parallel);
-  printf("SPEEDUP = %f\n", speed_up);
-  printf("EFFICIENZA %f\n", eff);
+  printf("SPEEDUP = %0.2f\n", speed_up);
+  printf("EFFICIENZA %0.2f\n", eff);
   printf("correttezza sequenziale %s\n",(isOrdered(data_seq, SIZE)==0 ? "OK" : "Errore"));
   printf("correttezza parallelo %s\n", (isOrdered(data_parall, SIZE)==0 ? "OK" : "Errore"));
 }
