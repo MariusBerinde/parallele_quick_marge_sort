@@ -1,5 +1,5 @@
 #include "lib.h"
-
+//#include <errno.h>
 //crono e thread sono usate per prendere prestazioni codice
 float tdiff(struct timeval *start,struct timeval *end){
   return (end->tv_sec-start->tv_sec) + 1e-6 * (end->tv_usec-start->tv_usec);
@@ -56,13 +56,19 @@ void gen_random_numbers(int *array, int len, int min, int max){
 	* funzione per testare tempi di sviluppo con 2^19 elementi
 */
 void big_test_merge_sort(){
-  int MAX=1<<20; //2^19 elementi 
-   system("cls");
+  int SIZE = 1<<19; //2^19 elementi 
     srand(time(0));
-  int data[MAX];
-  gen_random_numbers(data,MAX,0,2*MAX);
+  int *data = malloc(SIZE * sizeof(int));
+
+	if(data == NULL){
+		perror("Errore creazione array data , arresto forzato\n");
+
+		//printf("[%s] Errore creazione array data seq di %d element arresto forzato\n",__func__,SIZE);
+		exit(1);
+	}
+  gen_random_numbers(data,SIZE,0,2*SIZE);
   int non_ordinalto = 1;
-  for(int i=0;i<MAX-1;i++){
+  for(int i=0;i<SIZE-1;i++){
     if(data[i]>data[i+1]){
       non_ordinalto=0;
       break;
@@ -77,12 +83,12 @@ void big_test_merge_sort(){
 
   gettimeofday(&start, NULL);
 
-	merge_sort(data,0,MAX-1);
+	merge_sort(data,0,SIZE-1);
 
   gettimeofday(&end, NULL);
   non_ordinalto=1;
 
-  for(int i=0;i<MAX-1;i++){
+  for(int i=0;i<SIZE-1;i++){
     if(data[i]>data[i+1]){
       non_ordinalto=0;
       break;
@@ -92,9 +98,9 @@ void big_test_merge_sort(){
     printf("[%s] errore con merge sort\n",__func__);
   else{
 
-    printf("[%s] merge sort ok, tempo di esecuzione ordinamento : %0.6f effettuato con %d elementi\n",__func__, tdiff(&start, &end),MAX);
+    printf("[%s] merge sort ok, tempo di esecuzione ordinamento : %0.6f effettuato con %d elementi\n",__func__, tdiff(&start, &end),SIZE);
 	}
-
+free(data);
 }
 
 void test_big_quick_sort(){
@@ -155,12 +161,25 @@ void test_big_quick_sort(){
 	}
 
 }
+void test_perror(){
+	int a = 5;
+	int* b = &a;
+	printf("[%s] valore di a %d \t valore di b %p \n",__func__,a,b);
+	b=NULL;
+	if(b==NULL){
+		perror("errore b null");
+	}
+
+
+
+}
 int main(){
+	test_perror();
 //	mini_test_quick_sort();
  // mini_test_merge();
 
   
-  big_test_merge_sort();
+  //big_test_merge_sort();
   //test_big_quick_sort();
 
   return 0;
