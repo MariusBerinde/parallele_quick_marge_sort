@@ -164,14 +164,85 @@ void test_init(){
 
 
 
-void binary_merge_tree(int *data,size_t len){
-  if(NULL == data){
+/**
+ * funzione che implementa la strategia del binary merge tree 
+ * funiziona bene quando il numero di nodi mpi è una potenza di 2
+ *
+ * data è un array di nodi locale di tipo int 
+ * len è la lunghezza di data
+ */
+ 
+void binary_merge_tree(int **data,size_t *len){
+  if(NULL == *data || NULL == data){
     printf("[%s] Errore: puntatore a dati da mergiare nullo\n",__func__);
     MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
   }
-  if(len==0){
+  if(NULL==len){
+    printf("[%s] Errore: puntatore a len  nullo\n",__func__);
+    MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
+  }
+  if(*len==0){
     printf("[%s] Errore: ",__func__);
     MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
+  }
+	int my_rank =-1,nr_nodes=-1;
+	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+	MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
+
+  printf("[%s,%d],valore locale array:{",__func__,my_rank);
+  for(size_t i=0;i< (*len);i++)
+    printf("%d,", (*data)[i]); 
+  printf("}\n");
+
+  double exact_nr_rounds = log2((double)nr_nodes);
+  size_t nr_rounds = (size_t) exact_nr_rounds;
+  #ifdef DEBUG
+  if(my_rank==0){
+    printf("[%s,%d] Numero di round %ld\n",__func__,my_rank,nr_rounds);
+  }
+  #endif 
+   //TODO: gestione nel caso nr nodi non log2 
+  
+  /*
+  double tmp = exact_nr_rounds-floor(exact_nr_rounds); 
+  if(tmp == 0.0) 
+    nr_rounds = (size_t) exact_nr_rounds;
+  */
+
+  for(int i=1;i<=nr_rounds;i++){
+      int level_chunck = 1<<i; //ovvero il numero di chuck che vengono uniti in questo round;
+    if( my_rank % (level_chunck) == 0 ){ // ricezione e merge
+        int dest=my_rank+ (1 << (i-1));
+      if( dest < nr_nodes){
+#ifdef DEBUG
+        printf("[%s,%d] Round %d  ricevo dati da dest %d\n",__func__,my_rank,i,dest);
+#endif 
+
+        int* tmp = malloc(*len *sizeof(int));
+        int* merged_data = malloc(2* (*len) *sizeof(int));
+        MPI_Recv(tmp,*len,MPI_INT,dest,0,MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
+        merge(merged_data,2*(*len),*data,(*len),tmp,*len);
+        //data = realloc(data, 2*len *sizeof(int)); //dimenticato di copiare i dati 
+        free(*data);
+        *data = merged_data;
+        *len *= 2; 
+        //free(merged_data);
+        free(tmp);
+      }
+    //MPI_Barrier(MPI_COMM_WORLD);
+    }
+    else{
+      //invio dati per merge
+      int step_size_prev = 1 << (i-1);
+      if(my_rank % step_size_prev == 0){
+        int dest = my_rank - step_size_prev;
+        if(dest >=0){
+          MPI_Send(*data,*len,MPI_INT,dest,0,MPI_COMM_WORLD);
+        }
+      }
+    }
+    MPI_Barrier(MPI_COMM_WORLD);
   }
 
 }
@@ -179,10 +250,10 @@ void binary_merge_tree(int *data,size_t len){
 
 
 
+
 void test_merge_bint(){
 	size_t CHUNK_SIZE = 5;
 	int my_rank =-1,nr_nodes=-1;
-
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 	MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
   size_t local_size = CHUNK_SIZE;
@@ -209,17 +280,22 @@ void test_merge_bint(){
 
 
 
-		printf("[%s,%d],valore locale array:{",__func__,my_rank);
-		for(size_t i=0;i<CHUNK_SIZE;i++)
-			printf("%d,", local_data[i]); 
-		printf("}\n");
+//		printf("[%s,%d],valore locale array:{",__func__,my_rank);
+//		for(size_t i=0;i<CHUNK_SIZE;i++)
+//			printf("%d,", local_data[i]); 
+//		printf("}\n");
+
   if(my_rank==0)
 		printf("[%s],Inizio merge:\n",__func__);
 
-  //merge_binary_tree();
+  binary_merge_tree(&local_data,&local_size);
 
 
     MPI_Barrier(MPI_COMM_WORLD);
+/*
+  double exact_nr_rounds = log2((double)nr_nodes);
+  size_t nr_rounds = (size_t) exact_nr_rounds;
+  
   double exact_nr_rounds = log2((double)nr_nodes);
   size_t nr_rounds = (size_t) exact_nr_rounds;
   #ifdef DEBUG
@@ -229,17 +305,16 @@ void test_merge_bint(){
   #endif 
    //TODO: gestione nel caso nr nodi non log2 
   
-  /*
+  
   double tmp = exact_nr_rounds-floor(exact_nr_rounds); 
   if(tmp == 0.0) 
     nr_rounds = (size_t) exact_nr_rounds;
 
-  */
   
   for(int i=1;i<=nr_rounds;i++){
 
       int level_chunck = 1<<i; //ovvero il numero di chuck che vengono uniti in questo round;
-      //local_size = level_chunck * CHUNK_SIZE;
+      //len = level_chunck * CHUNK_SIZE;
     if( my_rank % (level_chunck) == 0 ){ // ricezione e merge
         //int dest=my_rank+i;
 
@@ -249,23 +324,19 @@ void test_merge_bint(){
         printf("[%s,%d] Round %d  ricevo dati da dest %d\n",__func__,my_rank,i,dest);
 #endif 
 
-        int* tmp = malloc(local_size *sizeof(int));
-        int* merged_data = malloc(2*local_size *sizeof(int));
-        MPI_Recv(tmp,local_size,MPI_INT,dest,0,MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        int* tmp = malloc(len *sizeof(int));
+        int* merged_data = malloc(2*len *sizeof(int));
+        MPI_Recv(tmp,len,MPI_INT,dest,0,MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
-
-        merge(merged_data,2*local_size,local_data,local_size,tmp,local_size);
-        //local_data = realloc(local_data, 2*local_size *sizeof(int)); //dimenticato di copiare i dati 
+        merge(merged_data,2*len,local_data,len,tmp,len);
+        //local_data = realloc(local_data, 2*len *sizeof(int)); //dimenticato di copiare i dati 
         free(local_data);
         local_data = merged_data;
-
-        local_size *= 2; 
+        len *= 2; 
         //free(merged_data);
         free(tmp);
 
       }
-
-
     //MPI_Barrier(MPI_COMM_WORLD);
     }
     else{
@@ -274,16 +345,14 @@ void test_merge_bint(){
       if(my_rank % step_size_prev == 0){
         int dest = my_rank - step_size_prev;
         if(dest >=0){
-          MPI_Send(local_data,local_size,MPI_INT,dest,0,MPI_COMM_WORLD);
+          MPI_Send(local_data,len,MPI_INT,dest,0,MPI_COMM_WORLD);
         }
-
       }
-
-
     }
 
     MPI_Barrier(MPI_COMM_WORLD);
   }
+  */
   
 
     MPI_Barrier(MPI_COMM_WORLD);
