@@ -1,0 +1,9 @@
+
+merge_mp:400 terminated with signal 11 at PC=7f52867b43fe SP=7fff50851e40.  Backtrace:
+/lib/x86_64-linux-gnu/libc.so.6(free+0x1e)[0x7f52867b43fe]
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x211690e)[0x7f5288a4e90e]
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x265663)[0x7f5286b9d663]
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x21403a)[0x7f5286b4c03a]
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x2143a5)[0x7f5286b4c3a5]
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x214658)[0x7f5286b4c658]
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x2327ce)[0x7f5286b6a7ce]

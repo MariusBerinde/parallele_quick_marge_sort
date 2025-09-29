@@ -180,8 +180,8 @@ void ben_quick_sort_mpi(){
 	float eff = 0;
 
 	srand(time(0));
-	int data_seq[SIZE];
-	int data_parall[SIZE];
+	int *data_seq = malloc(SIZE * sizeof(int));
+	int *data_parall= malloc(SIZE * sizeof(int));
 	gen_random_numbers(data_seq,SIZE,0,SIZE);
 	
 	#pragma omp parallel for 
@@ -216,6 +216,9 @@ void ben_quick_sort_mpi(){
   printf("EFFICIENZA %f\n", eff);
   printf("correttezza sequenziale %s\n",(isOrdered(data_seq, SIZE)==0 ? "OK" : "Errore"));
   printf("correttezza parallelo %s\n", (isOrdered(data_parall, SIZE)==0 ? "OK" : "Errore"));
+
+	free(data_seq);
+	free(data_parall);
 }
 
 /* funzione che esegue versione sequenziale e parallela del merge sort con open_mpi e stampa a schermo:
@@ -237,8 +240,19 @@ void ben_merge_sort_mpi(){
 	float eff = 0;
 
 	srand(time(0));
-	int data_seq[SIZE];
-	int data_parall[SIZE];
+	int *data_seq = malloc(SIZE * sizeof(int));
+	int *data_parall= malloc(SIZE * sizeof(int));
+	if(data_seq==NULL){
+//		perror("[%s] Errore creazione array data seq di %d element arresto forzato\n",__func__,SIZE);
+
+		printf("[%s] Errore creazione array data seq di %d element arresto forzato\n",__func__,SIZE);
+		exit(1);
+	}
+
+	if(data_parall==NULL){
+		printf("[%s] Errore creazione array data parall di %d element arresto forzato\n",__func__,SIZE);
+		exit(1);
+	}
 	gen_random_numbers(data_seq,SIZE,0,SIZE);
 	
 	#pragma omp parallel for 
@@ -249,13 +263,14 @@ void ben_merge_sort_mpi(){
 	struct timeval start,end;
 
 	gettimeofday(&start, NULL);
-	merge_sort(data_seq,0,SIZE-1);
+	merge_sort_iterative(data_seq,SIZE-1);
 	gettimeofday(&end, NULL);
 	execution_time_sequenzial = tdiff(&start, &end);
 
 
 	gettimeofday(&start, NULL);
 	merge_sort_omp_start(data_parall,0,SIZE-1);
+	//merge_sort_alt(data_parall,0,SIZE-1);
 	gettimeofday(&end, NULL);
 	execution_time_parallel = tdiff(&start, &end);
 
@@ -273,6 +288,9 @@ void ben_merge_sort_mpi(){
   printf("EFFICIENZA %0.2f\n", eff);
   printf("correttezza sequenziale %s\n",(isOrdered(data_seq, SIZE)==0 ? "OK" : "Errore"));
   printf("correttezza parallelo %s\n", (isOrdered(data_parall, SIZE)==0 ? "OK" : "Errore"));
+	
+	free(data_seq);
+	free(data_parall);
 }
 
 int main(){
@@ -282,7 +300,7 @@ int main(){
   
 //  big_test_merge_sort();
 //  test_big_quick_sort();
-	//ben_quick_sort_mpi();
+//	ben_quick_sort_mpi();
   ben_merge_sort_mpi();
   return 0;
 }

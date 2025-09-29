@@ -11,8 +11,8 @@ void swap(int *data,int first,int second){
 
 /**
  * quick sort ricorsivo
- * basso Ã¨ l'inizio dell'intervallo
- * alto Ã¨ la fine dell'intervallo
+ * basso è l'inizio dell'intervallo
+ * alto è la fine dell'intervallo
  * */
 
 int partition(int *data,int basso,int alto){
@@ -154,7 +154,29 @@ void merge_sort(int* data,int left,int right){
     
   }
 }
+int min(int a,int b){
+  return (a<=b)?a:b;
+}
 
+void merge_sort_iterative(int *data, int size) {
+    
+    // Bottom-up approach: inizia con blocchi di dimensione 1, poi raddoppia
+    for (int block_size = 1; block_size < size; block_size *= 2) {
+        
+        // Per ogni coppia di blocchi adiacenti di questa dimensione
+        for (int left = 0; left < size; left += 2 * block_size) {
+            int mid = min(left + block_size - 1, size - 1);
+            int right = min(left + 2 * block_size - 1, size - 1);
+            
+            // Mergia solo se abbiamo effettivamente due blocchi
+            if (mid < right) {
+                merge(data, left, mid, right );
+            }
+        }
+    }
+    
+    //free(temp);
+}
 
 void merge_sort_omp(int* restrict data,int* restrict tmp_buffer,int level,int left,int right){
 	if(left < right) {
@@ -170,8 +192,8 @@ void merge_sort_omp(int* restrict data,int* restrict tmp_buffer,int level,int le
 			#pragma omp taskwait  
 		} else {
 			// Per array piccoli, usa versione sequenziale
-			merge_sort(data, left, center);
-			merge_sort(data, center + 1, right);
+			merge_sort_iterative(data+left,right-left+1);
+			//merge_sort(data, center + 1, right);
 		}
 
 		if (level % 2 == 0) {
@@ -190,7 +212,10 @@ void merge_sort_omp(int* restrict data,int* restrict tmp_buffer,int level,int le
 void merge_sort_omp_start(int* data,int left,int right){
     int n = right-left+1;
     int* tmp_buffer;
-    posix_memalign((void**)&tmp_buffer, 64, n * sizeof(int));
+    if(posix_memalign((void**)&tmp_buffer, 64, n * sizeof(int))!=0){
+    printf("%s : errore con la posix memalig\n",__func__);
+    exit(1);
+  }
 
     #pragma omp parallel 
     {
@@ -204,3 +229,28 @@ void merge_sort_omp_start(int* data,int left,int right){
 
     free(tmp_buffer);
 }
+
+
+/**
+  * versione alternativa con avvio prematuro del merge 
+  * */
+void merge_sort_alt(int *data,int left,int right){
+  int soglia=2;
+  if(left<right){
+    if(right-left<=soglia){
+      merge(data,left,(left+right)/2,right);
+      return;
+    }
+
+    int center = (left+right)/2;
+    //printf("%s, center = %d\n",__func__,center);
+    //indipendente
+    merge_sort_alt(data,left,center);
+    //indipendente
+    merge_sort_alt(data,center+1,right);
+    //qui collect di dati 
+    merge(data,left,center,right); // è possibile parallellelizzarla
+
+  }
+}
+

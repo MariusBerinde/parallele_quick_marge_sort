@@ -1,0 +1,14 @@
+
+merge_mp:394 terminated with signal 11 at PC=7fb08ab243fe SP=7fff82db8920.  Backtrace:
+/lib/x86_64-linux-gnu/libc.so.6(free+0x1e)[0x7fb08ab243fe]
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x211690e)[0x7fb08cdbe90e]
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x265663)[0x7fb08af0d663]
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x21403a)[0x7fb08aebc03a]
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x2143a5)[0x7fb08aebc3a5]
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x214658)[0x7fb08aebc658]
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x2327ce)[0x7fb08aeda7ce]
+/lib/x86_64-linux-gnu/libmpich.so.12(PMPI_Finalize+0x16)[0x7fb08ad8b026]
+./out/merge_mp(+0x2356)[0x55ba84cb9356]
+/lib/x86_64-linux-gnu/libc.so.6(+0x29d90)[0x7fb08aaa8d90]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x80)[0x7fb08aaa8e40]
+./out/merge_mp(+0x1285)[0x55ba84cb8285]
