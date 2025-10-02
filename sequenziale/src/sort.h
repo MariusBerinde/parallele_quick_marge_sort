@@ -3,6 +3,7 @@
 
 #include <time.h> // lib per generare numeri random
 #include <sys/time.h> // lib per prendere i tempi
+#include <string.h>
 
 int partition(int *data,int basso,int alto);
 
