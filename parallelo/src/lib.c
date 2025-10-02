@@ -78,19 +78,43 @@ void quick_sort_omp_start(int *data,int basso,int alto){
  * mid rappresenta la met√† 
  * high rappresenta l'indice superiore
  */
+
 void merge(int* data,int low,int mid,int high){
   int i,j,k;
   int n1 = mid-low+1;
   int n2 = high-mid;
-  int tmpLeft[n1],tmpRight[n2];
+  //int tmpLeft[n1],tmpRight[n2];
+  int *tmpLeft = malloc(n1 * sizeof(int));
+  int *tmpRight = malloc(n2 * sizeof(int));
 
+  if(tmpLeft == NULL ){
+    printf("[%s] Errore con creazione tmpLeft\n",__func__);
+    exit(1);
+  }
+
+  if( tmpRight == NULL ){
+    printf("[%s] Errore con creazione tmpRight\n",__func__);
+    exit(1);
+  }
+
+  // sono in lettura dei dati quindi posso caricare in contemporanea left e right  possono essere messi in delle sections 
+
+
+  /*
   for (i=0;i<n1;i++) {
     tmpLeft[i] = data[low+i];
   }
+  */
 
+
+  memcpy(tmpLeft,&data[low],n1*sizeof(int));	
+  memcpy(tmpRight,&data[mid+1],n2*sizeof(int));	
+  /*
   for(j=0;j<n2;j++){
     tmpRight[j] = data[mid+1+j];
   }
+  */
+
 
   //merge tmpLeft and tmpRight :todo cercare reduce con confronto 
   i=0; j=0; k=low;
@@ -106,12 +130,15 @@ void merge(int* data,int low,int mid,int high){
 
   }
 
-  //la parte di unione delle parti separate non √® parallelelizzabile a meno di non trovare delle funzioni di mpi nate per la reduce degli elementi 
+  //la parte di unione delle parti separate non Ë parallelelizzabile a meno di non trovare delle funzioni di mpi nate per la reduce degli elementi 
+
   while(i<n1){
     data[k++]= tmpLeft[i++];
-    //i++;
-    //k++;
+    // i++;
+    // k++;
   }
+
+
 
   while(j<n2){
     data[k++]= tmpRight[j++];
@@ -119,7 +146,14 @@ void merge(int* data,int low,int mid,int high){
     //k++;
   }
 
+
+
+
+  free(tmpLeft);
+  free(tmpRight);
+
 }
+
 
 void merge_omp(int* restrict src, int* restrict dst, int left, int mid, int right){
 
@@ -229,28 +263,3 @@ void merge_sort_omp_start(int* data,int left,int right){
 
     free(tmp_buffer);
 }
-
-
-/**
-  * versione alternativa con avvio prematuro del merge 
-  * */
-void merge_sort_alt(int *data,int left,int right){
-  int soglia=2;
-  if(left<right){
-    if(right-left<=soglia){
-      merge(data,left,(left+right)/2,right);
-      return;
-    }
-
-    int center = (left+right)/2;
-    //printf("%s, center = %d\n",__func__,center);
-    //indipendente
-    merge_sort_alt(data,left,center);
-    //indipendente
-    merge_sort_alt(data,center+1,right);
-    //qui collect di dati 
-    merge(data,left,center,right); // Ë possibile parallellelizzarla
-
-  }
-}
-

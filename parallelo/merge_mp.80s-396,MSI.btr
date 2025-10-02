@@ -1,3 +1,0 @@
-
-merge_mp:396 terminated with signal 11 at PC=7f26077953fe SP=7fff228906a0.  Backtrace:
-/lib/x86_64-linux-gnu/libc.so.6(free+0x1e)[0x7f26077953fe]

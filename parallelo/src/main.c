@@ -231,7 +231,7 @@ void ben_quick_sort_mpi(){
 * efficienza
 */
 void ben_merge_sort_mpi(){
-	int SIZE = 1<<19;
+	int SIZE = 1<<25;
 	int nr_cores = omp_get_num_procs();
 	int nr_threads = omp_get_max_threads();
 	float execution_time_sequenzial = 0;
@@ -263,7 +263,7 @@ void ben_merge_sort_mpi(){
 	struct timeval start,end;
 
 	gettimeofday(&start, NULL);
-	merge_sort_iterative(data_seq,SIZE-1);
+	merge_sort(data_seq,0,SIZE-1);
 	gettimeofday(&end, NULL);
 	execution_time_sequenzial = tdiff(&start, &end);
 
@@ -294,13 +294,13 @@ void ben_merge_sort_mpi(){
 }
 
 int main(){
-	 //mini_test_quick_sort();
- // mini_test_merge();
+  //mini_test_quick_sort();
+  // mini_test_merge();
 
-  
-//  big_test_merge_sort();
-//  test_big_quick_sort();
-//	ben_quick_sort_mpi();
+
+  //  big_test_merge_sort();
+  //  test_big_quick_sort();
+  //	ben_quick_sort_mpi();
   ben_merge_sort_mpi();
   return 0;
 }

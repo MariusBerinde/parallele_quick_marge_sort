@@ -1,31 +1,30 @@
 CC = srun gcc
 CFLAGS = -Wall -g -fopenmp -O3 -march=native #-DOMP_NESTED=1
-SRCDIR = src
-OUTDIR = out
-SOURCES = $(SRCDIR)/main.c $(SRCDIR)/lib.c
-SOURCES2 = $(SRCDIR)/main2.c 
-TARGET = $(OUTDIR)/main
-TARGET2 = $(OUTDIR)/main2
+SRC = src
+OUT = out
+SOURCES = $(SRC)/main.c $(SRC)/lib.c
+TARGET = $(OUT)/main
 
 # Crea la directory out se non esiste e compila
-$(TARGET): $(SOURCES) | $(OUTDIR)
+compila_run: $(SOURCES) | $(OUT)
 	$(CC) $(CFLAGS) -o $(TARGET) $(SOURCES)
 
+# Esegue il programma
+run: compila_run
+	srun  $(TARGET)
+
+compila_merge: ./src/merge_mp.c
+	srun mpicc -Wall -O3 -fopenmp $(SRC)/merge_mp.c $(SRC)/lib.c -o ./out/merge_mp -lm #-D DEBUG
+
+	# -lm serve per poter usare le librerie matematiche
+merge: compila_merge
+	srun	mpirun -np 8 ./out/merge_mp 
+
 # Crea la directory out
-$(OUTDIR):
-	if not exist $(OUTDIR) mkdir $(OUTDIR)
+$(OUT):
+	if not exist $(OUT) mkdir $(OUT)
 
 # Pulisce i file generati
 clean:
-	rm -I $(OUTDIR)/*
-
-main2: $(SOURCES2)
-	$(CC) $(CFLAGS) -o $(TARGET2) $(SOURCES2)
-
-# Esegue il programma
-run: $(TARGET)
-	srun  $(TARGET)
-run2:main2
-	srun  --cpus-per-task=36 $(TARGET2)
-
+	rm -I $(OUT)/*
 .PHONY: clean run

@@ -21,7 +21,7 @@ clean:
 run: compila_run
 	$(TARGET)
 compila_merge: ./src/merge_mp.c
-	mpicc -Wall -fopenmp $(SRC)/merge_mp.c $(SRC)/lib.c -o ./out/merge_mp -lm -D DEBUG
+	mpicc -Wall -O3 -fopenmp $(SRC)/merge_mp.c $(SRC)/lib.c -o ./out/merge_mp -lm #-D DEBUG
 
 merge: compila_merge
 	mpirun -np 8 ./out/merge_mp 
