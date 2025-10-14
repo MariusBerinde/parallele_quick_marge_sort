@@ -74,7 +74,7 @@ void quick_sort(int *data,int basso,int alto){
 
 void select_median_of_3(int *data, int basso, int alto){
   int mid = (basso+alto)/2;
-  if( data[basso] > data[mid] ) swap(data,basso,alto);
+  if( data[basso] > data[mid] ) swap(data,basso,mid);
   if( data[mid] > data[alto] ) swap(data,mid,alto);
   if( data[basso] > data[mid] ) swap(data,basso,mid);
 
