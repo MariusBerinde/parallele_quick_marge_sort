@@ -10,6 +10,12 @@ compila_main:$(SRC)/main.c | $(OUT)
 run: compila_main
 	./$(OUT)/main
 
+compila_test:$(SRC)/test.c | $(OUT) 
+	gcc $(CFLAGS)  $(SRC)/test.c -o $(OUT)/test
+
+test:compila_test
+	./$(OUT)/test
+
 $(OUT):
 	mkdir -p $(OUT)
 

@@ -15,7 +15,12 @@ void swap(int *data,int first,int second){
  * alto è la fine dell'intervallo
  * */
 
-int partition(int *data,int basso,int alto){
+/**
+ * Lomuto partition scheme: single forward pass
+ * Pivot = data[alto] (last element)
+ * Returns final pivot position
+ */
+int partition_lomuto(int *data,int basso,int alto){
   int pivot = data[alto];
   int i = basso-1;
 
@@ -29,18 +34,61 @@ int partition(int *data,int basso,int alto){
   return (i+1);
 }
 
+int random_partition(int *data,int basso,int alto){
+  int pos_pivot = rand()%(alto-basso)+basso;
+  swap(data,alto,pos_pivot);
+  return partition_lomuto(data,basso,alto);
 
+}
+
+int partition_hoare(int *data, int basso, int alto){
+  int pivot = data[basso];
+  int l = basso + 1;
+  int r = alto;
+  while(1){
+    while(l<r && data[l]<= pivot) l++;
+    while(l<r && data[r]>= pivot) r--;
+    if( l==r ) break;
+    swap(data,l,r);
+  }
+
+  if( pivot < data[l]) l--;
+  swap(data,basso,l);
+
+  return l;
+
+
+}
 /** implementazione di quick sort ricorsivo**/
 
 void quick_sort(int *data,int basso,int alto){
   if(basso<alto){
-    int pivot = partition(data,basso,alto);
+//    int pivot = partition_lomuto(data,basso,alto);
+    int pivot = partition_hoare(data,basso,alto);
+//    int pivot = random_partition(data,basso,alto);
     quick_sort(data,basso,pivot-1);
     quick_sort(data,pivot+1,alto);
   }
 
 }
 
+void select_median_of_3(int *data, int basso, int alto){
+  int mid = (basso+alto)/2;
+  if( data[basso] > data[mid] ) swap(data,basso,alto);
+  if( data[mid] > data[alto] ) swap(data,mid,alto);
+  if( data[basso] > data[mid] ) swap(data,basso,mid);
+
+  swap(data,basso,mid);
+}
+
+void median_quick_sort(int *data,int basso,int alto){
+  if(basso < alto){
+    select_median_of_3(data,basso,alto);
+    int pivot = partition_hoare(data,basso,alto);
+    median_quick_sort(data,basso,pivot-1);
+    median_quick_sort(data,pivot+1,alto);
+  }
+}
 /*funzione di merge 
  * data indica l'array di partenza
  * low indica l'indice inferiore
