@@ -1,21 +1,24 @@
 #include "lib.h"
 /**
  * funzione usata per scambiare gli elementi in posizione first e second nell'array data.
+ * data è il puntatore ai dati 
+ * first indice del primo elemento
+ * second indice del secondo elemento
  */
 void swap(int *data,int first,int second){
-			int tmp = data[first];
-			data[first]=data[second];
-			data[second]=tmp;
+	int tmp = data[first];
+	data[first]=data[second];
+	data[second]=tmp;
 }
 
 
-/**
- * quick sort ricorsivo
- * basso è l'inizio dell'intervallo
- * alto è la fine dell'intervallo
- * */
 
-int partition(int *data,int basso,int alto){
+/**
+ * Lomuto partition scheme: single forward pass
+ * Pivot = data[alto] (last element)
+ * Returns final pivot position
+ */
+int partition_lomuto(int *data,int basso,int alto){
   int pivot = data[alto];
   int i = basso-1;
 
@@ -30,45 +33,100 @@ int partition(int *data,int basso,int alto){
 }
 
 
+int partition_hoare(int *data, int basso, int alto){
+  int pivot = data[basso];
+  int l = basso + 1;
+  int r = alto;
+  while(1){
+    while(l<r && data[l]<= pivot) l++;
+    while(l<r && data[r]>= pivot) r--;
+    if( l==r ) break;
+    swap(data,l,r);
+  }
 
-/** implementazione di quick sort ricorsivo**/
+  if( pivot < data[l]) l--;
+  swap(data,basso,l);
 
+  return l;
+
+
+}
+
+/** corpo base di quick sort  per farlo partire con facilità merge_sort(data,0,size-1)
+ * data : il puntatore ai dati 
+ * basso l'indice l'estremo inferiore da cui partire
+ * alto l'indice l'estremo superiore a cui arrivare , è escluso
+ */
 void quick_sort(int *data,int basso,int alto){
   if(basso<alto){
-    int pivot = partition(data,basso,alto);
+//   int pivot = partition_lomuto(data,basso,alto);
+   int pivot = partition_hoare(data,basso,alto);
     quick_sort(data,basso,pivot-1);
     quick_sort(data,pivot+1,alto);
   }
 
 }
 
+void select_median_of_3(int *data, int basso, int alto){
+  int mid = (basso+alto)/2;
+  if( data[basso] > data[mid] ) swap(data,basso,mid);
+  if( data[mid] > data[alto] ) swap(data,mid,alto);
+  if( data[basso] > data[mid] ) swap(data,basso,mid);
 
-void quick_sort_omp(int *data,int basso,int alto){
-  if(basso<alto){
-    int pivot = partition(data,basso,alto);
-  if(alto - basso >= MIN_ACTIVATION) {
-      #pragma omp task shared(data) firstprivate(basso)
-      quick_sort_omp(data,basso,pivot-1);
-
-      #pragma omp task shared(data) firstprivate(alto)
-      quick_sort_omp(data,pivot+1,alto);
-
-      #pragma omp taskwait
-
-    }else{
-
-    quick_sort(data,basso,pivot-1);
-    quick_sort(data,pivot+1,alto);
-    }
-  }
-
+  swap(data,basso,mid);
 }
-void quick_sort_omp_start(int *data,int basso,int alto){
-#pragma omp parallel
-    {
-        #pragma omp single  // Solo un thread crea i task iniziali
-        quick_sort_omp(data, basso , alto);
-    }
+
+void median_quick_sort(int *data,int basso,int alto){
+  if(basso < alto){
+    select_median_of_3(data,basso,alto);
+    int pivot = partition_hoare(data,basso,alto);
+    median_quick_sort(data,basso,pivot-1);
+    median_quick_sort(data,pivot+1,alto);
+  }
+}
+
+/* versione parallela di quick sort che utilizza il paradigma omp per funzionare 
+ * attenzione : per farlo compilare correttamente serve usare il flag -fopenmpi
+ * attenzione : per lanciarlo nel modo corretto bisogna usare la funizone quick_sort_omp_start 
+ */
+void quick_sort_omp(int *data,int basso,int alto,int is_median){
+	if(basso<alto){
+//		int pivot = partition_lomuto(data,basso,alto);
+		int pivot = partition_hoare(data,basso,alto);
+		if(alto - basso >= MIN_ACTIVATION) {
+			#pragma omp task shared(data) firstprivate(basso)
+			quick_sort_omp(data,basso,pivot-1,is_median);
+
+			#pragma omp task shared(data) firstprivate(alto)
+			quick_sort_omp(data,pivot+1,alto,is_median);
+
+			#pragma omp taskwait
+
+		}else{
+			if(is_median == MEDIAN_ACTIVATION){
+        //printf("[%s] Attivazione median\n",__func__);
+
+							median_quick_sort(data,basso,pivot-1);
+							median_quick_sort(data,pivot+1,alto);
+			}else{
+
+							quick_sort(data,basso,pivot-1);
+							quick_sort(data,pivot+1,alto);
+			}
+			
+		}
+	}
+}
+
+
+/* funzione usata per lanciare correttamente quick sort parallel 
+ **/
+void quick_sort_omp_start(int *data,int basso,int alto,int is_median){
+	#pragma omp parallel
+	{
+		#pragma omp single  // Solo un thread crea i task iniziali
+		quick_sort_omp(data, basso , alto,is_median);
+	}
 
 }
 
@@ -80,78 +138,69 @@ void quick_sort_omp_start(int *data,int basso,int alto){
  */
 
 void merge(int* data,int low,int mid,int high){
-  int i,j,k;
-  int n1 = mid-low+1;
-  int n2 = high-mid;
-  //int tmpLeft[n1],tmpRight[n2];
-  int *tmpLeft = malloc(n1 * sizeof(int));
-  int *tmpRight = malloc(n2 * sizeof(int));
+	int i,j,k;
+	int n1 = mid-low+1;
+	int n2 = high-mid;
+	//int tmpLeft[n1],tmpRight[n2];
+	int *tmpLeft = malloc(n1 * sizeof(int));
+	int *tmpRight = malloc(n2 * sizeof(int));
 
-  if(tmpLeft == NULL ){
-    printf("[%s] Errore con creazione tmpLeft\n",__func__);
-    exit(1);
-  }
+	if(tmpLeft == NULL ){
+		printf("[%s] Errore con creazione tmpLeft\n",__func__);
+		exit(1);
+	}
 
-  if( tmpRight == NULL ){
-    printf("[%s] Errore con creazione tmpRight\n",__func__);
-    exit(1);
-  }
+	if( tmpRight == NULL ){
+		printf("[%s] Errore con creazione tmpRight\n",__func__);
+		exit(1);
+	}
 
-  // sono in lettura dei dati quindi posso caricare in contemporanea left e right  possono essere messi in delle sections 
+	// sono in lettura dei dati quindi posso caricare in contemporanea left e right  possono essere messi in delle sections 
 
 
-  /*
+	/*
   for (i=0;i<n1;i++) {
     tmpLeft[i] = data[low+i];
   }
   */
 
 
-  memcpy(tmpLeft,&data[low],n1*sizeof(int));	
-  memcpy(tmpRight,&data[mid+1],n2*sizeof(int));	
-  /*
+	memcpy(tmpLeft,&data[low],n1*sizeof(int));	
+	memcpy(tmpRight,&data[mid+1],n2*sizeof(int));	
+	/*
   for(j=0;j<n2;j++){
     tmpRight[j] = data[mid+1+j];
   }
   */
 
 
-  //merge tmpLeft and tmpRight :todo cercare reduce con confronto 
-  i=0; j=0; k=low;
-  while(i<n1 &&j<n2){
-    if(tmpLeft[i] <= tmpRight[j]){
-      data[k]=tmpLeft[i];
-      i++;
-    }else{
-      data[k]=tmpRight[j];
-      j++;
-    }
-    k++;
+	//merge tmpLeft and tmpRight :todo cercare reduce con confronto 
+	i=0; j=0; k=low;
+	while(i<n1 &&j<n2){
+		if(tmpLeft[i] <= tmpRight[j]){
+			data[k]=tmpLeft[i];
+			i++;
+		}else{
+			data[k]=tmpRight[j];
+			j++;
+		}
+		k++;
 
-  }
+	}
 
-  //la parte di unione delle parti separate non è parallelelizzabile a meno di non trovare delle funzioni di mpi nate per la reduce degli elementi 
+	while(i<n1){
+		data[k++]= tmpLeft[i++];
+		// i++;
+		// k++;
+	}
 
-  while(i<n1){
-    data[k++]= tmpLeft[i++];
-    // i++;
-    // k++;
-  }
-
-
-
-  while(j<n2){
-    data[k++]= tmpRight[j++];
-    //j++;
-    //k++;
-  }
-
-
-
-
-  free(tmpLeft);
-  free(tmpRight);
-
+	while(j<n2){
+		data[k++]= tmpRight[j++];
+		//j++;
+		//k++;
+	}
+	free(tmpLeft);
+	free(tmpRight);
 }
 
 
@@ -242,13 +291,16 @@ void merge_sort_omp(int* restrict data,int* restrict tmp_buffer,int level,int le
 }
 
 
-
+/**
+ * funzione usata per lanciare correttamene merge sort omp 
+ * utilizza una allocazione preventiva del buffer usato per lo scambio dei dati
+*/
 void merge_sort_omp_start(int* data,int left,int right){
     int n = right-left+1;
     int* tmp_buffer;
     if(posix_memalign((void**)&tmp_buffer, 64, n * sizeof(int))!=0){
     printf("%s : errore con la posix memalig\n",__func__);
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
     #pragma omp parallel 
@@ -263,3 +315,6 @@ void merge_sort_omp_start(int* data,int left,int right){
 
     free(tmp_buffer);
 }
+
+
+

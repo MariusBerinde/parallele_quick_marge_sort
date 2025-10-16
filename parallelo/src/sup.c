@@ -3,14 +3,29 @@
 #include <string.h>
 #include <math.h>
 
-int main(){
-  size_t array_size = 5;
-  printf("dimensione array %ld\n",array_size);
-  for(int i=1;i<=10;i++){
-    int ideal_chunk_size = array_size/i;
-    double min_chunck_size = (double)array_size/(double)i;
+void printArray(int *data,size_t LEN){
+  printf("[%s] stampa array:{\t",__func__);
+  size_t i;
+  for( i=0;i<LEN-1;i++)
+    printf("%d,",data[i]);
+  printf("%d }\n",data[i]);
 
-    printf("[%s] numero processi %d\t dimensione ideale(upper bound) %d\tlower bound %f\n",__func__,i,ideal_chunk_size,min_chunck_size);
+}
+
+int main(){
+  size_t SIZE = 10;
+  int *d = malloc(SIZE*sizeof(int));
+  if( NULL == d ){
+    printf("[%d] errore allocazione memoria con d\n",__func__);
+    exit(EXIT_FAILURE);
   }
+  for(size_t i=0;i<SIZE;d[i]=i,i++);
+  // uso standard mi aspetto tutto l'array
+  printArray(d,SIZE);
+  //provo solo da 4 a finale
+  printArray(&(d[4]),SIZE-4);
+
+
+  free(d);
 
 }

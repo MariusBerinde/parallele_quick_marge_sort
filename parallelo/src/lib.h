@@ -1,14 +1,34 @@
+#include <math.h>
+//#include <mpi.h>
 #include <omp.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h> // lib per prendere i tempi
 #include <time.h> // lib per generare numeri random
-#define MIN_ACTIVATION 1<<14
 
-int partition(int *data,int basso,int alto);
+#define MIN_ACTIVATION 1<<14
+#define MEDIAN_ACTIVATION 1 
+
+/**
+ * Lomuto partition scheme: single forward pass
+ * Pivot = data[alto] (last element)
+ * Returns final pivot position
+ */
+int partition_lomuto(int *data, int basso, int alto);
+
+/**
+ * Hoare partition scheme: bidirectional convergence
+ * Pivot = data[basso] (first element, or pre-selected)
+ * Returns pivot position
+ */
+int partition_hoare(int *data, int basso, int alto);
 
 void quick_sort(int *data,int basso,int alto);
+
+void select_median_of_3(int *data, int basso, int alto);
+
+void median_quick_sort(int *data,int basso,int alto);
 
 void merge(int* data,int low,int mid,int high);
 
@@ -16,9 +36,15 @@ void merge_sort(int* data,int left,int right);
 
 void merge_sort_omp(int* data,int *tmp_buffer,int level,int left,int right);
 
-void quick_sort_omp_start(int *data,int basso,int alto);
+/* versione di quick sort che utilizza omp per funzionare 
+ * data è vettore dei dati 
+ * basso l'inizio dell'intervallo 
+ * alto la fine dell'intervallo 
+ * is_median variabile usato per decidere se attivare o meno la versione median of 3 di quick sort 
+ */
+void quick_sort_omp_start(int *data,int basso,int alto,int is_median);
 
-void quick_sort_omp(int *data,int basso,int alto);
+void quick_sort_omp(int *data,int basso,int alto,int is_median);
 
 void merge_omp(int* restrict src, int* restrict dst, int left, int mid, int right);
 
@@ -30,11 +56,7 @@ void merge_omp(int* restrict src, int* restrict dst, int left, int mid, int righ
  */
 void merge_sort_omp_start(int* data,int left,int right);
 
-
 void merge_sort_alt(int *data,int left,int right);
-
 
 void merge_sort_iterative(int *data, int size);
 
-
- 

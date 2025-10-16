@@ -1,9 +1,9 @@
 CC = gcc
-CFLAGS = -Wall -g -fopenmp -O3
+CFLAGS = -Wall   -g -fopenmp -O3
 SRC = src
 OUT = out
 SOURCES = $(SRC)/main.c $(SRC)/lib.c
-TARGET = $(OUT)/main
+TARGET = $(OUT)/main.out
 
 # Crea la directory out se non esiste e compila
 compila_run: $(SOURCES) | $(OUT)
@@ -21,10 +21,10 @@ clean:
 run: compila_run
 	$(TARGET)
 compila_merge: ./src/merge_mp.c
-	mpicc -Wall -O3 -fopenmp $(SRC)/merge_mp.c $(SRC)/lib.c -o ./out/merge_mp -lm #-D DEBUG
+	mpicc -Wall -O3 -fopenmp  $(SRC)/merge_mp.c $(SRC)/lib.c -o ./out/merge_mp -lm #-D DEBUG
 
 merge: compila_merge
-	mpirun -np 8 ./out/merge_mp 
+	mpirun -np 16 ./out/merge_mp 
 
 compila_net:src/net_mp.c
 	mpicc -Wall  src/net_mp.c -o out/net_mp #-D DEBUG 
