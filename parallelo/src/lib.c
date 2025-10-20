@@ -204,18 +204,22 @@ void merge(int* data,int low,int mid,int high){
 }
 
 
-void merge_omp(int* restrict src, int* restrict dst, int left, int mid, int right){
-
-  int i = left, j = mid + 1, k = left;
-
-  while (i <= mid && j <= right) {
-    if (src[i] <= src[j])
-      dst[k++] = src[i++];
-    else
-      dst[k++] = src[j++];
-  }
-  while (i <= mid)  dst[k++] = src[i++];
-  while (j <= right) dst[k++] = src[j++];
+void merge_omp(int *restrict src, int *restrict dst, size_t left, size_t mid, size_t right) {
+    size_t i = left, j = mid + 1, k = left;
+    
+    // Loop principale di confronto
+    while (i <= mid && j <= right) {
+        dst[k++] = (src[i] <= src[j]) ? src[i++] : src[j++];
+    }
+    
+    // Copia residui con memcpy (IL TRUCCO DI merge_l!)
+    if (i <= mid) {
+        memcpy(&dst[k], &src[i], (mid - i + 1) * sizeof(int));
+    }
+    
+    if (j <= right) {
+        memcpy(&dst[k], &src[j], (right - j + 1) * sizeof(int));
+    }
 }
 
 /**
@@ -224,7 +228,7 @@ void merge_omp(int* restrict src, int* restrict dst, int left, int mid, int righ
   * left è l'estremo inferiore su cui effettuare l'ordinamento
   * right è l'estremo superiore su cui effettuare l'ordinamento
 */
-void merge_sort(int* data,int left,int right){
+void merge_sort(int* data,size_t left,size_t right){
   if(left<right){
     int center = (left+right)/2;
     //printf("%s, center = %d\n",__func__,center);
@@ -241,7 +245,7 @@ int min(int a,int b){
   return (a<=b)?a:b;
 }
 
-void merge_sort_iterative(int *data, int size) {
+void merge_sort_iterative(int *data, size_t size) {
     
     // Bottom-up approach: inizia con blocchi di dimensione 1, poi raddoppia
     for (int block_size = 1; block_size < size; block_size *= 2) {
@@ -261,7 +265,7 @@ void merge_sort_iterative(int *data, int size) {
     //free(temp);
 }
 
-void merge_sort_omp(int* restrict data,int* restrict tmp_buffer,int level,int left,int right){
+void merge_sort_omp(int* restrict data,int* restrict tmp_buffer,size_t level,size_t left,size_t right){
 	if(left < right) {
 		int center = (left + right) / 2;
 
@@ -295,7 +299,7 @@ void merge_sort_omp(int* restrict data,int* restrict tmp_buffer,int level,int le
  * funzione usata per lanciare correttamene merge sort omp 
  * utilizza una allocazione preventiva del buffer usato per lo scambio dei dati
 */
-void merge_sort_omp_start(int* data,int left,int right){
+void merge_sort_omp_start(int* data,size_t left,size_t right){
     int n = right-left+1;
     int* tmp_buffer;
     if(posix_memalign((void**)&tmp_buffer, 64, n * sizeof(int))!=0){

@@ -273,7 +273,6 @@ void ben_merge_sort_mpi(){
 
 	gettimeofday(&start, NULL);
 	merge_sort_omp_start(data_parall,0,SIZE-1);
-	//merge_sort_alt(data_parall,0,SIZE-1);
 	gettimeofday(&end, NULL);
 	execution_time_parallel = tdiff(&start, &end);
 

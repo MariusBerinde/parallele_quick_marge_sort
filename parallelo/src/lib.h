@@ -32,9 +32,14 @@ void median_quick_sort(int *data,int basso,int alto);
 
 void merge(int* data,int low,int mid,int high);
 
-void merge_sort(int* data,int left,int right);
+/** funzione di merge 
+ * data dati da inviare 
+ * lef inizio intervallo 
+ * right fine intervallo (size-1)
+ */
+void merge_sort(int* data,size_t left,size_t right);
 
-void merge_sort_omp(int* data,int *tmp_buffer,int level,int left,int right);
+void merge_sort_omp(int* data,int *tmp_buffer,size_t level,size_t left,size_t right);
 
 /* versione di quick sort che utilizza omp per funzionare 
  * data è vettore dei dati 
@@ -46,17 +51,16 @@ void quick_sort_omp_start(int *data,int basso,int alto,int is_median);
 
 void quick_sort_omp(int *data,int basso,int alto,int is_median);
 
-void merge_omp(int* restrict src, int* restrict dst, int left, int mid, int right);
+void merge_omp(int* restrict src, int* restrict dst, size_t left, size_t mid, size_t right);
 
-/**
- * @brief entry point for the function that perform the merge sort using omp library 
+/** @brief entry point for the function that perform the merge sort using omp library 
  * @param data : the buffer 
  * @param left : the base of the position where the algoritm 
  * @param right: the top position
  */
-void merge_sort_omp_start(int* data,int left,int right);
+void merge_sort_omp_start(int* data,size_t left,size_t right);
 
 void merge_sort_alt(int *data,int left,int right);
 
-void merge_sort_iterative(int *data, int size);
+void merge_sort_iterative(int *data, size_t size);
 

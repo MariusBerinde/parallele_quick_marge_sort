@@ -1,0 +1,7 @@
+
+merge_mp:355 terminated with signal 11 at PC=7fbcf25048c0 SP=7ffc5f4ceb78.  Backtrace:
+/lib/x86_64-linux-gnu/libc.so.6(+0x1a08c0)[0x7fbcf25048c0]
+./out/merge_mp(+0x1614)[0x563281b4c614]
+/lib/x86_64-linux-gnu/libc.so.6(+0x29d90)[0x7fbcf238dd90]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x80)[0x7fbcf238de40]
+./out/merge_mp(+0x1775)[0x563281b4c775]
