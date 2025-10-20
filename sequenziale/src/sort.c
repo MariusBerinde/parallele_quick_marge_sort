@@ -2,10 +2,14 @@
 /**
  * funzione usata per scambiare gli elementi in posizione first e second nell'array data.
  */
-void swap(int *data,int first,int second){
-			int tmp = data[first];
-			data[first]=data[second];
-			data[second]=tmp;
+void swap(long *data,int first,int second){
+  if( NULL == data){
+    printf("[%s] Errore data null\n",__func__);
+    exit(EXIT_FAILURE);
+  }
+  long tmp = data[first];
+  data[first]=data[second];
+  data[second]=tmp;
 }
 
 
@@ -20,7 +24,12 @@ void swap(int *data,int first,int second){
  * Pivot = data[alto] (last element)
  * Returns final pivot position
  */
-int partition_lomuto(int *data,int basso,int alto){
+int partition_lomuto(long *data,int basso,int alto){
+
+  if( NULL == data){
+    printf("[%s] Errore data null\n",__func__);
+    exit(EXIT_FAILURE);
+  }
   int pivot = data[alto];
   int i = basso-1;
 
@@ -34,14 +43,17 @@ int partition_lomuto(int *data,int basso,int alto){
   return (i+1);
 }
 
-int random_partition(int *data,int basso,int alto){
+int random_partition(long *data,int basso,int alto){
   int pos_pivot = rand()%(alto-basso)+basso;
   swap(data,alto,pos_pivot);
   return partition_lomuto(data,basso,alto);
-
 }
 
-int partition_hoare(int *data, int basso, int alto){
+int partition_hoare(long *data,int basso,int alto){
+  if( NULL == data ){
+    printf("[%s] Errore data null\n",__func__);
+    exit(EXIT_FAILURE);
+  }
   int pivot = data[basso];
   int l = basso + 1;
   int r = alto;
@@ -53,26 +65,32 @@ int partition_hoare(int *data, int basso, int alto){
   }
 
   if( pivot < data[l]) l--;
+
   swap(data,basso,l);
 
   return l;
-
-
 }
 /** implementazione di quick sort ricorsivo**/
 
-void quick_sort(int *data,int basso,int alto){
+void quick_sort(long *data,int basso,int alto){
+  if( NULL == data){
+    printf("[%s] Errore data null\n",__func__);
+    exit(EXIT_FAILURE);
+  }
   if(basso<alto){
-//    int pivot = partition_lomuto(data,basso,alto);
+//    int  pivot = partition_lomuto(data,basso,alto);
     int pivot = partition_hoare(data,basso,alto);
-//    int pivot = random_partition(data,basso,alto);
     quick_sort(data,basso,pivot-1);
     quick_sort(data,pivot+1,alto);
   }
 
 }
 
-void select_median_of_3(int *data, int basso, int alto){
+void select_median_of_3(long *data,int basso,int alto){
+  if( NULL == data){
+    printf("[%s] Errore data null\n",__func__);
+    exit(EXIT_FAILURE);
+  }
   int mid = (basso+alto)/2;
   if( data[basso] > data[mid] ) swap(data,basso,mid);
   if( data[mid] > data[alto] ) swap(data,mid,alto);
@@ -81,7 +99,11 @@ void select_median_of_3(int *data, int basso, int alto){
   swap(data,basso,mid);
 }
 
-void median_quick_sort(int *data,int basso,int alto){
+void median_quick_sort(long *data,int basso,int alto){
+  if( NULL == data){
+    printf("[%s] Errore data null\n",__func__);
+    exit(EXIT_FAILURE);
+  }
   if(basso < alto){
     select_median_of_3(data,basso,alto);
     int pivot = partition_hoare(data,basso,alto);
@@ -95,22 +117,25 @@ void median_quick_sort(int *data,int basso,int alto){
  * mid rappresenta la metà 
  * high rappresenta l'indice superiore
  */
-void merge(int* data,int low,int mid,int high){
-  int i,j,k;
-  int n1 = mid-low+1;
-  int n2 = high-mid;
-  //int tmpLeft[n1],tmpRight[n2];
-  int *tmpLeft = malloc(n1 * sizeof(int));
-  int *tmpRight = malloc(n2 * sizeof(int));
+void merge(long* data,size_t low,size_t mid,size_t high){
+  if( NULL == data){
+    printf("[%s] Errore data null\n",__func__);
+    exit(EXIT_FAILURE);
+  }
+  size_t i,j,k;
+  size_t n1 = mid-low+1;
+  size_t n2 = high-mid;
+  long *tmpLeft = malloc(n1 * sizeof(long));
+  long *tmpRight = malloc(n2 * sizeof(long));
 
   if(tmpLeft == NULL ){
     printf("[%s] Errore con creazione tmpLeft\n",__func__);
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   if( tmpRight == NULL ){
     printf("[%s] Errore con creazione tmpRight\n",__func__);
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   // sono in lettura dei dati quindi posso caricare in contemporanea left e right  possono essere messi in delle sections 
@@ -123,8 +148,8 @@ void merge(int* data,int low,int mid,int high){
   */
 
 
-  memcpy(tmpLeft,&data[low],n1*sizeof(int));	
-  memcpy(tmpRight,&data[mid+1],n2*sizeof(int));	
+  memcpy(tmpLeft,&data[low],n1*sizeof(long));	
+  memcpy(tmpRight,&data[mid+1],n2*sizeof(long));	
   /*
   for(j=0;j<n2;j++){
     tmpRight[j] = data[mid+1+j];
@@ -162,9 +187,6 @@ void merge(int* data,int low,int mid,int high){
     //k++;
   }
 
-
-
-
   free(tmpLeft);
   free(tmpRight);
 
@@ -176,9 +198,13 @@ void merge(int* data,int low,int mid,int high){
   * left è l'estremo inferiore su cui effettuare l'ordinamento
   * right è l'estremo superiore su cui effettuare l'ordinamento
 */
-void merge_sort(int* data,int left,int right){
+void merge_sort(long* data,size_t left,size_t right){
+  if( NULL == data){
+    printf("[%s] Errore data null\n",__func__);
+    exit(EXIT_FAILURE);
+  }
   if(left<right){
-    int center = (left+right)/2;
+    size_t center = (left+right)/2;
     //printf("%s, center = %d\n",__func__,center);
     //indipendente
     merge_sort(data,left,center);
@@ -189,4 +215,3 @@ void merge_sort(int* data,int left,int right){
     
   }
 }
-
