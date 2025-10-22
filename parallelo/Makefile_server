@@ -3,11 +3,28 @@ CFLAGS = -Wall -g -fopenmp -O3 -march=native #-DOMP_NESTED=1
 SRC = src
 OUT = out
 SOURCES = $(SRC)/main.c $(SRC)/lib.c
-TARGET = $(OUT)/main
+TARGET = $(OUT)/main.out
 
 # Crea la directory out se non esiste e compila
 compila_run: $(SOURCES) | $(OUT)
 	$(CC) $(CFLAGS) -o $(TARGET) $(SOURCES)
+
+# Crea la directory out
+$(OUT):
+	if not exist $(OUT) mkdir $(OUT)
+
+compila_omp:./src/omp.c
+	srun $(CC) $(CFLAGS) $(SRC)/omp.c $(SRC)/lib.c -o out/omp
+
+omp:compila_omp
+	./out/omp
+
+
+compila_mpi:src/mpi.c 
+	srun mpicc  -g -fopenmp -O3  src/mpi.c src/lib.c -o out/mpi -lm #-D DEBUG
+
+mpi:compila_mpi 
+	srun -np 16 ./out/mpi
 
 # Esegue il programma
 run: compila_run

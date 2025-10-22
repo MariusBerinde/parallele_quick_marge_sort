@@ -60,6 +60,8 @@ void mini_test_merge(){
 }
 
 
+
+
 /**
 	* funzione per testare tempi di sviluppo con 2^19 elementi
 */
@@ -95,8 +97,8 @@ void ben_quick_sort_mpi(){
 	struct timeval start,end;
 
 	gettimeofday(&start, NULL);
-	quick_sort(data_seq,0,SIZE-1);
-//	median_quick_sort(data_seq,0,SIZE-1);
+//	quick_sort(data_seq,0,SIZE-1);
+	median_quick_sort(data_seq,0,SIZE-1);
 	gettimeofday(&end, NULL);
 	execution_time_sequenzial = tdiff(&start, &end);
 
@@ -111,7 +113,7 @@ void ben_quick_sort_mpi(){
 	
 
   printf("[%s] Statistiche esecuzione quick sort in %s at %s\n", __func__, __DATE__, __TIME__);
-  printf("dimensione array= %d\n", SIZE);
+  printf("dimensione array= %ld\n", SIZE);
   printf("numero core = %d\n", nr_cores);
   printf("numero thread = %d\n", nr_threads);
   printf("tempo di esecuzione sequenziale %0.6f\n", execution_time_sequenzial);
@@ -135,7 +137,7 @@ void ben_quick_sort_mpi(){
 * efficienza
 */
 void ben_merge_sort_mpi(){
-	size_t SIZE = 1<<29;
+	size_t SIZE = 1<<20;
 	int nr_cores = omp_get_num_procs();
 	int nr_threads = omp_get_max_threads();
 	float execution_time_sequenzial = 0;
@@ -196,10 +198,65 @@ void ben_merge_sort_mpi(){
 	free(data_parall);
 }
 
+void printArray(long *data,size_t LEN){
+  printf("[%s] stampa array:{\t",__func__);
+  size_t i;
+  for( i=0;i<LEN-1;i++)
+    printf("%ld,",data[i]);
+  printf("%ld }\n",data[i]);
+
+}
+void test_random(){
+  size_t SIZE = 1<<28;
+  long *a = malloc(SIZE*sizeof(long));
+  long *b = malloc(SIZE*sizeof(long));
+  if( NULL == a){
+    printf("[%s] errore allocazione a\n",__func__);
+    exit(EXIT_FAILURE);
+  }
+
+  if( NULL == b){
+    printf("[%s] errore allocazione b",__func__);
+    exit(EXIT_FAILURE);
+  }
+
+	struct timeval start_s,end_s;
+	struct timeval start_p,end_p;
+
+	gettimeofday(&start_s, NULL);
+  gen_random_numbers(a,SIZE,0,SIZE);
+	gettimeofday(&end_s, NULL);
+
+	gettimeofday(&start_p, NULL);
+  gen_random_numbers(b,SIZE,0,SIZE);
+	gettimeofday(&end_p, NULL);
+//  printArray(a,SIZE);
+ // printArray(b,SIZE);
+//  printf("[%s] a[0]==b[0] esito %d",__func__,(a[0]==b[0]));
+  int all_eq = 1;
+  for(size_t i=0;i<SIZE;i++){
+    if(a[i] != b[i]){
+      printf("[%s] ERRORE RANDOM NON DETERMINISTICO: in posizione %ld a=%ld e b=%ld\n",__func__,i,a[i],b[i]);
+      all_eq = !all_eq;
+      break;
+    }
+  }
+  if(all_eq){
+    printf("[%s] a e b sono uguali\n",__func__);
+  }
+
+  printf("[%s] tempo di generazione %ld numeri casuali in versione sequenziale %0.6f secondi e in versione parallela %0.6f secondi\n",__func__,SIZE,tdiff(&start_s, &end_s),tdiff(&start_p, &end_p));
+
+
+  free(a);
+  free(b);
+}
+
 int main(){
-//  mini_test_quick_sort();
+  test_random();
+// mini_test_quick_sort();
 //  mini_test_merge();
-  	ben_quick_sort_mpi();
-//  ben_merge_sort_mpi();
+//  	ben_quick_sort_mpi();
+  ben_merge_sort_mpi();
   return 0;
 }

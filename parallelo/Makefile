@@ -13,9 +13,18 @@ compila_run: $(SOURCES) | $(OUT)
 $(OUT):
 	if not exist $(OUT) mkdir $(OUT)
 
-# Pulisce i file generati
-clean:
-	rm -I $(OUT)/*
+compila_omp:./src/omp.c
+	$(CC) $(CFLAGS) $(SRC)/omp.c $(SRC)/lib.c -o out/omp
+
+omp:compila_omp
+	./out/omp
+
+
+compila_mpi:src/mpi.c 
+	mpicc  -g -fopenmp -O3  src/mpi.c src/lib.c -o out/mpi -lm -D DEBUG
+
+mpi:compila_mpi 
+	mpirun -np 10 ./out/mpi
 
 # Esegue il programma
 run: compila_run
@@ -36,10 +45,8 @@ compila_sup: ./src/sup.c
 
 sup:compila_sup 
 	./out/sup
-compila_test: ./src/test_open_mp.c
-	mpicc -Wall  $(SRC)/test_open_mp.c -o ./out/test_open_mp
 
-tests: compila_test
-	mpirun -np 4 ./out/test_open_mp
-
+# Pulisce i file generati
+clean:
+	rm -I $(OUT)/*
 .PHONY: clean run

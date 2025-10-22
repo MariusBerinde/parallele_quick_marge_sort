@@ -15,31 +15,31 @@
  * Pivot = data[alto] (last element)
  * Returns final pivot position
  */
-int partition_lomuto(int *data, int basso, int alto);
+int partition_lomuto(long *data, int basso, int alto);
 
 /**
  * Hoare partition scheme: bidirectional convergence
  * Pivot = data[basso] (first element, or pre-selected)
  * Returns pivot position
  */
-int partition_hoare(int *data, int basso, int alto);
+int partition_hoare(long *data, int basso, int alto);
 
-void quick_sort(int *data,int basso,int alto);
+void quick_sort(long *data,int basso,int alto);
 
-void select_median_of_3(int *data, int basso, int alto);
+void select_median_of_3(long *data, int basso, int alto);
 
-void median_quick_sort(int *data,int basso,int alto);
+void median_quick_sort(long *data,int basso,int alto);
 
-void merge(int* data,int low,int mid,int high);
+void merge(long* data,int low,int mid,int high);
 
 /** funzione di merge 
  * data dati da inviare 
  * lef inizio intervallo 
  * right fine intervallo (size-1)
  */
-void merge_sort(int* data,size_t left,size_t right);
+void merge_sort(long* data,size_t left,size_t right);
 
-void merge_sort_omp(int* data,int *tmp_buffer,size_t level,size_t left,size_t right);
+void merge_sort_omp(long* data,long *tmp_buffer,size_t level,size_t left,size_t right);
 
 /* versione di quick sort che utilizza omp per funzionare 
  * data è vettore dei dati 
@@ -47,20 +47,19 @@ void merge_sort_omp(int* data,int *tmp_buffer,size_t level,size_t left,size_t ri
  * alto la fine dell'intervallo 
  * is_median variabile usato per decidere se attivare o meno la versione median of 3 di quick sort 
  */
-void quick_sort_omp_start(int *data,int basso,int alto,int is_median);
+void quick_sort_omp_start(long *data,int basso,int alto,int is_median);
 
-void quick_sort_omp(int *data,int basso,int alto,int is_median);
+void quick_sort_omp(long *data,int basso,int alto,int is_median);
 
-void merge_omp(int* restrict src, int* restrict dst, size_t left, size_t mid, size_t right);
+void merge_omp(long* restrict src, long* restrict dst, size_t left, size_t mid, size_t right);
 
 /** @brief entry point for the function that perform the merge sort using omp library 
  * @param data : the buffer 
  * @param left : the base of the position where the algoritm 
  * @param right: the top position
  */
-void merge_sort_omp_start(int* data,size_t left,size_t right);
+void merge_sort_omp_start(long* data,size_t left,size_t right);
 
-void merge_sort_alt(int *data,int left,int right);
 
-void merge_sort_iterative(int *data, size_t size);
-
+/** funzione che genera dati random nell intervallo min max per l'array data usando la libreria openmpi */
+void gen_random_numbers(long *data,size_t len,long min,long max);

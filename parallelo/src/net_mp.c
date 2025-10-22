@@ -5,6 +5,7 @@
 #include <stddef.h>  
 #include <stdio.h>
 #include <stdlib.h> 
+//#include <openmpi.h>
 
 typedef struct{
   int rank;
@@ -84,10 +85,7 @@ void test_init(){
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 	MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
 	printf("[%s,%d] Ciao sono %d e ci sono %d processi attivi\n",__func__,my_rank,my_rank,nr_nodes);
-
-
 }
-
 
 int main(int argc,char *argv[]){
   MPI_Init(&argc, &argv);
@@ -97,5 +95,4 @@ int main(int argc,char *argv[]){
   test_init();
   //test_send_node();
   MPI_Finalize();
-
 }
