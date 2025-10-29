@@ -1,0 +1,964 @@
+/var/spool/slurmd/job250499/slurm_script: line 11: module: command not found
+/var/spool/slurmd/job250499/slurm_script: line 15: module: command not found
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+src/mpi.c: In function ‘find_error_scatter’:
+src/mpi.c:1524:36: warning: format ‘%ls’ expects argument of type ‘wchar_t *’, but argument 2 has type ‘size_t’ {aka ‘long unsigned int’} [-Wformat=]
+ 1524 |     printf("dimensione originale %ls\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
+      |                                  ~~^                           ~~~~~
+      |                                    |                           |
+      |                                    int *                       size_t {aka long unsigned int}
+      |                                  %ld
+[broadwell-010:2672106] *** Process received signal ***
+[broadwell-010:2672106] Signal: Segmentation fault (11)
+[broadwell-010:2672106] Signal code: Address not mapped (1)
+[broadwell-010:2672106] Failing at address: 0x40000000
+[broadwell-010:2672106] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x43090)[0x7fb786ceb090]
+[broadwell-010:2672106] [ 1] /lib/x86_64-linux-gnu/libc.so.6(+0x18d055)[0x7fb786e35055]
+[broadwell-010:2672106] [ 2] /lib/x86_64-linux-gnu/libc.so.6(wcsrtombs+0x1c4)[0x7fb786d65854]
+[broadwell-010:2672106] [ 3] /lib/x86_64-linux-gnu/libc.so.6(+0x79447)[0x7fb786d21447]
+[broadwell-010:2672106] [ 4] /lib/x86_64-linux-gnu/libc.so.6(__printf_chk+0xab)[0x7fb786dd605b]
+[broadwell-010:2672106] [ 5] out/mpi(+0x5edb)[0x55e8492e9edb]
+[broadwell-010:2672106] [ 6] out/mpi(+0x25a4)[0x55e8492e65a4]
+[broadwell-010:2672106] [ 7] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf3)[0x7fb786ccc083]
+[broadwell-010:2672106] [ 8] out/mpi(+0x25de)[0x55e8492e65de]
+[broadwell-010:2672106] *** End of error message ***
+srun: error: broadwell-010: task 0: Segmentation fault (core dumped)
+slurmstepd: error:  mpi/pmix_v3: _errhandler: broadwell-010 [0]: pmixp_client_v2.c:211: Error handler invoked: status = -25, source = [slurm.pmix.250499.1:0]
+slurmstepd: error: *** STEP 250499.1 ON broadwell-010 CANCELLED AT 2025-10-24T12:06:14 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: broadwell-010: tasks 1-31: Killed
+srun: error: broadwell-013: tasks 96-127: Killed
+srun: error: broadwell-011: tasks 32-63: Killed
+srun: error: broadwell-012: tasks 64-95: Killed
+[broadwell-010:2672375] *** Process received signal ***
+[broadwell-010:2672375] Signal: Segmentation fault (11)
+[broadwell-010:2672375] Signal code: Address not mapped (1)
+[broadwell-010:2672375] Failing at address: 0x40000000
+[broadwell-010:2672375] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x43090)[0x7fc55a08e090]
+[broadwell-010:2672375] [ 1] /lib/x86_64-linux-gnu/libc.so.6(+0x18d055)[0x7fc55a1d8055]
+[broadwell-010:2672375] [ 2] /lib/x86_64-linux-gnu/libc.so.6(wcsrtombs+0x1c4)[0x7fc55a108854]
+[broadwell-010:2672375] [ 3] /lib/x86_64-linux-gnu/libc.so.6(+0x79447)[0x7fc55a0c4447]
+[broadwell-010:2672375] [ 4] /lib/x86_64-linux-gnu/libc.so.6(__printf_chk+0xab)[0x7fc55a17905b]
+[broadwell-010:2672375] [ 5] out/mpi(+0x5edb)[0x56533d186edb]
+[broadwell-010:2672375] [ 6] out/mpi(+0x25a4)[0x56533d1835a4]
+[broadwell-010:2672375] [ 7] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf3)[0x7fc55a06f083]
+[broadwell-010:2672375] [ 8] out/mpi(+0x25de)[0x56533d1835de]
+[broadwell-010:2672375] *** End of error message ***
+srun: error: broadwell-010: task 0: Segmentation fault (core dumped)
+slurmstepd: error:  mpi/pmix_v3: _errhandler: broadwell-010 [0]: pmixp_client_v2.c:211: Error handler invoked: status = -25, source = [slurm.pmix.250499.2:0]
+slurmstepd: error: *** STEP 250499.2 ON broadwell-010 CANCELLED AT 2025-10-24T12:06:33 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: broadwell-013: tasks 48-63: Killed
+srun: error: broadwell-011: tasks 16-31: Killed
+srun: error: broadwell-012: tasks 32-47: Killed
+srun: error: broadwell-010: tasks 1-15: Killed
+[broadwell-010:2672581] *** Process received signal ***
+[broadwell-010:2672581] Signal: Segmentation fault (11)
+[broadwell-010:2672581] Signal code: Address not mapped (1)
+[broadwell-010:2672581] Failing at address: 0x40000000
+[broadwell-010:2672581] [ 0] /lib/x86_64-linux-gnu/libc.so.6(+0x43090)[0x7f98e6aea090]
+[broadwell-010:2672581] [ 1] /lib/x86_64-linux-gnu/libc.so.6(+0x18d055)[0x7f98e6c34055]
+[broadwell-010:2672581] [ 2] /lib/x86_64-linux-gnu/libc.so.6(wcsrtombs+0x1c4)[0x7f98e6b64854]
+[broadwell-010:2672581] [ 3] /lib/x86_64-linux-gnu/libc.so.6(+0x79447)[0x7f98e6b20447]
+[broadwell-010:2672581] [ 4] /lib/x86_64-linux-gnu/libc.so.6(__printf_chk+0xab)[0x7f98e6bd505b]
+[broadwell-010:2672581] [ 5] out/mpi(+0x5edb)[0x55d816a55edb]
+[broadwell-010:2672581] [ 6] out/mpi(+0x25a4)[0x55d816a525a4]
+[broadwell-010:2672581] [ 7] /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf3)[0x7f98e6acb083]
+[broadwell-010:2672581] [ 8] out/mpi(+0x25de)[0x55d816a525de]
+[broadwell-010:2672581] *** End of error message ***
+srun: error: broadwell-010: task 0: Segmentation fault (core dumped)
+slurmstepd: error:  mpi/pmix_v3: _errhandler: broadwell-010 [0]: pmixp_client_v2.c:211: Error handler invoked: status = -25, source = [slurm.pmix.250499.3:0]
+slurmstepd: error: *** STEP 250499.3 ON broadwell-010 CANCELLED AT 2025-10-24T12:06:50 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: broadwell-010: tasks 1-7: Killed
+srun: error: broadwell-012: tasks 16-23: Killed
+srun: error: broadwell-011: tasks 8-15: Killed
+srun: error: broadwell-013: tasks 24-31: Killed

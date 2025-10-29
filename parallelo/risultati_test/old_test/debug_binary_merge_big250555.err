@@ -1,0 +1,17 @@
+/var/spool/slurmd/job250555/slurm_script: line 11: module: command not found
+/var/spool/slurmd/job250555/slurm_script: line 15: module: command not found
+slurmstepd: error: Detected 1 oom_kill event in StepId=250555.1. Some of the step tasks have been OOM Killed.
+srun: error: broadwell-010: task 0: Out Of Memory
+slurmstepd: error:  mpi/pmix_v3: _errhandler: broadwell-010 [0]: pmixp_client_v2.c:211: Error handler invoked: status = -25, source = [slurm.pmix.250555.1:0]
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 250555.1 ON broadwell-010 CANCELLED AT 2025-10-24T13:03:38 ***
+slurmstepd: error: Detected 1 oom_kill event in StepId=250555.2. Some of the step tasks have been OOM Killed.
+srun: error: broadwell-010: task 0: Out Of Memory
+slurmstepd: error:  mpi/pmix_v3: _errhandler: broadwell-010 [0]: pmixp_client_v2.c:211: Error handler invoked: status = -25, source = [slurm.pmix.250555.2:0]
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 250555.2 ON broadwell-010 CANCELLED AT 2025-10-24T13:08:28 ***
+slurmstepd: error: Detected 1 oom_kill event in StepId=250555.3. Some of the step tasks have been OOM Killed.
+srun: error: broadwell-010: task 0: Out Of Memory
+slurmstepd: error:  mpi/pmix_v3: _errhandler: broadwell-010 [0]: pmixp_client_v2.c:211: Error handler invoked: status = -25, source = [slurm.pmix.250555.3:0]
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 250555.3 ON broadwell-010 CANCELLED AT 2025-10-24T13:13:08 ***

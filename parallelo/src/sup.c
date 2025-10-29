@@ -15,7 +15,6 @@ void printArray(int *data,size_t LEN){
 void gen_random_numbers(int *array, int len, int min, int max){
  const unsigned int SEED = 42; 
   srand(SEED);
-  srand(time(0));
     for (int i = 0; i < len; i++)
         array[i] = rand() % (max - min + 1) + min;
 }
@@ -27,6 +26,7 @@ void test_ciclo(int n){
   }
 }
 int main(){
+  
   size_t SIZE = 10;
   int *d = malloc(SIZE*sizeof(int));
   if( NULL == d ){
@@ -57,4 +57,5 @@ int main(){
   free(a);
   free(b);
  test_ciclo(SIZE); 
+  
 }

@@ -5,7 +5,7 @@
  * first indice del primo elemento
  * second indice del secondo elemento
  */
-void swap(long *data,int first,int second){
+void swap(long *data,long first,long second){
 	int tmp = data[first];
 	data[first]=data[second];
 	data[second]=tmp;
@@ -18,11 +18,11 @@ void swap(long *data,int first,int second){
  * Pivot = data[alto] (last element)
  * Returns final pivot position
  */
-int partition_lomuto(long *data,int basso,int alto){
-  int pivot = data[alto];
-  int i = basso-1;
+long partition_lomuto(long *data,long basso,long alto){
+  long pivot = data[alto];
+  long i = basso-1;
 
-  for(int j=basso;j<=alto-1;j++){
+  for(long j=basso;j<=alto-1;j++){
     if(data[j]<pivot){
       i++;
       swap(data,i,j);
@@ -33,23 +33,19 @@ int partition_lomuto(long *data,int basso,int alto){
 }
 
 
-int partition_hoare(long *data, int basso, int alto){
-  int pivot = data[basso];
-  int l = basso + 1;
-  int r = alto;
+long partition_hoare(long *data, long basso, long alto){
+  long pivot = data[basso];
+  long l = basso + 1;
+  long r = alto;
   while(1){
     while(l<r && data[l]<= pivot) l++;
     while(l<r && data[r]>= pivot) r--;
     if( l==r ) break;
     swap(data,l,r);
   }
-
   if( pivot < data[l]) l--;
   swap(data,basso,l);
-
   return l;
-
-
 }
 
 /** corpo base di quick sort  per farlo partire con facilità merge_sort(data,0,size-1)
@@ -57,18 +53,18 @@ int partition_hoare(long *data, int basso, int alto){
  * basso l'indice l'estremo inferiore da cui partire
  * alto l'indice l'estremo superiore a cui arrivare , è escluso
  */
-void quick_sort(long *data,int basso,int alto){
+void quick_sort(long *data,long basso,long alto){
   if(basso<alto){
-//   int pivot = partition_lomuto(data,basso,alto);
-   int pivot = partition_hoare(data,basso,alto);
+//   long pivot = partition_lomuto(data,basso,alto);
+   long pivot = partition_hoare(data,basso,alto);
     quick_sort(data,basso,pivot-1);
     quick_sort(data,pivot+1,alto);
   }
 
 }
 
-void select_median_of_3(long *data, int basso, int alto){
-  int mid = (basso+alto)/2;
+void select_median_of_3(long *data, long basso, long alto){
+  long mid = (basso+alto)/2;
   if( data[basso] > data[mid] ) swap(data,basso,mid);
   if( data[mid] > data[alto] ) swap(data,mid,alto);
   if( data[basso] > data[mid] ) swap(data,basso,mid);
@@ -76,10 +72,10 @@ void select_median_of_3(long *data, int basso, int alto){
   swap(data,basso,mid);
 }
 
-void median_quick_sort(long *data,int basso,int alto){
+void median_quick_sort(long *data,long basso,long alto){
   if(basso < alto){
     select_median_of_3(data,basso,alto);
-    int pivot = partition_hoare(data,basso,alto);
+    long pivot = partition_hoare(data,basso,alto);
     median_quick_sort(data,basso,pivot-1);
     median_quick_sort(data,pivot+1,alto);
   }
@@ -137,70 +133,50 @@ void quick_sort_omp_start(long *data,int basso,int alto,int is_median){
  * high rappresenta l'indice superiore
  */
 
-void merge(long* data,int low,int mid,int high){
-	int i,j,k;
-	int n1 = mid-low+1;
-	int n2 = high-mid;
-	//int tmpLeft[n1],tmpRight[n2];
-	long *tmpLeft = malloc(n1 * sizeof(long));
-	long *tmpRight = malloc(n2 * sizeof(long));
-
-	if(tmpLeft == NULL ){
-		printf("[%s] Errore con creazione tmpLeft\n",__func__);
-		exit(1);
-	}
-
-	if( tmpRight == NULL ){
-		printf("[%s] Errore con creazione tmpRight\n",__func__);
-		exit(1);
-	}
-
-	// sono in lettura dei dati quindi posso caricare in contemporanea left e right  possono essere messi in delle sections 
-
-
-	/*
-  for (i=0;i<n1;i++) {
-    tmpLeft[i] = data[low+i];
-  }
-  */
-
-
-	memcpy(tmpLeft,&data[low],n1*sizeof(long));	
-	memcpy(tmpRight,&data[mid+1],n2*sizeof(long));	
-	/*
-  for(j=0;j<n2;j++){
-    tmpRight[j] = data[mid+1+j];
-  }
-  */
-
-
-	//merge tmpLeft and tmpRight :todo cercare reduce con confronto 
-	i=0; j=0; k=low;
-	while(i<n1 &&j<n2){
-		if(tmpLeft[i] <= tmpRight[j]){
-			data[k]=tmpLeft[i];
-			i++;
-		}else{
-			data[k]=tmpRight[j];
-			j++;
-		}
-		k++;
-
-	}
-
-	while(i<n1){
-		data[k++]= tmpLeft[i++];
-		// i++;
-		// k++;
-	}
-
-	while(j<n2){
-		data[k++]= tmpRight[j++];
-		//j++;
-		//k++;
-	}
-	free(tmpLeft);
-	free(tmpRight);
+/**
+ * Merge ottimizzato con buffer pre-allocato
+ * Fonde due sottoarray ordinati: [low...mid] e [mid+1...high]
+ * 
+ * @param data Array principale
+ * @param tmp_buffer Buffer temporaneo pre-allocato (deve essere >= size dell'array)
+ * @param low Indice iniziale del primo sottoarray
+ * @param mid Indice finale del primo sottoarray
+ * @param high Indice finale del secondo sottoarray
+ */
+void merge(long* restrict data, long* restrict tmp_buffer, size_t low, size_t mid, size_t high) {
+    
+    // Early exit: se già ordinato, non fare nulla
+    if (data[mid] <= data[mid + 1]) {
+        return;
+    }
+    
+    size_t n1 = mid - low + 1;  // Dimensione parte sinistra
+    size_t n2 = high - mid;      // Dimensione parte destra
+    
+    // Copia solo la parte sinistra nel buffer temporaneo
+    // (Ottimizzazione: la parte destra rimane in data)
+    memcpy(tmp_buffer, data + low, n1 * sizeof(long));
+    
+    size_t i = 0;           // Indice per tmp_buffer (parte sinistra)
+    size_t j = mid + 1;     // Indice per parte destra in data
+    size_t k = low;         // Indice per posizione di scrittura in data
+    
+    // Merge principale: confronta e copia il minore
+    while (i < n1 && j <= high) {
+        
+        if (tmp_buffer[i] <= data[j]) {
+            data[k++] = tmp_buffer[i++];
+        } else {
+            data[k++] = data[j++];
+        }
+    }
+    
+    // Copia gli elementi rimanenti dalla parte sinistra (se ci sono)
+    // La parte destra è già al posto giusto!
+    if (i < n1) {
+        memcpy(data + k, tmp_buffer + i, (n1 - i) * sizeof(long));
+    }
+    // Non serve copiare da j: gli elementi sono già in data!
 }
 
 
@@ -234,28 +210,37 @@ void merge_sort(long* data,size_t left,size_t right){
     merge_sort(data,left,center);
     //indipendente
     merge_sort(data,center+1,right);
+
+    size_t n = right-left+1;
+    long* tmp_buffer = malloc(n * sizeof(long));
+    if( NULL == tmp_buffer){
+      printf("%s : errore con la malloc \n",__func__);
+      exit(EXIT_FAILURE);
+    }
+
     //qui collect di dati 
-    merge(data,left,center,right); // è possibile parallellelizzarla
+    merge(data,tmp_buffer,left,center,right); // è possibile parallellelizzarla
     
   }
 }
-int min(int a,int b){
+static inline size_t min(size_t a,size_t b){
   return (a<=b)?a:b;
 }
 
-void merge_sort_iterative(long *data, size_t size) {
+void merge_sort_iterative(long *data, long *tmp_buffer,size_t size) {
     
     // Bottom-up approach: inizia con blocchi di dimensione 1, poi raddoppia
-    for (int block_size = 1; block_size < size; block_size *= 2) {
+    for (size_t block_size = 1; block_size < size; block_size *= 2) {
         
         // Per ogni coppia di blocchi adiacenti di questa dimensione
-        for (int left = 0; left < size; left += 2 * block_size) {
-            int mid = min(left + block_size - 1, size - 1);
-            int right = min(left + 2 * block_size - 1, size - 1);
+		#pragma omp parallel for schedule(dynamic) if(size > (1<<16))
+        for (size_t left = 0; left < size; left += 2 * block_size) {
+            size_t mid = min(left + block_size - 1, size - 1);
+            size_t right = min(left + 2 * block_size - 1, size - 1);
             
             // Mergia solo se abbiamo effettivamente due blocchi
             if (mid < right) {
-                merge(data, left, mid, right );
+                merge(data, tmp_buffer,left, mid, right );
             }
         }
     }
@@ -265,7 +250,7 @@ void merge_sort_iterative(long *data, size_t size) {
 
 void merge_sort_omp(long* restrict data,long* restrict tmp_buffer,size_t level,size_t left,size_t right){
 	if(left < right) {
-		int center = (left + right) / 2;
+		size_t center = (left + right) / 2;
 
 		if(right - left >= MIN_ACTIVATION && level < 5) {
 			#pragma omp task shared(data) firstprivate(left, center)
@@ -277,7 +262,7 @@ void merge_sort_omp(long* restrict data,long* restrict tmp_buffer,size_t level,s
 			#pragma omp taskwait  
 		} else {
 			// Per array piccoli, usa versione sequenziale
-			merge_sort_iterative(data+left,right-left+1);
+			merge_sort_iterative(data+left,tmp_buffer+left,right-left+1);
 			//merge_sort(data, center + 1, right);
 		}
 
@@ -333,6 +318,7 @@ void gen_random_numbers(long *data,size_t len,long min,long max){
   const unsigned int SEED = 42; 
   srand(SEED);
 
+	/*
     #pragma omp parallel for
     for (size_t i = 0; i < len; i++){
       unsigned int seed = SEED + i; // seed deterministico per ogni indice
@@ -340,4 +326,11 @@ void gen_random_numbers(long *data,size_t len,long min,long max){
       data[i] = r % (max - min + 1) + min;
       //data[i]= rand()%(max - min + 1) + min; 
     }
-}
+	*/
+    for (size_t i = 0; i < len; i++){
+      unsigned int seed = SEED + i; // seed deterministico per ogni indice
+      long r = (long)rand_r(&seed);
+      data[i] = r % (max - min + 1) + min;
+      //data[i]= rand()%(max - min + 1) + min; 
+    }
+	}

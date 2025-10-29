@@ -15,22 +15,20 @@
  * Pivot = data[alto] (last element)
  * Returns final pivot position
  */
-int partition_lomuto(long *data, int basso, int alto);
+long partition_lomuto(long *data, long basso, long alto);
 
 /**
  * Hoare partition scheme: bidirectional convergence
  * Pivot = data[basso] (first element, or pre-selected)
  * Returns pivot position
  */
-int partition_hoare(long *data, int basso, int alto);
+long partition_hoare(long *data, long basso, long alto);
 
-void quick_sort(long *data,int basso,int alto);
+void quick_sort(long *data,long basso,long alto);
 
-void select_median_of_3(long *data, int basso, int alto);
+void select_median_of_3(long *data, long basso, long alto);
 
-void median_quick_sort(long *data,int basso,int alto);
-
-void merge(long* data,int low,int mid,int high);
+void median_quick_sort(long *data,long basso,long alto);
 
 /** funzione di merge 
  * data dati da inviare 

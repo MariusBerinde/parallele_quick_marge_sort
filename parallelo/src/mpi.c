@@ -8,15 +8,14 @@
 #include <stdlib.h>
 #include <string.h>
 #include "lib.h"
-#define MAX_MPI_CHUNK (1UL << 28)
-
+#define MAX_MPI_CHUNK (4294963200)  
+#define MAX_MPI_ELEMENTS (MAX_MPI_CHUNK / sizeof(long))  // ~536M elementi long
 //crono e thread sono usate per prendere prestazioni codice
 float tdiff(struct timeval *start,struct timeval *end){
   return (end->tv_sec-start->tv_sec) + 1e-6 * (end->tv_usec-start->tv_usec);
 }
-// esgue il l'algoritmo di merge tra left e right
 
-
+//Algoritmo di merge locale dei dati 
 void merge_l(long *dest,size_t dest_size,long *left,size_t left_size,long *right,size_t right_size ){
   size_t i=0,j=0,k=0;
   while(i <left_size && j<right_size ){
@@ -28,23 +27,6 @@ void merge_l(long *dest,size_t dest_size,long *left,size_t left_size,long *right
     memcpy(&dest[k], &left[i], (left_size - i) * sizeof(long));
     k += (left_size - i);
   }
-  
-
- /* 
-  while(i<left_size){
-   dest[k++]=left[i++]; 
-  }
-  */
-  
-  
-
-  /*
-  while(j< right_size){
-   dest[k++]=right[j++]; 
-  }
-  */
-  
-
   
   if(j<right_size){
     memcpy(&dest[k], &right[j], (right_size - j) * sizeof(long));
@@ -210,140 +192,10 @@ void test_init(){
  
 */
 
-void binary_merge_tree2(long **data, size_t *len) {
-  if (NULL == *data || NULL == data) {
-    printf("[%s] Errore: puntatore a dati da mergiare nullo\n", __func__);
-    MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-  }
-  if (NULL == len) {
-    printf("[%s] Errore: puntatore a len nullo\n", __func__);
-    MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-  }
-  if (*len == 0) {
-    printf("[%s] Errore: lunghezza array nulla\n", __func__);
-    MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-  }
-  
-  int my_rank = -1, nr_nodes = -1;
-  MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-  MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
-  
-  if (2 > nr_nodes) {
-    printf("[%s] Numero di nodi troppo basso\n", __func__);
-    MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-  }
 
-  // Calcola il numero massimo di round necessari
-  int max_rounds = 0;
-  int temp = nr_nodes - 1;
-  while (temp > 0) {
-    max_rounds++;
-    temp >>= 1;
-  }
 
-#ifdef DEBUG
-  if (my_rank == 0) {
-    printf("[%s,%d] Numero massimo di round: %d per %d nodi\n", 
-           __func__, my_rank, max_rounds, nr_nodes);
-  }
-#endif
+void binary_merge_tree_old(long **data,size_t *len){
 
-  // Array per tracciare quali nodi sono ancora attivi
-  int active = 1;  // Il nodo Š attivo se ha dati da inviare o ricevere
-  
-  for (int round = 0; round < max_rounds; round++) {
-    int step = 1 << round;           // Distanza tra partner in questo round
-    int group_size = step << 1;      // Dimensione del gruppo in questo round
-    
-    if (!active) {
-      // Questo nodo ha gi… inviato i suoi dati e non partecipa pi—
-      continue;
-    }
-    
-    // Determina il ruolo del nodo in questo round
-    int group_id = my_rank / group_size;
-    int pos_in_group = my_rank % group_size;
-    
-    if (pos_in_group < step) {
-      // Questo nodo dovrebbe ricevere (se esiste un partner)
-      int partner = my_rank + step;
-      
-      if (partner < nr_nodes) {
-        // Il partner esiste, ricevi i dati
-#ifdef DEBUG
-        printf("[%s,%d] Round %d: ricevo da nodo %d\n", 
-               __func__, my_rank, round, partner);
-#endif
-        
-        // Prima ricevi la dimensione dei dati in arrivo
-        size_t incoming_size = 0;
-        MPI_Recv(&incoming_size, 1, MPI_UNSIGNED_LONG, partner, 0, 
-                 MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        
-        // Alloca spazio per i dati in arrivo
-        long *tmp = malloc(incoming_size * sizeof(long));
-        if (NULL == tmp) {
-          printf("[%s,%d] Errore allocazione tmp\n", __func__, my_rank);
-          MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-        }
-        
-        // Ricevi i dati
-        MPI_Recv(tmp, incoming_size, MPI_LONG, partner, 1, 
-                 MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        
-        // Alloca spazio per il merge
-        size_t new_size = *len + incoming_size;
-        long *merged_data = malloc(new_size * sizeof(long));
-        if (NULL == merged_data) {
-          printf("[%s,%d] Errore allocazione merged_data\n", __func__, my_rank);
-          MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-        }
-        
-        // Esegui il merge
-        merge_l(merged_data, new_size, *data, *len, tmp, incoming_size);
-        
-        // Sostituisci i dati vecchi con quelli mergiati
-        free(*data);
-        *data = merged_data;
-        *len = new_size;
-        free(tmp);
-        
-#ifdef DEBUG
-        printf("[%s,%d] Round %d: merge completato, nuova size=%zu\n", 
-               __func__, my_rank, round, *len);
-#endif
-      }
-      // Altrimenti non c'Š partner, mantieni i dati correnti
-      
-    } else {
-      // Questo nodo dovrebbe inviare
-      int partner = my_rank - step;
-      
-#ifdef DEBUG
-      printf("[%s,%d] Round %d: invio a nodo %d\n", 
-             __func__, my_rank, round, partner);
-#endif
-      
-      // Invia prima la dimensione
-      MPI_Send(len, 1, MPI_UNSIGNED_LONG, partner, 0, MPI_COMM_WORLD);
-      
-      // Poi invia i dati
-      MPI_Send(*data, *len, MPI_LONG, partner, 1, MPI_COMM_WORLD);
-      
-      // Questo nodo ha finito, disattivalo
-      active = 0;
-    }
-  }
-
-#ifdef DEBUG
-  if (my_rank == 0) {
-    printf("[%s,%d] Merge completato, dimensione finale: %zu\n", 
-           __func__, my_rank, *len);
-  }
-#endif
-}
-
-void binary_merge_tree(long **data,size_t *len){
   if(NULL == *data || NULL == data){
     printf("[%s] Errore: puntatore a dati da mergiare nullo\n",__func__);
     MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
@@ -359,7 +211,6 @@ void binary_merge_tree(long **data,size_t *len){
   }
 
 	int my_rank =-1,nr_nodes=-1;
-  size_t first_size = *len;
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 	MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
   if( 2 > nr_nodes){
@@ -437,24 +288,43 @@ void binary_merge_tree(long **data,size_t *len){
 /**
  * Invia array di dimensione arbitraria superando il limite MPI
  */
+
 void send_large_array(long *data, size_t total_size, int dest, int tag, MPI_Comm comm) {
+  
     size_t remaining = total_size;
     size_t offset = 0;
     int chunk_id = 0;
-    
+
+    #ifdef DEBUG
+    printf("[send_large_array] Invio %zu elementi (%.2f GB) a rank %d\n",
+           total_size, (total_size * sizeof(long)) / (1024.0*1024.0*1024.0), dest);
+    #endif
+
     // Invia dimensione totale prima
     MPI_Send(&total_size, 1, MPI_UNSIGNED_LONG, dest, tag, comm);
-    
+
     // Invia i dati in chunk
     while (remaining > 0) {
-        size_t to_send = (remaining > MAX_MPI_CHUNK) ? MAX_MPI_CHUNK : remaining;
-        
-        MPI_Send(&data[offset], (int)to_send, MPI_LONG, dest, tag + chunk_id + 1, comm);
-        
+        // CORREZIONE: confronta ELEMENTI con MAX_MPI_ELEMENTS
+        size_t to_send = (remaining > MAX_MPI_ELEMENTS) ? MAX_MPI_ELEMENTS : remaining;
+
+        #ifdef DEBUG
+        if (chunk_id == 0 || remaining <= MAX_MPI_ELEMENTS) {
+            printf("[send_large_array] Chunk %d: invio %zu elementi (%.2f MB)\n",
+                   chunk_id, to_send, (to_send * sizeof(long)) / (1024.0*1024.0));
+        }
+        #endif
+
+        MPI_Send(&data[offset], to_send, MPI_LONG, dest, tag + chunk_id + 1, comm);
+
         offset += to_send;
         remaining -= to_send;
         chunk_id++;
     }
+
+    #ifdef DEBUG
+    printf("[send_large_array] Invio completato: %d chunk inviati\n", chunk_id);
+    #endif
 }
 
 /**
@@ -462,238 +332,187 @@ void send_large_array(long *data, size_t total_size, int dest, int tag, MPI_Comm
  */
 void recv_large_array(long *data, size_t expected_size, int source, int tag, MPI_Comm comm) {
     size_t total_size;
-    
+
     // Ricevi dimensione totale
     MPI_Recv(&total_size, 1, MPI_UNSIGNED_LONG, source, tag, comm, MPI_STATUS_IGNORE);
-    
+
+    #ifdef DEBUG
+    printf("[recv_large_array] Ricevo %zu elementi (%.2f GB) da rank %d\n",
+           total_size, (total_size * sizeof(long)) / (1024.0*1024.0*1024.0), source);
+    #endif
+
     if (total_size != expected_size) {
-        printf("ERRORE: dimensione ricevuta (%zu) != attesa (%zu)\n", 
+        printf("ERRORE: dimensione ricevuta (%zu) != attesa (%zu)\n",
                total_size, expected_size);
         MPI_Abort(comm, EXIT_FAILURE);
     }
-    
+
     // Ricevi i dati in chunk
     size_t remaining = total_size;
     size_t offset = 0;
     int chunk_id = 0;
-    
+
     while (remaining > 0) {
-        size_t to_recv = (remaining > MAX_MPI_CHUNK) ? MAX_MPI_CHUNK : remaining;
-        
-        MPI_Recv(&data[offset], (int)to_recv, MPI_LONG, source, tag + chunk_id + 1, 
+        // CORREZIONE: confronta ELEMENTI con MAX_MPI_ELEMENTS
+        size_t to_recv = (remaining > MAX_MPI_ELEMENTS) ? MAX_MPI_ELEMENTS : remaining;
+
+        #ifdef DEBUG
+        if (chunk_id == 0 || remaining <= MAX_MPI_ELEMENTS) {
+            printf("[recv_large_array] Chunk %d: ricevo %zu elementi (%.2f MB)\n",
+                   chunk_id, to_recv, (to_recv * sizeof(long)) / (1024.0*1024.0));
+        }
+        #endif
+
+        MPI_Recv(&data[offset], to_recv, MPI_LONG, source, tag + chunk_id + 1,
                  comm, MPI_STATUS_IGNORE);
-        
+
         offset += to_recv;
         remaining -= to_recv;
         chunk_id++;
     }
+
+    #ifdef DEBUG
+    printf("[recv_large_array] Ricezione completata: %d chunk ricevuti\n", chunk_id);
+    #endif
 }
 
-void binary_merge_tree_large(long **data, size_t *len) {
-  //
-    // Validazione parametri
-    if (NULL == data || NULL == *data || NULL == len || *len == 0) {
-        printf("[binary_merge_tree_large] Errore: parametri invalidi\n");
-        MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-    }
-    
-    int my_rank = -1, nr_nodes = -1;
-    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
-    
-    if (nr_nodes < 2) {
-        printf("[binary_merge_tree_large] Numero di nodi troppo basso\n");
-        return;  // Niente da fare con 1 solo nodo
-    }
-    
-    size_t nr_rounds = (size_t)log2((double)nr_nodes);
-    size_t current_len = *len;
+
+void binary_merge_tree(long **data, size_t *len) {
+  if (NULL == *data || NULL == data) {
+    printf("[%s] Errore: puntatore a dati da mergiare nullo\n", __func__);
+    MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+  }
+  if (NULL == len) {
+    printf("[%s] Errore: puntatore a len nullo\n", __func__);
+    MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+  }
+  if (*len == 0) {
+    printf("[%s] Errore: lunghezza array nulla\n", __func__);
+    MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+  }
+  
+  int my_rank = -1, nr_nodes = -1;
+  MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+  MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
+  
+  if (2 > nr_nodes) {
+    printf("[%s] Numero di nodi troppo basso\n", __func__);
+    MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+  }
+
+  // Calcola l'upper bound del numero massimo di turni 
+  int max_rounds = 0;
+  int temp = nr_nodes - 1;
+  while (temp > 0) {
+    max_rounds++;
+    temp >>= 1; // modo efficiente di calcolare la potenza di 2 utile
+  }
+
+#ifdef DEBUG
+  if (my_rank == 0) {
+    printf("[%s,%d] Numero massimo di round: %d per %d nodi\n", __func__, my_rank, max_rounds, nr_nodes);
+  }
+#endif
+
+  // Array per tracciare quali nodi sono ancora attivi
+  int active = 1;
+  
+  // Ciclo principale
+  for (int round = 0; round < max_rounds; round++) {
+    int step = 1 << round;
+    int group_size = step << 1;
     
     #ifdef DEBUG
-    if (my_rank == 0) {
-        printf("[binary_merge_tree_large] Inizio: %d nodi, %zu round\n",
-               nr_nodes, nr_rounds);
-        printf("[binary_merge_tree_large] Dimensione iniziale per nodo: %zu elementi (%.2f GB)\n",
-               current_len, (current_len * sizeof(int)) / (1024.0*1024.0*1024.0));
+    if (0 == my_rank) {
+      printf("[%s,%d] round %d\t valore step %d\tvalore group size %d\n",
+             __func__, my_rank, round, step, group_size);
     }
     #endif
     
+    if (!active) {
+      continue;
+    }
     
-    for (int round = 1; round <= nr_rounds; round++) {
-        int level_chunk = 1 << round;
-        int step_size_prev = 1 << (round - 1);
+    // Determina il ruolo del nodo in questo round
+    int group_id = my_rank / group_size;
+    int pos_in_group = my_rank % group_size;
+    
+    if (pos_in_group < step) {
+      // Questo nodo dovrebbe ricevere (se esiste un partner)
+      int partner = my_rank + step;
+      
+      if (partner < nr_nodes) {
+        // Il partner esiste, ricevi i dati
         
-        if (my_rank % level_chunk == 0) {
-            int source = my_rank + step_size_prev;
-            
-            if (source < nr_nodes) {
-                size_t recv_size = current_len;  // Stessa dimensione del mio array
-                
-                #ifdef DEBUG
-                printf("[Rank %d] Round %d: aspetto %zu elementi da rank %d\n",
-                       my_rank, round, recv_size, source);
-                #endif
-                
-                long *received_data = malloc(recv_size * sizeof(long));
-                long *merged_data = malloc((current_len + recv_size) * sizeof(long));
-                
-                if (received_data == NULL || merged_data == NULL) {
-                    printf("[Rank %d] ERRORE: allocazione memoria fallita al round %d\n",
-                           my_rank, round);
-                    printf("  Tentativo alloc: recv=%zu (%.2f GB), merged=%zu (%.2f GB)\n",
-                           recv_size, (recv_size * sizeof(int)) / (1024.0*1024.0*1024.0),
-                           current_len + recv_size, 
-                           ((current_len + recv_size) * sizeof(int)) / (1024.0*1024.0*1024.0));
-                    MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-                }
-                
-                // Ricevi dati (gestisce array grandi automaticamente)
-                recv_large_array(received_data, recv_size, source, round * 1000, MPI_COMM_WORLD);
-                
-                #ifdef DEBUG
-                printf("[Rank %d] Round %d: ricevuti %zu elementi, inizio merge\n",
-                       my_rank, round, recv_size);
-                #endif
-                
-                // Merge dei due array ordinati
-                merge_l(merged_data,current_len + recv_size,*data,current_len,received_data, recv_size);
-                // Libera vecchi dati e aggiorna puntatori
-                free(*data);
-                free(received_data);
-                *data = merged_data;
-                current_len = current_len + recv_size;
-                
-                #ifdef DEBUG
-                printf("[Rank %d] Round %d: merge completato, nuova len=%zu (%.2f GB)\n",
-                       my_rank, round, current_len,
-                       (current_len * sizeof(int)) / (1024.0*1024.0*1024.0));
-                #endif
-            }
-            
-        } else if (my_rank % step_size_prev == 0) {
-            // ====================================
-            // MITTENTE: Invia i suoi dati
-            // ====================================
-            int dest = my_rank - step_size_prev;
-            
-            if (dest >= 0) {
-                #ifdef DEBUG
-                printf("[Rank %d] Round %d: invio %zu elementi a rank %d\n",
-                       my_rank, round, current_len, dest);
-                #endif
-                
-                send_large_array(*data, current_len, dest, round * 1000, 
-                                MPI_COMM_WORLD);
-                
-                
-                // Dopo l'invio, questo processo ha finito
-                *len = current_len;
-                
-                
-                return;
-            }
+        // Prima ricevi la dimensione dei dati in arrivo
+        size_t incoming_size = 0;
+        MPI_Recv(&incoming_size, 1, MPI_UNSIGNED_LONG, partner, round * 1000, 
+                 MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+        
+#ifdef DEBUG
+        printf("[%s,%d] Round %d: ricevo %zu elementi da rank %d (%.2f GB)\n", __func__, my_rank, round, incoming_size, partner,
+               (incoming_size * sizeof(long)) / (1024.0*1024.0*1024.0));
+#endif
+        
+        // Alloca spazio per i dati in arrivo
+        long *tmp = malloc(incoming_size * sizeof(long));
+        if (NULL == tmp) {
+          printf("[%s,%d] Errore allocazione tmp (%zu elementi, %.2f GB)\n",
+                 __func__, my_rank, incoming_size,
+                 (incoming_size * sizeof(long)) / (1024.0*1024.0*1024.0));
+          MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
         }
         
-        // Sincronizzazione tra round (opzionale, commentabile per performance)
-        // MPI_Barrier(MPI_COMM_WORLD);
-    }
-    
-    // Aggiorna la dimensione finale
-    *len = current_len;
-    
-    #ifdef DEBUG
-    if (my_rank == 0) {
-        printf("[binary_merge_tree_large] Completato: dimensione finale=%zu (%.2f GB)\n",
-               current_len, (current_len * sizeof(int)) / (1024.0*1024.0*1024.0));
-    }
-    #endif
-    
-}
-
-
-void binary_merge_tree_nb(long **data, size_t *len) {
-    if (data == NULL || *data == NULL || len == NULL || *len == 0) {
-        printf("[%s] Errore: input non valido\n", __func__);
-        MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-    }
-
-    int my_rank = -1, nr_nodes = -1;
-    MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
-
-    if (nr_nodes < 2) {
-        printf("[%s] Numero di nodi troppo basso\n", __func__);
-        MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-    }
-
-    double exact_nr_rounds = log2((double)nr_nodes);
-    size_t nr_rounds = (size_t)exact_nr_rounds;
-
-#ifdef DEBUG
-    if (my_rank == 0) {
-        printf("[%s,%d] Numero di round %ld\n", __func__, my_rank, nr_rounds);
-    }
-#endif
-
-    for (int i = 1; i <= nr_rounds; i++) {
-        int level_chunk = 1 << i;  // numero di chunk uniti a questo livello
-        if (my_rank % level_chunk == 0) {
-            // processo ricevente
-            int src = my_rank + (1 << (i - 1));
-            if (src < nr_nodes) {
-#ifdef DEBUG
-                printf("[%s,%d] Round %d: ricevo da %d\n",
-                       __func__, my_rank, i, src);
-#endif
-                long *tmp = malloc(*len * sizeof(long));
-                long *merged_data = malloc(2 * (*len) * sizeof(long));
-                if (!tmp || !merged_data) {
-                    printf("[%s,%d] Errore malloc\n", __func__, my_rank);
-                    MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-                }
-
-                MPI_Request req;
-                MPI_Irecv(tmp, *len, MPI_LONG, src, 0, MPI_COMM_WORLD, &req);
-                MPI_Wait(&req, MPI_STATUS_IGNORE);
-
-                merge_l(merged_data, 2 * (*len), *data, *len, tmp, *len);
-
-                free(*data);
-                *data = merged_data;
-                *len *= 2;
-
-                free(tmp);
-            }
-        } else {
-            // processo mittente
-            int step_size_prev = 1 << (i - 1);
-            if (my_rank % step_size_prev == 0) {
-                int dest = my_rank - step_size_prev;
-                if (dest >= 0) {
-#ifdef DEBUG
-                    printf("[%s,%d] Round %d: invio a %d\n",
-                           __func__, my_rank, i, dest);
-#endif
-                    MPI_Request req;
-                    MPI_Isend(*data, *len, MPI_LONG, dest, 0, MPI_COMM_WORLD, &req);
-                    MPI_Wait(&req, MPI_STATUS_IGNORE);
-                }
-            }
-            // Dopo l'invio, questo processo non partecipa pi—
-            break;
+        // Ricevi i dati usando recv_large_array
+        recv_large_array(tmp, incoming_size, partner, round * 1000 + 1, MPI_COMM_WORLD);
+        
+        // Alloca spazio per il merge
+        size_t new_size = *len + incoming_size;
+        long *merged_data = malloc(new_size * sizeof(long));
+        if (NULL == merged_data) {
+          printf("[%s,%d] Errore allocazione merged_data (%zu elementi, %.2f GB)\n",
+                 __func__, my_rank, new_size,
+                 (new_size * sizeof(long)) / (1024.0*1024.0*1024.0));
+          MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
         }
+        
+        // Esegui il merge
+        merge_l(merged_data, new_size, *data, *len, tmp, incoming_size);
+        
+        // Sostituisci i dati vecchi con quelli mergiati
+        free(*data);
+        *data = merged_data;
+        *len = new_size;
+        free(tmp);
+        
+      }
+      
+    } else {
+      // Questo nodo dovrebbe inviare
+      int partner = my_rank - step;
+      
+#ifdef DEBUG
+      printf("[%s,%d] Round %d: invio %zu elementi a nodo %d (%.2f GB)\n", __func__, my_rank, round, *len, partner, (*len * sizeof(long)) / (1024.0*1024.0*1024.0));
+#endif
+
+      // Invia prima la dimensione
+      MPI_Send(len, 1, MPI_UNSIGNED_LONG, partner, round * 1000, MPI_COMM_WORLD);
+      
+      // Poi invia i dati usando send_large_array
+      send_large_array(*data, *len, partner, round * 1000 + 1, MPI_COMM_WORLD);
+      
+      // Questo nodo ha finito, disattivalo
+      active = 0;
     }
+  }
 }
-
-
-
 
 
 void test_merge_bint(){
 	int my_rank =-1,nr_nodes=-1;
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 	MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
-  size_t global_size = 40;
+  size_t global_size = 25;
   size_t local_size = global_size/nr_nodes;
 	long *local_data = malloc(local_size*sizeof(long));
 
@@ -747,7 +566,7 @@ void test_merge_bint(){
 
     printArray(local_data,local_size);
   #endif
-  binary_merge_tree2(&local_data,&local_size);
+  binary_merge_tree(&local_data,&local_size);
 
 
     //MPI_Barrier(MPI_COMM_WORLD);
@@ -838,20 +657,6 @@ void test_merge_bint(){
 
 }
 
-
-
-/**
-  * Funzione per verificare se ci saranno problemi nell'invio di dati con la scatter 
-  * len la lunghezza de dati originali,
-  * chunk_size la dimensione del chunk attuale 
-  *
-  * la funzione restituisce:
-  * 0 se i dati saranno distribuiti equamente 
-  * 1 se il chunk Ã¨ piccolo 
-  * 2 se il chunk Ã¨ troppo grande 
-  * -1 in caso di problemi con i parametri o il numero di nodi
-*/
-
 int check_chunks (size_t len,size_t chunk_size){
 	int nr_nodes=-1;
 	MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
@@ -889,8 +694,6 @@ int check_chunks (size_t len,size_t chunk_size){
     return 2;
 
   return 1;
-
-
   
 }
 
@@ -1008,121 +811,110 @@ void test_all_to_all(){
  *   - il nodo 7 ha collegamento solo con 6
  
 	*/
-/*
-  * versione di merge sort che utilizza la libreria mpi per funzionare , distribuisce i dati in chuks a vari nodi mpi che eseguono ordinamento locale 
+/**
+ * dataset : dati contenuti in my_rank ==0 da distribuire 
+ * len_datase : dim di dataset 
+ * local_data : dati che devono arrivare a un singolo nodo 
+ * local_size : len di local data 
+ */
+/* versione di merge sort che utilizza la libreria mpi per funzionare , distribuisce i dati in chuks a vari nodi mpi che eseguono ordinamento locale 
   * ed eseguono un merge dei chunk ordinati usando la strategia del binary_merge_tree .
   * data dati da ordinare 
   * len la lunghezza dei dati da ordinare 
          */
-
-
 void merge_sort_mpi(long *data,size_t len){
 	int my_rank =-1,nr_nodes=-1;
-	
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 	MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
-  if( nr_nodes == 1 ){
-    if(len > (1<<18)){
-      merge_sort_omp_start(data,0,len);
-      return;
-    }else{
-      merge_sort(data,0,len-1);
-      return;
-    }
 
-  }
-  if( NULL == data && my_rank == 0 ){
-    printf("[%s] Errore puntatore a data null\n",__func__);
-    MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
-  }
-  if( 0 == len ){
-    printf("[%s] Errore con la lunghezza indicata in len\n",__func__);
-    MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
-  }
-  if(  2 > nr_nodes  ){
-      printf("[%s] Errore: numero di nodi mpi  troppo basso.\n",__func__);
-      MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
-    }
-if((nr_nodes & (nr_nodes - 1)) != 0){
-        if(my_rank == 0){
-            printf("[%s] ERRORE: Il numero di nodi MPI (%d) deve essere una potenza di 2!\n", 
-                   __func__, nr_nodes);
-            printf("       Valori validi: 2, 4, 8, 16, 32, 64, 128, ...\n");
-        }
-        MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
-    }
-	
-	int CHUNK_SIZE = len / nr_nodes;
-	#ifdef DEBUG
-		printf("[%s,%d] Lunghezza array originale %ld\tdimensione chunk %d \n",__func__,my_rank,len,CHUNK_SIZE);
-	#endif
-  if( len <= CHUNK_SIZE ){
-    if(len>=MIN_ACTIVATION ){
-      merge_sort_omp_start(data,0,len-1);
-    }
-    else{
-      merge_sort(data,0,len-1);
-    }
-    return;
-  }
-  #ifdef DEBUG
-  printf("[%s] Ho passato i controlli preliminari e sto per avviare la distribuzione dei dati\n",__func__);
-  #endif 
+  //Gestione validazione dati locali
+	if( (NULL == data) && (my_rank == 0) ){
+		printf("[%s] Errore puntatore a data null\n",__func__);
+		MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
+	}
+	if( 0 == len  ){
+		if( 0 == my_rank)
+			printf("[%s] Errore con la lunghezza indicata in len\n",__func__);
+		MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
+	}
+	if( nr_nodes == 1 ){
+		if(len > (1<<18)){
+			merge_sort(data,0,len-1);
+		}
 
-  long *local_data = malloc(CHUNK_SIZE * sizeof(long));
+			return;
+	}
+	if((nr_nodes & (nr_nodes - 1)) != 0){
+		if(my_rank == 0){
+			printf("[%s] ERRORE: Il numero di nodi MPI (%d) deve essere una potenza di 2!\n", 
+	  __func__, nr_nodes);
+			printf("       Valori validi: 2, 4, 8, 16, 32, 64, 128, ...\n");
+		}
+		MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+	}
 
-  if( NULL == local_data){
-      printf("[%s,%d] Errore: problemi allocazione local data.\n",__func__,my_rank);
-      MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
-  }
-  // suddivisione in chunk dei dati
-  if( my_rank == 0 ){
-    MPI_Scatter(data, (int)CHUNK_SIZE, MPI_LONG, local_data, (int)CHUNK_SIZE, MPI_LONG, 0, MPI_COMM_WORLD);
-  }else{
-    MPI_Scatter(NULL, (int)CHUNK_SIZE, MPI_LONG, local_data, (int)CHUNK_SIZE, MPI_LONG, 0, MPI_COMM_WORLD);
-  }
+	size_t CHUNK_SIZE = len / nr_nodes;
+#ifdef DEBUG
+	printf("[%s,%d] Lunghezza array originale %ld\tdimensione chunk %zu \n",__func__,my_rank,len,CHUNK_SIZE);
+	printf("[%s] Ho passato i controlli preliminari e sto per avviare la distribuzione dei dati\n",__func__);
+#endif
 
-  // ordinamento dati locali 
-  
-  size_t local_size = CHUNK_SIZE;
+	long *local_data = malloc(CHUNK_SIZE * sizeof(long));
 
-  #ifdef DEBUG
-  printf("[%s,%d] Sto lanciando il sort locale sui chunk con local size %ld \n",__func__,my_rank,local_size);
-  #endif 
+	if( NULL == local_data){
+		printf("[%s,%d] Errore: problemi allocazione local data.\n",__func__,my_rank);
+		MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
+	}
+
+	// suddivisione in chunk dei dati
+
+	if( 0 == my_rank ){
+		MPI_Scatter(data, CHUNK_SIZE, MPI_LONG, local_data, CHUNK_SIZE, MPI_LONG, 0, MPI_COMM_WORLD);
+	}else{
+		MPI_Scatter(NULL, CHUNK_SIZE, MPI_LONG, local_data, CHUNK_SIZE, MPI_LONG, 0, MPI_COMM_WORLD);
+	}
+	// ordinamento dati locali 
+
+	size_t local_size = CHUNK_SIZE;
+
+#ifdef DEBUG
+  if( 0 == my_rank)
+    printf("[%s,%d] Sto lanciando il sort locale sui chunk con local size %ld \n",__func__,my_rank,local_size);
+#endif 
+
+	if(0 == local_size){
+		if(0 == my_rank)
+			printf("[%s] errore DIMENSIONE CHUNK 0 in %d\n",__func__,__LINE__);
+		MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
+	}
+
+	// Ordinamento locale dei dati
 	merge_sort_omp_start(local_data,0,local_size-1);
-  //merge_sort(local_data,0,local_size-1);
-  // merge
-  MPI_Barrier(MPI_COMM_WORLD);
+//	merge_sort(local_data,0,local_size-1);
+	MPI_Barrier(MPI_COMM_WORLD);
+#ifdef DEBUG
+  if( 0==my_rank)
+    printf("[%s] lancio il binary merge tree\n",__func__);
+#endif 
 
-  #ifdef DEBUG
-  printf("[%s] lancio il binary merge tree\n",__func__);
-  #endif 
-  //binary_merge_tree_nb(&local_data,&local_size);
+// merge dati locali
+	binary_merge_tree(&local_data,&local_size);
 
-    binary_merge_tree_large(&local_data,&local_size);
-   // binary_merge_tree_large(&local_data,&local_size);
-//  if(CHUNK_SIZE > MAX_MPI_CHUNK)
-//    binary_merge_tree_large(&local_data,&local_size);
- // else
-  //  binary_merge_tree(&local_data,&local_size);
-  
-   // binary_merge_tree(&local_data,&local_size);
-  MPI_Barrier(MPI_COMM_WORLD);
+	MPI_Barrier(MPI_COMM_WORLD);
 
-  #ifdef DEBUG
-  printf("[%s] Copio i dati locali in data da local data\n",__func__);
-  #endif 
-  if( my_rank == 0 ){
-    if( local_size != len ){
-      printf("[%s,%d] Errore dopo il merge le lunghezze di len e local len non corrispondono\n",__func__,my_rank);
-      MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
-    }else{
-      memcpy(data, local_data, local_size * sizeof(long));
-    }
-  }
-  free(local_data);
+	if( my_rank == 0 ){
+#ifdef DEBUG
+    printf("[%s] Copio i dati locali in data da local data\n",__func__);
+#endif 
+		if( local_size != len ){
+			printf("[%s,%d] Errore dopo il merge le lunghezze di len e local len non corrispondono\n",__func__,my_rank);
+			MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
+		}else{
+			memcpy(data, local_data, local_size * sizeof(long));
+		}
+	}
+	free(local_data);
 }
-
 
 
 /* verifica se data è in ordine crescente e restituisce 0 in caso affermativo, se almeno un elemento non è ordinato restituisce 1*/
@@ -1141,13 +933,13 @@ int isOrdered(long data[],size_t size){
 /** funzione di bechmark dove provo a vedere se funzione la funzione di merge e con quali prestazioni
 */
 
+// Versione di test delle prestazioni dell'algoritmo "merge sort mpi"  dove vengono eseguite le versioni sequenziali e parallerelle
 void ben_merge_sort_mpi() { 
   int my_rank = -1, nr_nodes = -1;
   MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
   MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
 
-  //size_t SIZE = 1UL << 15;
-  size_t SIZE = 1 << 25;
+  size_t SIZE = 1UL << 25;
   int nr_cores = omp_get_num_procs();
   int nr_threads = omp_get_max_threads();
   float execution_time_sequenzial = 0;
@@ -1156,7 +948,6 @@ void ben_merge_sort_mpi() {
   long *data_seq = NULL;
   long *data_parall = NULL;
   int status_seq = 0;
-
   const char *job_id = getenv("SLURM_JOB_ID");
   const char *nnodes_env = getenv("SLURM_NNODES");
   int nnodes_slurm = (nnodes_env) ? atoi(nnodes_env) : -1;
@@ -1183,7 +974,6 @@ void ben_merge_sort_mpi() {
     }
   }
 
-  // Solo rank 0 alloca e inizializza
   if (my_rank == 0) {
     data_seq = malloc(SIZE * sizeof(long));
 
@@ -1191,9 +981,7 @@ void ben_merge_sort_mpi() {
       printf("[%s,%d] Errore creazione array\n", __func__, my_rank);
       MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
     }
-
     gen_random_numbers(data_seq, SIZE, 0, SIZE);
-
 
     struct timeval start, end;
     gettimeofday(&start, NULL);
@@ -1215,13 +1003,13 @@ void ben_merge_sort_mpi() {
       printf("[%s,%d] Errore creazione data parall\n", __func__, my_rank);
       MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
     }
-    gen_random_numbers(data_parall, SIZE, 0, SIZE);
+    gen_random_numbers(data_parall, SIZE, 0, 2*SIZE);
 
     gettimeofday(&start, NULL);
   }
 
   merge_sort_mpi(data_parall, SIZE);
-
+  //MPI_Barrier(MPI_COMM_WORLD);
   if (my_rank == 0) {
     gettimeofday(&end, NULL);
     execution_time_parallel = tdiff(&start, &end);
@@ -1257,22 +1045,116 @@ void ben_merge_sort_mpi() {
            ( status_seq == 0 ? "OK" : "Errore"));
     printf("correttezza parallelo   = %s\n", 
            (isOrdered(data_parall, SIZE) == 0 ? "OK" : "Errore"));
+    free(data_parall);
+  }
 
+}
+
+// Versione di test delle prestazioni dell'algoritmo merge sort mpi dove viene eseguita solo la versione sequenziale.
+// Le prestazioni vengono calcolate inserendo manualmente il tempo di esecuzione della versione sequenziale.
+void ben_merge_sort_mpi_alt(){
+  int my_rank = -1, nr_nodes = -1;
+  MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+  MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
+  
+  size_t SIZE = 1UL << 33 ;
+  int nr_cores = omp_get_num_procs();
+  int nr_threads = omp_get_max_threads();
+  long *data_parall = NULL;
+  
+  const char *job_id = getenv("SLURM_JOB_ID");
+  const char *nnodes_env = getenv("SLURM_NNODES");
+  int nnodes_slurm = (nnodes_env) ? atoi(nnodes_env) : -1;
+  int nnodes_physical = 0;
+  
+  const double execution_time_sequential = 2212.470947;
+  double execution_time_parallel = 0;
+  
+  /* Conta i nodi fisici */
+  MPI_Comm node_comm;
+  MPI_Comm_split_type(MPI_COMM_WORLD, MPI_COMM_TYPE_SHARED, 0, MPI_INFO_NULL, &node_comm);
+  int local_rank;
+  MPI_Comm_rank(node_comm, &local_rank);
+  int is_master = (local_rank == 0) ? 1 : 0;
+  MPI_Allreduce(&is_master, &nnodes_physical, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
+  MPI_Comm_free(&node_comm);
+  
+  //stampa statistiche ambiente e allocazione memoria data_parall
+  if (my_rank == 0) {
+    if (job_id) {
+      printf("Ambiente HPC rilevato (SLURM job %s)\nNumero di nodi fisici rilevati da MPI: %d\n", job_id,nnodes_physical);
+      if (nnodes_slurm > 0)
+        printf("Numero di nodi da variabile SLURM_NNODES: %d\n", nnodes_slurm);
+    } else {
+      printf("Esecuzione locale\nNumero di nodi fisici (MPI_COMM_TYPE_SHARED): %d\n", nnodes_physical);
+    }
+    
+    // Preparazione dati
+    data_parall = malloc(SIZE * sizeof(long));
+    if (data_parall == NULL) { 
+      printf("[%s,%d] Errore allocazione memoria\n", __func__, my_rank);
+      MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+    }
+    gen_random_numbers(data_parall, SIZE, 0, 2*SIZE);
+  }
+  
+  MPI_Barrier(MPI_COMM_WORLD);
+  
+  // Rank 0 inizia a misurare
+  double start_time = 0;
+  if (my_rank == 0) {
+    start_time = MPI_Wtime();
+  }
+  
+  // Algoritmo parallelo
+  merge_sort_mpi(data_parall, SIZE);
+  
+  // Rank 0 termina la misurazione
+  if (my_rank == 0) {
+    execution_time_parallel = MPI_Wtime() - start_time;
+    double speed_up = execution_time_sequential / execution_time_parallel;
+    double eff_mpi = speed_up / nr_nodes;
+    int total_processors = nr_nodes * nr_threads;
+    double eff_total = speed_up / total_processors;
+
+    printf("\n[%s] Statistiche Merge Sort MPI\n", __func__);
+    printf("Compilato: %s at %s\n", __DATE__, __TIME__);
+    printf("============================================\n");
+    printf("Configurazione:\n");
+    printf("  dimensione array         = %ld elementi (2^33)\n", SIZE);
+    printf("  memoria richiesta        = %.2f GB\n", (SIZE * sizeof(long)) / 1e9);
+    printf("  numero processi MPI      = %d\n", nr_nodes);
+    printf("  numero nodi fisici       = %d\n", nnodes_physical);
+    printf("  thread OpenMP per proc   = %d\n", nr_threads);
+    printf("  TOTALE processori logici = %d\n", total_processors);
+    printf("  core fisici disponibili  = %d\n", nr_cores);
+    printf("============================================\n");
+    printf("Prestazioni:\n");
+    printf("  tempo sequenziale        = %.3f s (%.2f min)\n", 
+           execution_time_sequential, execution_time_sequential / 60.0);
+    printf("  tempo parallelo          = %.3f s (%.2f min)\n", 
+           execution_time_parallel, execution_time_parallel / 60.0);
+    printf("  SPEEDUP ASSOLUTO         = %.2fx\n", speed_up);
+    printf("  Efficienza MPI           = %.2f%% (%.2fx su %d proc)\n", 
+           eff_mpi * 100, eff_mpi, nr_nodes);
+    printf("  Efficienza totale        = %.2f%% (%.2fx su %d proc)\n", 
+           eff_total * 100, eff_total, total_processors);
+    printf("  Throughput               = %.2f M elem/s\n", 
+           SIZE / (execution_time_parallel * 1e6));
+    printf("============================================\n");
+    printf("Verifica:\n");
+    printf("  ordinamento corretto     = %s\n", 
+           (isOrdered(data_parall, SIZE) == 0 ? "V OK" : "? ERRORE"));
+    printf("  precisione timer MPI     = %.9f s\n", MPI_Wtick());
+    printf("============================================\n");
+    
     free(data_parall);
   }
 }
 
-void print_array(int *data,int proc,size_t len){
-  printf("[%s,%d],valore locale array:{\t",__func__,proc);
-  size_t i;
-  for( i=0;i<len-1;i++)
-    printf("%d,", data[i]); 
-  printf("%d\t}\n",data[i]);
-}
 
 void quick_sort_mpi(long *data,size_t len){
 	int my_rank =-1,nr_nodes=-1;
-
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 	MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
   if( nr_nodes == 1 ){
@@ -1305,9 +1187,9 @@ if((nr_nodes & (nr_nodes - 1)) != 0){
         MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
     }
 	
-	int CHUNK_SIZE = len / nr_nodes;
+	size_t CHUNK_SIZE = len / nr_nodes;
 	#ifdef DEBUG
-		printf("[%s,%d] Lunghezza array originale %ld\tdimensione chunk %d \n",__func__,my_rank,len,CHUNK_SIZE);
+		printf("[%s,%d] Lunghezza array originale %ld\tdimensione chunk %zu \n",__func__,my_rank,len,CHUNK_SIZE);
 	#endif
   if( len <= CHUNK_SIZE ){
 //    merge_sort(data,0,len-1);
@@ -1338,7 +1220,8 @@ if((nr_nodes & (nr_nodes - 1)) != 0){
   #ifdef DEBUG
   printf("[%s,%d] Sto lanciando il sort locale sui chunk con local size %ld \n",__func__,my_rank,local_size);
   #endif 
-	merge_sort_omp_start(local_data,0,local_size-1);
+	quick_sort_omp_start(local_data,0,local_size-1,MEDIAN_ACTIVATION);
+
   // merge
   MPI_Barrier(MPI_COMM_WORLD);
 
@@ -1453,8 +1336,109 @@ void ben_quick_sort_mpi(){
     }
 }
 
+void ben_quick_sort_mpi_alt(){
+  int my_rank = -1, nr_nodes = -1;
+  MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+  MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
+  
+  size_t SIZE = 1UL << 28 ;
+  int nr_cores = omp_get_num_procs();
+  int nr_threads = omp_get_max_threads();
+  long *data_parall = NULL;
+  
+  const char *job_id = getenv("SLURM_JOB_ID");
+  const char *nnodes_env = getenv("SLURM_NNODES");
+  int nnodes_slurm = (nnodes_env) ? atoi(nnodes_env) : -1;
+  int nnodes_physical = 0;
+  
+  const double execution_time_sequential = 2212.470947;
+  double execution_time_parallel = 0;
+  
+  /* Conta i nodi fisici */
+  MPI_Comm node_comm;
+  MPI_Comm_split_type(MPI_COMM_WORLD, MPI_COMM_TYPE_SHARED, 0, MPI_INFO_NULL, &node_comm);
+  int local_rank;
+  MPI_Comm_rank(node_comm, &local_rank);
+  int is_master = (local_rank == 0) ? 1 : 0;
+  MPI_Allreduce(&is_master, &nnodes_physical, 1, MPI_INT, MPI_SUM, MPI_COMM_WORLD);
+  MPI_Comm_free(&node_comm);
+  
+  //stampa statistiche ambiente e allocazione memoria data_parall
+  if (my_rank == 0) {
+    if (job_id) {
+      printf("Ambiente HPC rilevato (SLURM job %s)\nNumero di nodi fisici rilevati da MPI: %d\n", job_id,nnodes_physical);
+      if (nnodes_slurm > 0)
+        printf("Numero di nodi da variabile SLURM_NNODES: %d\n", nnodes_slurm);
+    } else {
+      printf("Esecuzione locale\nNumero di nodi fisici (MPI_COMM_TYPE_SHARED): %d\n", nnodes_physical);
+    }
+    
+    // Preparazione dati
+    data_parall = malloc(SIZE * sizeof(long));
+    if (data_parall == NULL) { 
+      printf("[%s,%d] Errore allocazione memoria\n", __func__, my_rank);
+      MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
+    }
+    gen_random_numbers(data_parall, SIZE, 0, 2*SIZE);
+  }
+  
+  MPI_Barrier(MPI_COMM_WORLD);
+  
+  // Rank 0 inizia a misurare
+  double start_time = 0;
+  if (my_rank == 0) {
+    start_time = MPI_Wtime();
+  }
+  
+  // Algoritmo parallelo
+  quick_sort_mpi(data_parall, SIZE);
+  
+  // Rank 0 termina la misurazione
+  if (my_rank == 0) {
+    execution_time_parallel = MPI_Wtime() - start_time;
+    double speed_up = execution_time_sequential / execution_time_parallel;
+    double eff_mpi = speed_up / nr_nodes;
+    int total_processors = nr_nodes * nr_threads;
+    double eff_total = speed_up / total_processors;
+
+    printf("\n[%s] Statistiche Merge Sort MPI\n", __func__);
+    printf("Compilato: %s at %s\n", __DATE__, __TIME__);
+    printf("============================================\n");
+    printf("Configurazione:\n");
+    printf("  dimensione array         = %ld elementi (2^28)\n", SIZE);
+    printf("  memoria richiesta        = %.2f GB\n", (SIZE * sizeof(long)) / 1e9);
+    printf("  numero processi MPI      = %d\n", nr_nodes);
+    printf("  numero nodi fisici       = %d\n", nnodes_physical);
+    printf("  thread OpenMP per proc   = %d\n", nr_threads);
+    printf("  TOTALE processori logici = %d\n", total_processors);
+    printf("  core fisici disponibili  = %d\n", nr_cores);
+    printf("============================================\n");
+    printf("Prestazioni:\n");
+    printf("  tempo sequenziale        = %.3f s (%.2f min)\n", 
+           execution_time_sequential, execution_time_sequential / 60.0);
+    printf("  tempo parallelo          = %.3f s (%.2f min)\n", 
+           execution_time_parallel, execution_time_parallel / 60.0);
+    printf("  SPEEDUP ASSOLUTO         = %.2fx\n", speed_up);
+    printf("  Efficienza MPI           = %.2f%% (%.2fx su %d proc)\n", 
+           eff_mpi * 100, eff_mpi, nr_nodes);
+    printf("  Efficienza totale        = %.2f%% (%.2fx su %d proc)\n", 
+           eff_total * 100, eff_total, total_processors);
+    printf("  Throughput               = %.2f M elem/s\n", 
+           SIZE / (execution_time_parallel * 1e6));
+    printf("============================================\n");
+    printf("Verifica:\n");
+    printf("  ordinamento corretto     = %s\n", 
+           (isOrdered(data_parall, SIZE) == 0 ? "V OK" : "? ERRORE"));
+    printf("  precisione timer MPI     = %.9f s\n", MPI_Wtick());
+    printf("============================================\n");
+    
+    free(data_parall);
+  }
+
+}
+
 void find_error_scatter(){
-  size_t OSIZE = 1UL << 31;
+  size_t OSIZE = 1UL << 33;
 	int my_rank =-1,nr_nodes=-1;
 	MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
 	MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
@@ -1481,20 +1465,23 @@ void find_error_scatter(){
 
   }else{
 
-    MPI_Scatter(NULL, CHUNK_SIZE, MPI_INT, local_data, CHUNK_SIZE, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Scatter(NULL, CHUNK_SIZE, MPI_LONG, local_data, CHUNK_SIZE, MPI_LONG, 0, MPI_COMM_WORLD);
   }
 
    if( 0 == my_rank){
    	printf("Test lancio binary merge con dati giganteschi\n");
    } 
 
-    binary_merge_tree_large(&local_data,&CHUNK_SIZE);
+   binary_merge_tree(&local_data,&CHUNK_SIZE);
     if( 0 == my_rank){
+    printf("[%s] Dimensione originale di test %zu\n",__func__,OSIZE);
+	    
 	    if( CHUNK_SIZE == OSIZE)
 		    printf("Dimensioni coerenti dopo la merge\n");
 	    else
 		    printf("Problemi con le dimenisoni CHUNCK_SIZE = %ld\t dimesione originale = %ld\n",CHUNK_SIZE,OSIZE);
 
+    //printf("dimensione originale %ld\tdimensione chunck %ld\n",OSIZE,CHUNK_SIZE);
     }
 
 
@@ -1508,12 +1495,13 @@ int main(int argc,char *argv[]){
   MPI_Init(&argc, &argv);
   //test_init();
   //test_merge();
-  test_merge_bint();
+  //test_merge_bint();
   //find_error_scatter();
-  //test_scatterv();
-  //test_all_to_all();
   //ben_merge_sort_mpi();
+  //ben_merge_sort_mpi_alt();
   //ben_quick_sort_mpi();
+  ben_quick_sort_mpi_alt();
+  //find_error_scatter();
   MPI_Finalize();
   return 0;
 }

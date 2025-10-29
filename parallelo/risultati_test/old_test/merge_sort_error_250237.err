@@ -1,0 +1,6 @@
+/var/spool/slurmd/job250237/slurm_script: line 11: module: command not found
+/var/spool/slurmd/job250237/slurm_script: line 12: module: command not found
+/var/spool/slurmd/job250237/slurm_script: line 16: module: command not found
+/usr/bin/ld: error: out/mpi(.debug_loc) section size (0x9507 bytes) is larger than file size (0xd70 bytes)
+/usr/bin/ld: error: out/mpi(.debug_ranges) section size (0x1880 bytes) is larger than file size (0xd70 bytes)
+srun: warning: can't honor --ntasks-per-node set to 1 which doesn't match the requested tasks 64 with the maximum number of requested nodes 3. Ignoring --ntasks-per-node.

@@ -1,0 +1,44 @@
+/var/spool/slurmd/job250663/slurm_script: line 11: module: command not found
+/var/spool/slurmd/job250663/slurm_script: line 15: module: command not found
+Message size 4294967296 bigger than supported by selected transport. Max = 4294963200
+[broadwell-012:283352] *** An error occurred in MPI_Send
+[broadwell-012:283352] *** reported by process [2157407812,64]
+[broadwell-012:283352] *** on communicator MPI_COMM_WORLD
+[broadwell-012:283352] *** MPI_ERR_OTHER: known error not in list
+[broadwell-012:283352] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+[broadwell-012:283352] ***    and potentially your MPI job)
+slurmstepd: error: *** STEP 250663.1 ON broadwell-010 CANCELLED AT 2025-10-24T16:33:08 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: broadwell-011: tasks 32-63: Killed
+srun: error: broadwell-013: tasks 96-127: Killed
+srun: error: broadwell-012: task 64: Exited with exit code 16
+srun: error: broadwell-012: tasks 65-95: Killed
+srun: error: broadwell-010: tasks 0-31: Killed
+Message size 4294967296 bigger than supported by selected transport. Max = 4294963200
+[broadwell-012:283671] *** An error occurred in MPI_Send
+[broadwell-012:283671] *** reported by process [518990581,32]
+[broadwell-012:283671] *** on communicator MPI_COMM_WORLD
+[broadwell-012:283671] *** MPI_ERR_OTHER: known error not in list
+[broadwell-012:283671] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+[broadwell-012:283671] ***    and potentially your MPI job)
+slurmstepd: error: *** STEP 250663.2 ON broadwell-010 CANCELLED AT 2025-10-24T16:33:31 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: broadwell-010: tasks 0-15: Killed
+srun: error: broadwell-013: tasks 48-63: Killed
+srun: error: broadwell-011: tasks 16-31: Killed
+srun: error: broadwell-012: task 32: Exited with exit code 16
+srun: error: broadwell-012: tasks 33-47: Killed
+Message size 4294967296 bigger than supported by selected transport. Max = 4294963200
+[broadwell-012:283842] *** An error occurred in MPI_Send
+[broadwell-012:283842] *** reported by process [4038938262,16]
+[broadwell-012:283842] *** on communicator MPI_COMM_WORLD
+[broadwell-012:283842] *** MPI_ERR_OTHER: known error not in list
+[broadwell-012:283842] *** MPI_ERRORS_ARE_FATAL (processes in this communicator will now abort,
+[broadwell-012:283842] ***    and potentially your MPI job)
+slurmstepd: error: *** STEP 250663.3 ON broadwell-010 CANCELLED AT 2025-10-24T16:33:51 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: broadwell-011: tasks 8-15: Killed
+srun: error: broadwell-013: tasks 24-31: Killed
+srun: error: broadwell-012: task 16: Exited with exit code 16
+srun: error: broadwell-012: tasks 17-23: Killed
+srun: error: broadwell-010: tasks 0-7: Killed

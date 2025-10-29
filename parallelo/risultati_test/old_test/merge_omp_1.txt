@@ -1,0 +1,40 @@
+[ben_merge_sort_mpi] Statistiche esecuzione merge sort in Sep 18 2025 at 13:33:44
+dimensione array= 524288
+numero core = 36
+numero thread = 36
+tempo di esecuzione sequenziale 0.051673
+tempo di esecuzione parallelo 0.016826
+SPEEDUP = 3.07
+EFFICIENZA 0.09
+correttezza sequenziale OK
+correttezza parallelo OK
+[ben_merge_sort_mpi] Statistiche esecuzione merge sort in Sep 18 2025 at 13:33:44
+dimensione array= 524288
+numero core = 36
+numero thread = 36
+tempo di esecuzione sequenziale 0.053084
+tempo di esecuzione parallelo 0.021174
+SPEEDUP = 2.51
+EFFICIENZA 0.07
+correttezza sequenziale OK
+correttezza parallelo OK
+[ben_merge_sort_mpi] Statistiche esecuzione merge sort in Sep 18 2025 at 13:33:44
+dimensione array= 524288
+numero core = 36
+numero thread = 36
+tempo di esecuzione sequenziale 0.051064
+tempo di esecuzione parallelo 0.021770
+SPEEDUP = 2.35
+EFFICIENZA 0.07
+correttezza sequenziale OK
+correttezza parallelo OK
+[ben_merge_sort_mpi] Statistiche esecuzione merge sort in Sep 18 2025 at 13:33:44
+dimensione array= 524288
+numero core = 36
+numero thread = 36
+tempo di esecuzione sequenziale 0.052063
+tempo di esecuzione parallelo 0.024150
+SPEEDUP = 2.16
+EFFICIENZA 0.06
+correttezza sequenziale OK
+correttezza parallelo OK

@@ -1,0 +1,47 @@
+/var/spool/slurmd/job250516/slurm_script: line 11: module: command not found
+/var/spool/slurmd/job250516/slurm_script: line 15: module: command not found
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+slurmstepd: error: *** STEP 250516.1 ON broadwell-010 CANCELLED AT 2025-10-24T12:24:43 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: broadwell-010: task 0: Exited with exit code 1
+srun: error: broadwell-010: tasks 1-31: Killed
+srun: error: broadwell-012: tasks 64-95: Killed
+srun: error: broadwell-013: tasks 96-127: Killed
+srun: error: broadwell-011: tasks 32-63: Killed
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+slurmstepd: error: *** STEP 250516.2 ON broadwell-010 CANCELLED AT 2025-10-24T12:24:44 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: broadwell-010: task 0: Exited with exit code 1
+srun: error: broadwell-010: tasks 1-15: Killed
+srun: error: broadwell-012: tasks 32-47: Killed
+srun: error: broadwell-013: tasks 48-63: Killed
+srun: error: broadwell-011: tasks 16-31: Killed
+--------------------------------------------------------------------------
+MPI_ABORT was invoked on rank 0 in communicator MPI_COMM_WORLD
+with errorcode 1.
+
+NOTE: invoking MPI_ABORT causes Open MPI to kill all MPI processes.
+You may or may not see output from other processes, depending on
+exactly when Open MPI kills them.
+--------------------------------------------------------------------------
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 250516.3 ON broadwell-010 CANCELLED AT 2025-10-24T12:24:45 ***
+srun: error: broadwell-010: task 0: Exited with exit code 1
+srun: error: broadwell-010: tasks 1-7: Killed
+srun: error: broadwell-011: tasks 8-15: Killed
+srun: error: broadwell-013: tasks 24-31: Killed
+srun: error: broadwell-012: tasks 16-23: Killed
