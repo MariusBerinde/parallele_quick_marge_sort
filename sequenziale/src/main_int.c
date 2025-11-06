@@ -1,4 +1,4 @@
-#include "sort.h"
+#include "sort_int.h"
 #include <locale.h>
 #include <omp.h>
 //crono e thread sono usate per prendere prestazioni codice
@@ -9,12 +9,12 @@ float tdiff(struct timeval *start,struct timeval *end){
 
 void mini_test_quick_sort(){
   size_t MAX=7;
-	long v[]={5,4,4,3,2,1,11};
+	int v[]={5,4,4,3,2,1,11};
 	printf("[%s]: Vettore prima dell'ordinamento :",__func__);
   
   
 	for(size_t i=0;i<MAX;i++){
-		printf("[%s]: v[%ld] = %ld\t :",__func__,i,v[i]);
+		printf("[%s]: v[%ld] = %d\t :",__func__,i,v[i]);
 	}
   puts("\n");
      
@@ -22,33 +22,33 @@ void mini_test_quick_sort(){
 	median_quick_sort(v,0,MAX-1);
 	printf("[%s]: Vettore dopo oridinamento \n",__func__);
 	for(size_t i=0;i<MAX;i++){
-		printf("[%s]: v[%ld] = %ld\n :",__func__,i,v[i]);
+		printf("[%s]: v[%ld] = %d\n :",__func__,i,v[i]);
 	}
 
 }
 
 void mini_test_merge(){
-  long v[]={38,27,43,3,9,82,10};
+  int v[]={38,27,43,3,9,82,10};
   size_t MAX=7;
 
 	printf("[%s]: Vettore prima dell'ordinamento :",__func__);
   
   
 	for(size_t i=0;i<MAX;i++){
-		printf("[%s]: v[%ld] = %ld\t :",__func__,i,v[i]);
+		printf("[%s]: v[%ld] = %d\t :",__func__,i,v[i]);
 	}
   puts("\n");
      
 	merge_sort(v,0,MAX-1);
 	printf("[%s]: Vettore dopo oridinamento \n",__func__);
 	for(size_t i=0;i<MAX;i++){
-		printf("[%s]: v[%ld] = %ld\n :",__func__,i,v[i]);
+		printf("[%s]: v[%ld] = %d\n :",__func__,i,v[i]);
 	}
 }
 
 
 
-void gen_random_numbers(long *data,size_t len,long min,long max){
+void gen_random_numbers(int *data,size_t len,int min,int max){
   if( NULL == data ){
     printf("[%s] errore: data null",__func__);
     exit(EXIT_FAILURE);
@@ -57,7 +57,7 @@ void gen_random_numbers(long *data,size_t len,long min,long max){
   srand(SEED);
 
   for (size_t i = 0; i < len; i++)
-    data[i] = (long)rand() % (max - min + 1) + min;
+    data[i] = (int)rand() % (max - min + 1) + min;
 }
 
 
@@ -66,9 +66,9 @@ void gen_random_numbers(long *data,size_t len,long min,long max){
 	* funzione per testare tempi di sviluppo con 2^19 elementi
 */
 void big_test_merge_sort(){
-  size_t SIZE = 1<<20; //2^19 elementi 
+  size_t SIZE = 1<<30; //2^19 elementi 
   srand(time(0));
-  long *data = malloc(SIZE * sizeof(long));
+  int *data = malloc(SIZE * sizeof(int));
 
 	if(data == NULL){
 		perror("Errore creazione array data , arresto forzato\n");
@@ -117,8 +117,8 @@ void test_big_quick_sort(){
 
   size_t SIZE=1<<30; //2^19 elementi 
   srand(time(0));
-  long *data;
-  data = malloc(SIZE * sizeof(long));
+  int *data;
+  data = malloc(SIZE * sizeof(int));
   if( NULL == data ){
     printf("[%s] problemi con la creazione di data\n",__func__);
     exit(EXIT_FAILURE);
@@ -156,7 +156,7 @@ void test_big_quick_sort(){
   
 
   if(non_ordinalto!=-1){
-    printf("[%s] errore con quick sort in posizione %d valori disordinati v[%d] = %ld e v[%d] = %ld\n",
+    printf("[%s] errore con quick sort in posizione %d valori disordinati v[%d] = %d e v[%d] = %d\n",
            __func__, non_ordinalto,non_ordinalto,data[non_ordinalto],non_ordinalto+1,data[non_ordinalto+1]);
   }
   else{
@@ -165,20 +165,20 @@ void test_big_quick_sort(){
 }
 
 
-void printArray(long *data,size_t LEN){
+void printArray(int *data,size_t LEN){
   printf("[%s] stampa array:{\t",__func__);
   size_t i;
   for( i=0;i<LEN-1;i++)
-    printf("%ld,",data[i]);
-  printf("%ld }\n",data[i]);
+    printf("%d,",data[i]);
+  printf("%d }\n",data[i]);
 }
 
 int main(){
 //	test_perror();
-//	mini_test_quick_sort();
+//  mini_test_quick_sort();
 //	mini_test_merge();
-//	big_test_merge_sort();
-	test_big_quick_sort();
+	//big_test_merge_sort();
+  test_big_quick_sort();
 
 	return 0;
 }

@@ -2,12 +2,12 @@
 /**
  * funzione usata per scambiare gli elementi in posizione first e second nell'array data.
  */
-void swap(long *data,long first,long second){
+void swap(int *data,int first,int second){
   if( NULL == data){
     printf("[%s] Errore data null\n",__func__);
     exit(EXIT_FAILURE);
   }
-  long tmp = data[first];
+  int tmp = data[first];
   data[first]=data[second];
   data[second]=tmp;
 }
@@ -24,16 +24,16 @@ void swap(long *data,long first,long second){
  * Pivot = data[alto] (last element)
  * Returns final pivot position
  */
-long partition_lomuto(long *data,long basso,long alto){
+int partition_lomuto(int *data,int basso,int alto){
 
   if( NULL == data){
     printf("[%s] Errore data null\n",__func__);
     exit(EXIT_FAILURE);
   }
-  long pivot = data[alto];
-  long i = basso-1;
+  int pivot = data[alto];
+  int i = basso-1;
 
-  for(long j=basso;j<=alto-1;j++){
+  for(int j=basso;j<=alto-1;j++){
     if(data[j]<pivot){
       i++;
       swap(data,i,j);
@@ -44,14 +44,14 @@ long partition_lomuto(long *data,long basso,long alto){
 }
 
 
-long partition_hoare(long *data,long basso,long alto){
+int partition_hoare(int *data,int basso,int alto){
   if( NULL == data ){
     printf("[%s] Errore data null\n",__func__);
     exit(EXIT_FAILURE);
   }
-  long pivot = data[basso];
-  long l = basso + 1;
-  long r = alto;
+  int pivot = data[basso];
+  int l = basso + 1;
+  int r = alto;
   while(1){
     while(l<r && data[l]<= pivot) l++;
     while(l<r && data[r]>= pivot) r--;
@@ -67,26 +67,26 @@ long partition_hoare(long *data,long basso,long alto){
 }
 /** implementazione di quick sort ricorsivo**/
 
-void quick_sort(long *data,long basso,long alto){
+void quick_sort(int *data,int basso,int alto){
   if( NULL == data){
     printf("[%s] Errore data null\n",__func__);
     exit(EXIT_FAILURE);
   }
   if(basso<alto){
-//    long  pivot = partition_lomuto(data,basso,alto);
-    long pivot = partition_hoare(data,basso,alto);
+//    int  pivot = partition_lomuto(data,basso,alto);
+    int pivot = partition_hoare(data,basso,alto);
     quick_sort(data,basso,pivot-1);
     quick_sort(data,pivot+1,alto);
   }
 
 }
 
-void select_median_of_3(long *data,long basso,long alto){
+void select_median_of_3(int *data,int basso,int alto){
   if( NULL == data){
     printf("[%s] Errore data null\n",__func__);
     exit(EXIT_FAILURE);
   }
-  long mid = (basso+alto)/2;
+  int mid = (basso+alto)/2;
   if( data[basso] > data[mid] ) swap(data,basso,mid);
   if( data[mid] > data[alto] ) swap(data,mid,alto);
   if( data[basso] > data[mid] ) swap(data,basso,mid);
@@ -94,7 +94,7 @@ void select_median_of_3(long *data,long basso,long alto){
   swap(data,basso,mid);
 }
 
-void median_quick_sort(long *data,long basso,long alto){
+void median_quick_sort(int *data,int basso,int alto){
   if( NULL == data){
     printf("[%s] Errore data null\n",__func__);
     exit(EXIT_FAILURE);
@@ -112,7 +112,7 @@ void median_quick_sort(long *data,long basso,long alto){
  * mid rappresenta la metà 
  * high rappresenta l'indice superiore
  */
-void merge(long* data,size_t low,size_t mid,size_t high){
+void merge(int* data,size_t low,size_t mid,size_t high){
   if( NULL == data){
     printf("[%s] Errore data null\n",__func__);
     exit(EXIT_FAILURE);
@@ -120,8 +120,8 @@ void merge(long* data,size_t low,size_t mid,size_t high){
   size_t i,j,k;
   size_t n1 = mid-low+1;
   size_t n2 = high-mid;
-  long *tmpLeft = malloc(n1 * sizeof(long));
-  long *tmpRight = malloc(n2 * sizeof(long));
+  int *tmpLeft = malloc(n1 * sizeof(int));
+  int *tmpRight = malloc(n2 * sizeof(int));
 
   if(tmpLeft == NULL ){
     printf("[%s] Errore con creazione tmpLeft\n",__func__);
@@ -143,8 +143,8 @@ void merge(long* data,size_t low,size_t mid,size_t high){
   */
 
 
-  memcpy(tmpLeft,&data[low],n1*sizeof(long));	
-  memcpy(tmpRight,&data[mid+1],n2*sizeof(long));	
+  memcpy(tmpLeft,&data[low],n1*sizeof(int));	
+  memcpy(tmpRight,&data[mid+1],n2*sizeof(int));	
   /*
   for(j=0;j<n2;j++){
     tmpRight[j] = data[mid+1+j];
@@ -193,7 +193,7 @@ void merge(long* data,size_t low,size_t mid,size_t high){
   * left è l'estremo inferiore su cui effettuare l'ordinamento
   * right è l'estremo superiore su cui effettuare l'ordinamento
 */
-void merge_sort(long* data,size_t left,size_t right){
+void merge_sort(int* data,size_t left,size_t right){
   if( NULL == data){
     printf("[%s] Errore data null\n",__func__);
     exit(EXIT_FAILURE);
