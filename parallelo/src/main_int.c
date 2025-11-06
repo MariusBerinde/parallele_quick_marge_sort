@@ -1,4 +1,4 @@
-#include "lib.h"
+#include "lib_int.h"
 
 //crono e thread sono usate per prendere prestazioni codice
 float tdiff(struct timeval *start,struct timeval *end){
@@ -8,7 +8,7 @@ float tdiff(struct timeval *start,struct timeval *end){
 
 /**
  * ritorna 0 se data è ordinato in modo crescente 1 altrimenti */
-int isOrdered(long data[],size_t size){
+int isOrdered(int data[],size_t size){
 	int ordinato=0;
 	for(size_t i=0;i<size-1;i++){
 		if(data[i]>data[i+1]){
@@ -21,12 +21,12 @@ int isOrdered(long data[],size_t size){
 
 void mini_test_quick_sort(){
   int MAX=6;
-  long v[]={5,4,3,2,1,11};
+  int v[]={5,4,3,2,1,11};
   printf("[%s]: Vettore prima dell'ordinamento :",__func__);
 
 
   for(size_t i=0;i<MAX;i++){
-    printf("[%s]: v[%ld] = %ld\t :",__func__,i,v[i]);
+    printf("[%s]: v[%ld] = %d\t :",__func__,i,v[i]);
   }
   puts("\n");
 
@@ -35,27 +35,27 @@ void mini_test_quick_sort(){
   median_quick_sort(v,0,MAX-1);
   printf("[%s]: Vettore dopo oridinamento \n",__func__);
   for(size_t i=0;i<MAX;i++){
-    printf("[%s]: v[%ld] = %ld\n :",__func__,i,v[i]);
+    printf("[%s]: v[%ld] = %d\n :",__func__,i,v[i]);
   }
 
 }
 
 void mini_test_merge(){
-  long v[]={38,27,43,3,9,82,10};
+  int v[]={38,27,43,3,9,82,10};
   int MAX=7;
 
 	printf("[%s]: Vettore prima dell'ordinamento :",__func__);
   
   
 	for(size_t i=0;i<MAX;i++){
-		printf("[%s]: v[%ld] = %ld\t :",__func__,i,v[i]);
+		printf("[%s]: v[%ld] = %d\t :",__func__,i,v[i]);
 	}
   puts("\n");
      
 	merge_sort(v,0,MAX-1);
 	printf("[%s]: Vettore dopo oridinamento \n",__func__);
 	for(size_t i=0;i<MAX;i++){
-		printf("[%s]: v[%ld] = %ld\n :",__func__,i,v[i]);
+		printf("[%s]: v[%ld] = %d\n :",__func__,i,v[i]);
 	}
 }
 
@@ -83,8 +83,8 @@ void ben_quick_sort_mpi(){
 	float eff = 0;
 
 	srand(time(0));
-	long *data_seq = malloc(SIZE * sizeof(long));
-	long *data_parall= malloc(SIZE * sizeof(long));
+	int *data_seq = malloc(SIZE * sizeof(int));
+	int *data_parall= malloc(SIZE * sizeof(int));
 	gen_random_numbers(data_seq,SIZE,0,SIZE);
 	
 	#pragma omp parallel for 
@@ -141,7 +141,7 @@ void ben_quick_sort_mpi(){
 * efficienza
 */
 void ben_merge_sort_mpi(){
-	size_t SIZE = 1<<29;
+	size_t SIZE = 1<<25;
 	int nr_cores = omp_get_num_procs();
 	int nr_threads = omp_get_max_threads();
 	float execution_time_sequenzial = 0;
@@ -150,8 +150,8 @@ void ben_merge_sort_mpi(){
 	float eff = 0;
 
 	srand(time(0));
-	long *data_seq = malloc(SIZE * sizeof(long));
-	long *data_parall= malloc(SIZE * sizeof(long));
+	int *data_seq = malloc(SIZE * sizeof(int));
+	int *data_parall= malloc(SIZE * sizeof(int));
 	if(data_seq==NULL){
 //		perror("[%s] Errore creazione array data seq di %d element arresto forzato\n",__func__,SIZE);
 
@@ -205,7 +205,7 @@ void ben_merge_sort_mpi(){
 int main(){
   //mini_test_quick_sort();
 //  mini_test_merge();
-  	ben_quick_sort_mpi();
-//  ben_merge_sort_mpi();
+ // 	ben_quick_sort_mpi();
+  ben_merge_sort_mpi();
   return 0;
 }
