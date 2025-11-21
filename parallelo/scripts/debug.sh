@@ -1,19 +1,18 @@
 #!/bin/bash
 #SBATCH --job-name=debug_binary_merge          # Nome del job
-#SBATCH --output=../risultati_test/debug_simply_binary_merge%j.out  # File output (%j = job ID)
-#SBATCH --error=../risultati_test/debug_simply_binary_merge_big%j.err    # File errori
+#SBATCH --output=../risultati_test/%x_%j.out # File output (%j = job ID)
+#SBATCH --error=../risultati_test/%x_33_%j.err    # File errori
 #SBATCH --nodes=4                       # Numero di nodi
 #SBATCH --ntasks-per-node=32            # Task (processi MPI) per nodo
 #SBATCH --cpus-per-task=1               # CPU per task
 #SBATCH --partition=broadwell           # Partizione da usare
-
 # Carica i moduli necessari (adatta al tuo cluster)
-module load gcc openmpi
+#module load gcc openmpi
 
 # Mostra i moduli caricati
-echo "=== Moduli Caricati ==="
-module list
-echo ""
+#echo "=== Moduli Caricati ==="
+#module list
+#echo ""
 
 # Informazioni sul job
 echo "=== Informazioni Job ==="
@@ -24,7 +23,10 @@ echo "Directory lavoro: $(pwd)"
 echo "Data inizio: $(date)"
 echo ""
 cd ..
-
+# aumenteare i timeout della rete 
+export FI_PSM2_CONN_TIMEOUT=180
+export PSM2_CONNECT_TIMEOUT=180 
+export OMPI_MCA_opal_warn_on_missing_libcuda=0
 # Definisci il percorso del file sorgente
 SOURCE_DIR="src"
 SOURCE_FILE="mpi.c"
@@ -36,12 +38,18 @@ if [ ! -f "$SOURCE_DIR/$SOURCE_FILE" ]; then
     exit 1
 fi
 
-# Compilazione
+
+# Verifica che il file sorgente esista
+if [ ! -f "$SOURCE_DIR/$SOURCE_FILE" ]; then
+    echo "ERRORE: File $SOURCE_DIR/$SOURCE_FILE non trovato!"
+    exit 1
+fi
+
 echo "=== Compilazione ==="
 echo "Compilando $SOURCE_DIR/$SOURCE_FILE..."
 make compila_mpi
 
-# Controlla se la compilazione è avvenuta con successo
+# Controlla se la compilazione Ã¨ avvenuta con successo
 if [ $? -eq 0 ]; then
     echo " Compilazione completata con successo!"
     echo ""
@@ -50,19 +58,10 @@ else
     exit 1
 fi
 
-# Test 1: 256 processi (come nell'esempio del codice)
+
+# Test 1: 128 processi 
 echo "--- Test con 128 processi ---"
 srun -n 128 out/mpi
-echo ""
-
-# Test 2: 64 processi (come nell'esempio del codice)
-echo "--- Test con 64 processi ---"
-srun -n 64 out/mpi
-echo ""
-
-# Test 3: 32 processi (come nell'esempio del codice)
-echo "--- Test con 32 processi ---"
-srun -n 32 out/mpi
 echo ""
 
 # Salva il codice di uscita dell'ultimo test

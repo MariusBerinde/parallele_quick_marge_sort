@@ -1,14 +1,16 @@
 #!/bin/bash
-#SBATCH --job-name=merge_24_detail        # Nome del job
-#SBATCH --output=../risultati_test/long/weak_scaling/%x_%j.out  # File output (%j = job ID)
-#SBATCH --error=../risultati_test/long/weak_scaling/%x_%j.err    # File errori
+#SBATCH --job-name=merge_24        # Nome del job
+#SBATCH --output=../risultati_test/int/weak_scaling/%x_%j.out  # File output (%j = job ID)
+#SBATCH --error=../risultati_test/int/weak_scaling/%x_%j.err    # File errori
 #SBATCH --nodes=4                    # Numero di nodi
 #SBATCH --ntasks-per-node=32          # Task (processi MPI) per nodo
 #SBATCH --cpus-per-task=1            # CPU per task
 #SBATCH --partition=broadwell           # Partizione da usare
+#SBATCH --hint=nomultithread
+#SBATCH --exclusive
 
 # Carica i moduli necessari (adatta al tuo cluster)
-module load gcc openmpi perf
+module load gcc openmpi
 
 # Mostra i moduli caricati
 echo "=== Moduli Caricati ==="
@@ -25,9 +27,10 @@ echo "Data inizio: $(date)"
 echo ""
 cd ..
 
+# Definisci il percorso del file sorgente
 SOURCE_DIR="src"
-SOURCE_FILE="mpi.c"
-EXECUTABLE="out/mpi"
+SOURCE_FILE="mpi_int.c"
+EXECUTABLE="out/i_mpi"
 
 # Verifica che il file sorgente esista
 if [ ! -f "$SOURCE_DIR/$SOURCE_FILE" ]; then
@@ -38,7 +41,7 @@ fi
 # Compilazione
 echo "=== Compilazione ==="
 echo "Compilando $SOURCE_DIR/$SOURCE_FILE..."
-make compila_mpi
+make compila_mpi_int
 
 # Controlla se la compilazione è avvenuta con successo
 if [ $? -eq 0 ]; then
@@ -49,28 +52,35 @@ else
     exit 1
 fi
 
-#OPT="-n 32 perf stat -e cache-references,cache-misses"
-OPT="-n 2 perf stat -d"
-echo "--- Prova 1 ---"
-srun $OPT out/mpi
+echo "---Prova 1 ---"
+srun --cpu-bind=cores -n 2 "$EXECUTABLE"
+#make  iomp
 echo ""
 
-echo "--- Prova 2 ---"
-srun    $OPT  out/mpi
+echo "---Prova 2 ---"
+srun  --cpu-bind=cores -n 2 "$EXECUTABLE"
+#make  iomp
 echo ""
 
-echo "--- Prova 3 ---"
-srun $OPT out/mpi
+echo "---Prova 3 ---"
+ srun  --cpu-bind=cores -n 2 "$EXECUTABLE"
+#make  iomp
 echo ""
 
-echo "--- Prova 4 ---"
-srun $OPT out/mpi
+echo "---Prova 4 ---"
+ srun  --cpu-bind=cores -n 2 "$EXECUTABLE"
+#make  iomp
 echo ""
 
 
-echo "--- Prova 5 ---"
-srun $OPT out/mpi
+echo "---Prova 5 ---"
+ srun  --cpu-bind=cores -n 2 "$EXECUTABLE"
+#make  iomp
 echo ""
+#echo "--- Test con 128 processi ---"
+#srun -n 128 "$EXECUTABLE"
+#echo ""
+
 
 # Salva il codice di uscita dell'ultimo test
 EXIT_CODE=$?
@@ -79,5 +89,7 @@ echo "=== Fine Esecuzione ==="
 echo "Codice di uscita: $EXIT_CODE"
 echo "Data fine: $(date)"
 
+# Pulizia (opzionale - commenta se vuoi mantenere l'eseguibile)
+# rm -f $EXECUTABLE
 
 exit $EXIT_CODE

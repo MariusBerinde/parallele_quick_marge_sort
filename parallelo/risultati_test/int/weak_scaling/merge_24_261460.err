@@ -1,0 +1,7 @@
+/var/spool/slurmd/job261460/slurm_script: line 13: module: command not found
+/var/spool/slurmd/job261460/slurm_script: line 17: module: command not found
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2

@@ -1,0 +1,7 @@
+/var/spool/slurmd/job252295/slurm_script: line 11: module: command not found
+/var/spool/slurmd/job252295/slurm_script: line 15: module: command not found
+/usr/bin/ld: error: out/mpi(.debug_abbrev) section size (0xa1b bytes) is larger than file size (0x37c bytes)
+/usr/bin/ld: error: out/mpi(.debug_line) section size (0x3cc2 bytes) is larger than file size (0x37c bytes)
+/usr/bin/ld: error: out/mpi(.debug_str) section size (0x1632 bytes) is larger than file size (0x37c bytes)
+/usr/bin/ld: error: out/mpi(.debug_loc) section size (0xa9d1 bytes) is larger than file size (0x37c bytes)
+/usr/bin/ld: error: out/mpi(.debug_ranges) section size (0x1850 bytes) is larger than file size (0x37c bytes)

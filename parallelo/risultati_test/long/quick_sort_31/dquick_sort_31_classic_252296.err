@@ -1,0 +1,6 @@
+/var/spool/slurmd/job252296/slurm_script: line 11: module: command not found
+/var/spool/slurmd/job252296/slurm_script: line 15: module: command not found
+/usr/bin/ld: cannot open output file out/mpi: No such file or directory
+collect2: error: ld returned 1 exit status
+srun: error: broadwell-000: task 21: Exited with exit code 1
+make: *** [Makefile:24: compila_mpi] Error 1

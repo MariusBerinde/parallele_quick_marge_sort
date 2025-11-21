@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=demo_quickosort_long_28          # Nome del job
-#SBATCH --output=../risultati_test/dquick_sort_28_%j.out  # File output (%j = job ID)
-#SBATCH --error=../risultati_test/dquick_sort_28_%j.err    # File errori
+#SBATCH --job-name=quick29          # Nome del job
+#SBATCH --output=../risultati_test/long/weak_scaling/%x_%j.out  # File output (%j = job ID)
+#SBATCH --error=../risultati_test/long/weak_scaling/%x_%j.err    # File errori
 #SBATCH --nodes=4                    # Numero di nodi
 #SBATCH --ntasks-per-node=32          # Task (processi MPI) per nodo
 #SBATCH --cpus-per-task=1            # CPU per task
@@ -36,7 +36,6 @@ if [ ! -f "$SOURCE_DIR/$SOURCE_FILE" ]; then
     exit 1
 fi
 
-# Compilazione
 echo "=== Compilazione ==="
 echo "Compilando $SOURCE_DIR/$SOURCE_FILE..."
 make compila_mpi
@@ -50,19 +49,24 @@ else
     exit 1
 fi
 
-# Test 1: 128 processi (come nell'esempio del codice)
-echo "--- Test con 64 processi ---"
-srun -n 128 out/mpi
-echo ""
-
-# Test 2: 64 processi (come nell'esempio del codice)
-echo "--- Test con 64 processi ---"
+echo "--- Prova 1 ---"
 srun -n 64 out/mpi
 echo ""
 
-# Test 3: 32 processi (come nell'esempio del codice)
-echo "--- Test con 32 processi ---"
-srun -n 32 out/mpi
+echo "--- Prova 2 ---"
+srun -n 64 out/mpi
+echo ""
+
+echo "--- Prova 3 ---"
+srun -n 64 out/mpi
+echo ""
+
+echo "--- Prova 4 ---"
+srun -n 64 out/mpi
+echo ""
+
+echo "--- Prova 5 ---"
+srun -n 64 out/mpi
 echo ""
 
 # Salva il codice di uscita dell'ultimo test
@@ -72,7 +76,5 @@ echo "=== Fine Esecuzione ==="
 echo "Codice di uscita: $EXIT_CODE"
 echo "Data fine: $(date)"
 
-# Pulizia (opzionale - commenta se vuoi mantenere l'eseguibile)
-# rm -f $EXECUTABLE
 
 exit $EXIT_CODE

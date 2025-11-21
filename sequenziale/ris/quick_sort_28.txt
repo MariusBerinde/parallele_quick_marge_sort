@@ -1,0 +1,29 @@
+# prova 1
+
+gcc -Wall -g -O3   src/main.c src/sort.c -o out/main
+./out/main
+[test_big_quick_sort] vettore di partenza disordinato
+[test_big_quick_sort] quick sort ok, tempo di esecuzione ordinamento : 31.849316 effettuato con 268435456 elementi  
+# prova 2
+
+gcc -Wall -g -O3   src/main.c src/sort.c -o out/main
+./out/main
+[test_big_quick_sort] vettore di partenza disordinato
+[test_big_quick_sort] quick sort ok, tempo di esecuzione ordinamento : 32.135857 effettuato con 268435456 elementi  
+# prova 3
+
+gcc -Wall -g -O3   src/main.c src/sort.c -o out/main
+./out/main
+[test_big_quick_sort] vettore di partenza disordinato
+[test_big_quick_sort] quick sort ok, tempo di esecuzione ordinamento : 31.609146 effettuato con 268435456 elementi  
+
+# prova 4
+gcc -Wall -g -O3   src/main.c src/sort.c -o out/main
+./out/main
+[test_big_quick_sort] vettore di partenza disordinato
+[test_big_quick_sort] quick sort ok, tempo di esecuzione ordinamento : 31.761265 effettuato con 268435456 elementi  
+# prova 5
+gcc -Wall -g -O3   src/main.c src/sort.c -o out/main
+./out/main
+[test_big_quick_sort] vettore di partenza disordinato
+[test_big_quick_sort] quick sort ok, tempo di esecuzione ordinamento : 31.437275 effettuato con 268435456 elementi  

@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "lib.h"
+#include "lib_int.h"
 #define MAX_MPI_CHUNK (1UL << 28)
 
 //crono e thread sono usate per prendere prestazioni codice
@@ -967,7 +967,7 @@ int isOrdered(int data[],int size){
 	return ordinato;
 }
 
-void gen_random_numbers(int *array, int len, int min, int max){
+void gen_random_numbers_local(int *array, int len, int min, int max){
  const unsigned int SEED = 42; 
   srand(SEED);
   //  srand(time(0));
@@ -982,7 +982,7 @@ void ben_merge_sort_mpi() {
     MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
     MPI_Comm_size(MPI_COMM_WORLD, &nr_nodes);
     
-    size_t SIZE = 1UL << 31;
+    size_t SIZE = 1UL << 30;
     int nr_cores = omp_get_num_procs();
     int nr_threads = omp_get_max_threads();
     float execution_time_sequenzial = 0;
@@ -1028,7 +1028,7 @@ void ben_merge_sort_mpi() {
             MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
         }
         
-        gen_random_numbers(data_seq, SIZE, 0, SIZE);
+        gen_random_numbers_local(data_seq, SIZE, 0, SIZE);
         
         
         struct timeval start, end;
@@ -1051,7 +1051,7 @@ void ben_merge_sort_mpi() {
             printf("[%s,%d] Errore creazione data parall\n", __func__, my_rank);
             MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
         }
-    gen_random_numbers(data_parall, SIZE, 0, SIZE);
+    gen_random_numbers_local(data_parall, SIZE, 0, SIZE);
 
     gettimeofday(&start, NULL);
   }
@@ -1238,7 +1238,7 @@ void ben_quick_sort_mpi(){
             MPI_Abort(MPI_COMM_WORLD, EXIT_FAILURE);
         }
         
-        gen_random_numbers(data_seq, SIZE, 0, SIZE);
+        gen_random_numbers_local(data_seq, SIZE, 0, SIZE);
         
         #pragma omp parallel for 
         for (size_t i = 0; i < SIZE; i++)
@@ -1312,7 +1312,7 @@ void find_error_scatter(){
       MPI_Abort(MPI_COMM_WORLD,EXIT_FAILURE);
     }
 
-    gen_random_numbers(data, OSIZE, 0, OSIZE);
+    gen_random_numbers_local(data, OSIZE, 0, OSIZE);
 
 
 		printf("[%s,%d],numero di elementi data totale %ld : Caso distribuzione corretta\n",__func__,my_rank,CHUNK_SIZE*nr_nodes);

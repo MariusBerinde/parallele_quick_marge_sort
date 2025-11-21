@@ -1,0 +1,131 @@
+/var/spool/slurmd/job261489/slurm_script: line 11: module: command not found
+/var/spool/slurmd/job261489/slurm_script: line 15: module: command not found
+In file included from src/mpi.c:10:
+src/lib.h:29:13: warning: inline function ‘select_median_of_3’ declared but never defined
+   29 | inline void select_median_of_3(long* restrict data, long basso, long alto);
+      |             ^~~~~~~~~~~~~~~~~~
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2
+
+ Performance counter stats for 'out/mpi':
+
+          49647513      cache-references                                            
+           5000080      cache-misses              #   10.071 % of all cache refs    
+
+      33.409167040 seconds time elapsed
+
+      32.078416000 seconds user
+       0.123993000 seconds sys
+
+
+
+ Performance counter stats for 'out/mpi':
+
+         335673559      cache-references                                            
+          82769311      cache-misses              #   24.658 % of all cache refs    
+
+      33.683518500 seconds time elapsed
+
+       3.793634000 seconds user
+       6.878254000 seconds sys
+
+
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2
+
+ Performance counter stats for 'out/mpi':
+
+          49106171      cache-references                                            
+           4845339      cache-misses              #    9.867 % of all cache refs    
+
+       5.233425867 seconds time elapsed
+
+       3.975742000 seconds user
+       0.107884000 seconds sys
+
+
+
+ Performance counter stats for 'out/mpi':
+
+         203613496      cache-references                                            
+          36984232      cache-misses              #   18.164 % of all cache refs    
+
+       5.323577343 seconds time elapsed
+
+       2.745516000 seconds user
+       1.430874000 seconds sys
+
+
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2
+
+ Performance counter stats for 'out/mpi':
+
+          49239353      cache-references                                            
+           4889056      cache-misses              #    9.929 % of all cache refs    
+
+       7.185441434 seconds time elapsed
+
+       5.586710000 seconds user
+       0.115890000 seconds sys
+
+
+
+ Performance counter stats for 'out/mpi':
+
+         188640396      cache-references                                            
+          57747436      cache-misses              #   30.612 % of all cache refs    
+
+       7.033047466 seconds time elapsed
+
+       3.829471000 seconds user
+       2.016562000 seconds sys
+
+
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2
+
+ Performance counter stats for 'out/mpi':
+
+          49078759      cache-references                                            
+           4848934      cache-misses              #    9.880 % of all cache refs    
+
+       5.253395711 seconds time elapsed
+
+       3.985783000 seconds user
+       0.107939000 seconds sys
+
+
+
+ Performance counter stats for 'out/mpi':
+
+         203234501      cache-references                                            
+          36921111      cache-misses              #   18.167 % of all cache refs    
+
+       5.327012823 seconds time elapsed
+
+       2.954714000 seconds user
+       1.227466000 seconds sys
+
+
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2
+
+ Performance counter stats for 'out/mpi':
+
+          49274005      cache-references                                            
+           4895086      cache-misses              #    9.934 % of all cache refs    
+
+       6.929300820 seconds time elapsed
+
+       5.580208000 seconds user
+       0.088192000 seconds sys
+
+
+
+ Performance counter stats for 'out/mpi':
+
+         188899543      cache-references                                            
+          57611704      cache-misses              #   30.499 % of all cache refs    
+
+       7.003936924 seconds time elapsed
+
+       3.761787000 seconds user
+       2.061363000 seconds sys
+
+

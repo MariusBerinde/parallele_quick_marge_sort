@@ -47,7 +47,7 @@ irun: compila_run_int
 	./out/i_main
 
 compila_merge: ./src/merge_mp.c
-	mpicc -Wall -O3 -fopenmp  $(SRC)/merge_mp.c $(SRC)/lib.c -o ./out/merge_mp -lm #-D DEBUG
+	mpicc -Wall -O3 -fopenmp  $(SRC)/merge_mp.c $(SRC)/lib_int.c -o ./out/merge_mp -lm #-D DEBUG
 
 merge: compila_merge
 	mpirun -np 16 ./out/merge_mp 

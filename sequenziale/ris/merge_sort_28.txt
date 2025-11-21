@@ -1,0 +1,10 @@
+# prova 1
+[big_test_merge_sort] merge sort ok, tempo di esecuzione ordinamento : 54.124298 s effettuato con 268435456 elementi
+# prova 2
+[big_test_merge_sort] merge sort ok, tempo di esecuzione ordinamento : 54.274971 s effettuato con 268435456 elementi
+# prova 3
+[big_test_merge_sort] merge sort ok, tempo di esecuzione ordinamento : 54.155239 s effettuato con 268435456 elementi
+# prova 4
+[big_test_merge_sort] merge sort ok, tempo di esecuzione ordinamento : 54.161205 s effettuato con 268435456 elementi
+# prova 5
+[big_test_merge_sort] merge sort ok, tempo di esecuzione ordinamento : 54.229530 s effettuato con 268435456 elementi

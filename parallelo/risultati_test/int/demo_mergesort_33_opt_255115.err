@@ -1,0 +1,42 @@
+/var/spool/slurmd/job255115/slurm_script: line 11: module: command not found
+/var/spool/slurmd/job255115/slurm_script: line 15: module: command not found
+srun: error: broadwell-051: task 0: Segmentation fault (core dumped)
+slurmstepd: error:  mpi/pmix_v3: _errhandler: broadwell-051 [0]: pmixp_client_v2.c:211: Error handler invoked: status = -25, source = [slurm.pmix.255115.0:0]
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 255115.0 ON broadwell-051 CANCELLED AT 2025-11-07T16:18:35 ***
+srun: error: broadwell-052: tasks 32-63: Killed
+srun: error: broadwell-051: tasks 1-31: Killed
+srun: error: broadwell-054: tasks 96-127: Killed
+srun: error: broadwell-053: tasks 64-95: Killed
+srun: error: broadwell-051: task 0: Segmentation fault (core dumped)
+slurmstepd: error:  mpi/pmix_v3: _errhandler: broadwell-051 [0]: pmixp_client_v2.c:211: Error handler invoked: status = -25, source = [slurm.pmix.255115.1:0]
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 255115.1 ON broadwell-051 CANCELLED AT 2025-11-07T16:19:40 ***
+srun: error: broadwell-053: tasks 64-95: Killed
+srun: error: broadwell-052: tasks 32-63: Killed
+srun: error: broadwell-051: tasks 1-31: Killed
+srun: error: broadwell-054: tasks 96-127: Killed
+srun: error: broadwell-051: task 0: Segmentation fault (core dumped)
+slurmstepd: error:  mpi/pmix_v3: _errhandler: broadwell-051 [0]: pmixp_client_v2.c:211: Error handler invoked: status = -25, source = [slurm.pmix.255115.2:0]
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 255115.2 ON broadwell-051 CANCELLED AT 2025-11-07T16:20:45 ***
+srun: error: broadwell-052: tasks 32-63: Killed
+srun: error: broadwell-051: tasks 1-31: Killed
+srun: error: broadwell-053: tasks 64-95: Killed
+srun: error: broadwell-054: tasks 96-127: Killed
+srun: error: broadwell-051: task 0: Segmentation fault (core dumped)
+slurmstepd: error:  mpi/pmix_v3: _errhandler: broadwell-051 [0]: pmixp_client_v2.c:211: Error handler invoked: status = -25, source = [slurm.pmix.255115.3:0]
+slurmstepd: error: *** STEP 255115.3 ON broadwell-051 CANCELLED AT 2025-11-07T16:21:50 ***
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+srun: error: broadwell-052: tasks 32-63: Killed
+srun: error: broadwell-051: tasks 1-31: Killed
+srun: error: broadwell-054: tasks 96-127: Killed
+srun: error: broadwell-053: tasks 64-95: Killed
+srun: error: broadwell-051: task 0: Segmentation fault (core dumped)
+slurmstepd: error:  mpi/pmix_v3: _errhandler: broadwell-051 [0]: pmixp_client_v2.c:211: Error handler invoked: status = -25, source = [slurm.pmix.255115.4:0]
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+slurmstepd: error: *** STEP 255115.4 ON broadwell-051 CANCELLED AT 2025-11-07T16:22:54 ***
+srun: error: broadwell-051: tasks 1-31: Killed
+srun: error: broadwell-054: tasks 96-127: Killed
+srun: error: broadwell-053: tasks 64-95: Killed
+srun: error: broadwell-052: tasks 32-63: Killed

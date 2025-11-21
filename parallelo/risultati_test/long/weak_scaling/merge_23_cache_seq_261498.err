@@ -1,0 +1,71 @@
+/var/spool/slurmd/job261498/slurm_script: line 11: module: command not found
+/var/spool/slurmd/job261498/slurm_script: line 15: module: command not found
+In file included from src/mpi.c:10:
+src/lib.h:29:13: warning: inline function ‘select_median_of_3’ declared but never defined
+   29 | inline void select_median_of_3(long* restrict data, long basso, long alto);
+      |             ^~~~~~~~~~~~~~~~~~
+srun: warning: can't run 1 processes on 4 nodes, setting nnodes to 1
+
+ Performance counter stats for 'out/mpi':
+
+         152510651      cache-references                                            
+          49436274      cache-misses              #   32.415 % of all cache refs    
+
+      19.977416560 seconds time elapsed
+
+       1.551729000 seconds user
+       3.702224000 seconds sys
+
+
+srun: warning: can't run 1 processes on 4 nodes, setting nnodes to 1
+
+ Performance counter stats for 'out/mpi':
+
+          67458214      cache-references                                            
+          10582953      cache-misses              #   15.688 % of all cache refs    
+
+       2.870065570 seconds time elapsed
+
+       1.104089000 seconds user
+       0.622305000 seconds sys
+
+
+srun: warning: can't run 1 processes on 4 nodes, setting nnodes to 1
+
+ Performance counter stats for 'out/mpi':
+
+          67024449      cache-references                                            
+          10317657      cache-misses              #   15.394 % of all cache refs    
+
+       2.893323023 seconds time elapsed
+
+       1.065874000 seconds user
+       0.685204000 seconds sys
+
+
+srun: warning: can't run 1 processes on 4 nodes, setting nnodes to 1
+
+ Performance counter stats for 'out/mpi':
+
+          67485163      cache-references                                            
+          10576454      cache-misses              #   15.672 % of all cache refs    
+
+       2.906878762 seconds time elapsed
+
+       1.119568000 seconds user
+       0.640912000 seconds sys
+
+
+srun: warning: can't run 1 processes on 4 nodes, setting nnodes to 1
+
+ Performance counter stats for 'out/mpi':
+
+          62578761      cache-references                                            
+          17628256      cache-misses              #   28.170 % of all cache refs    
+
+       3.459040180 seconds time elapsed
+
+       1.475686000 seconds user
+       0.799830000 seconds sys
+
+

@@ -1,0 +1,6 @@
+[test_big_quick_sort] vettore di partenza disordinato
+[test_big_quick_sort] quick sort ok, tempo di esecuzione ordinamento : 27.692080 effettuato con 268435456 elementi  
+[big_test_merge_sort] vettore di partenza disordinato
+[big_test_merge_sort] errore con merge sort
+[big_test_merge_sort] vettore di partenza disordinato
+[big_test_merge_sort] errore con merge sort

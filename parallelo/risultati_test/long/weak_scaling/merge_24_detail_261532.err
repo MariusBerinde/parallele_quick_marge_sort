@@ -1,0 +1,231 @@
+/var/spool/slurmd/job261532/slurm_script: line 11: module: command not found
+/var/spool/slurmd/job261532/slurm_script: line 15: module: command not found
+In file included from src/mpi.c:10:
+src/lib.h:29:13: warning: inline function ‘select_median_of_3’ declared but never defined
+   29 | inline void select_median_of_3(long* restrict data, long basso, long alto);
+      |             ^~~~~~~~~~~~~~~~~~
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2
+
+
+ Performance counter stats for 'out/mpi':
+
+ Performance counter stats for 'out/mpi':
+
+           1186.67 msec task-clock                #    0.507 CPUs utilized          
+           1181.31 msec task-clock                #    0.509 CPUs utilized          
+               881      context-switches          #    0.742 K/sec                  
+               767      context-switches          #    0.649 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+             13956      page-faults               #    0.012 M/sec                  
+             12013      page-faults               #    0.010 M/sec                  
+        4247380883      cycles                    #    3.579 GHz                      (49.85%)
+        4228413256      cycles                    #    3.579 GHz                    
+        4633170625      instructions              #    1.09  insn per cycle           (62.02%)
+        8079561378      instructions              #    1.91  insn per cycle         
+        1028805516      branches                  #  866.967 M/sec                    (61.76%)
+        1824238700      branches                  # 1544.248 M/sec                  
+          39754253      branch-misses             #    3.86% of all branches          (62.14%)
+          37980555      branch-misses             #    2.08% of all branches        
+         753452127      L1-dcache-loads           #  634.929 M/sec                    (62.52%)
+        2321566723      L1-dcache-loads           # 1965.244 M/sec                  
+          83078133      L1-dcache-load-misses     #   11.03% of all L1-dcache hits    (62.78%)
+          53417584      L1-dcache-load-misses     #    2.30% of all L1-dcache hits  
+           7543942      LLC-loads                 #    6.357 M/sec                    (50.66%)
+           5048412      LLC-loads                 #    4.274 M/sec                  
+           1162796      LLC-load-misses           #   15.41% of all LL-cache hits     (50.30%)
+            374604      LLC-load-misses           #    7.42% of all LL-cache hits   
+
+
+       2.340901178 seconds time elapsed
+
+       2.320873813 seconds time elapsed
+
+       0.986389000 seconds user
+       1.093455000 seconds user
+       0.204495000 seconds sys
+       0.092122000 seconds sys
+
+
+
+
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2
+
+
+ Performance counter stats for 'out/mpi':
+
+ Performance counter stats for 'out/mpi':
+
+           1178.91 msec task-clock                #    0.504 CPUs utilized          
+           1180.14 msec task-clock                #    0.508 CPUs utilized          
+               870      context-switches          #    0.738 K/sec                  
+               768      context-switches          #    0.651 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+             13940      page-faults               #    0.012 M/sec                  
+             11907      page-faults               #    0.010 M/sec                  
+        4216028436      cycles                    #    3.576 GHz                    
+        4213738994      cycles                    #    3.571 GHz                    
+        4524546375      instructions              #    1.07  insn per cycle         
+        8007266220      instructions              #    1.90  insn per cycle         
+        1028804824      branches                  #  872.672 M/sec                  
+        1809682448      branches                  # 1533.444 M/sec                  
+          40112812      branch-misses             #    3.90% of all branches        
+          37933641      branch-misses             #    2.10% of all branches        
+         754982732      L1-dcache-loads           #  640.406 M/sec                  
+        2296597481      L1-dcache-loads           # 1946.034 M/sec                  
+          82142673      L1-dcache-load-misses     #   10.88% of all L1-dcache hits  
+          53430356      L1-dcache-load-misses     #    2.33% of all L1-dcache hits  
+           8313252      LLC-loads                 #    7.052 M/sec                  
+           5057717      LLC-loads                 #    4.286 M/sec                  
+           1904184      LLC-load-misses           #   22.91% of all LL-cache hits   
+            365052      LLC-load-misses           #    7.22% of all LL-cache hits   
+
+
+       2.336845180 seconds time elapsed
+
+       2.324473028 seconds time elapsed
+
+       0.953073000 seconds user
+       1.104098000 seconds user
+       0.231289000 seconds sys
+       0.080886000 seconds sys
+
+
+
+
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2
+
+
+ Performance counter stats for 'out/mpi':
+
+ Performance counter stats for 'out/mpi':
+
+           1180.18 msec task-clock                #    0.503 CPUs utilized          
+           1185.16 msec task-clock                #    0.510 CPUs utilized          
+               959      context-switches          #    0.813 K/sec                  
+               800      context-switches          #    0.675 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+             11959      page-faults               #    0.010 M/sec                  
+             13961      page-faults               #    0.012 M/sec                  
+        4222440488      cycles                    #    3.578 GHz                    
+        4218348958      cycles                    #    3.559 GHz                      (50.05%)
+        7963770372      instructions              #    1.89  insn per cycle         
+        4531446603      instructions              #    1.07  insn per cycle           (62.81%)
+        1800829645      branches                  # 1525.900 M/sec                  
+        1075754417      branches                  #  907.690 M/sec                    (61.87%)
+          37969856      branch-misses             #    2.11% of all branches        
+          40080810      branch-misses             #    3.73% of all branches          (61.77%)
+        2281904124      L1-dcache-loads           # 1933.530 M/sec                  
+         785405695      L1-dcache-loads           #  662.703 M/sec                    (62.25%)
+          53510845      L1-dcache-load-misses     #    2.35% of all L1-dcache hits  
+          81288680      L1-dcache-load-misses     #   10.35% of all L1-dcache hits    (63.19%)
+           5069897      LLC-loads                 #    4.296 M/sec                  
+          10809069      LLC-loads                 #    9.120 M/sec                    (50.55%)
+            369190      LLC-load-misses           #    7.28% of all LL-cache hits   
+           2443496      LLC-load-misses           #   22.61% of all LL-cache hits     (50.32%)
+
+
+       2.348325365 seconds time elapsed
+
+       2.324998084 seconds time elapsed
+
+       1.085369000 seconds user
+       0.994204000 seconds user
+       0.100497000 seconds sys
+       0.193991000 seconds sys
+
+
+
+
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2
+
+ Performance counter stats for 'out/mpi':
+
+           1174.04 msec task-clock                #    0.507 CPUs utilized          
+               783      context-switches          #    0.667 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+
+             11549      page-faults               #    0.010 M/sec                  
+ Performance counter stats for 'out/mpi':
+
+        4196706234      cycles                    #    3.575 GHz                    
+           1173.60 msec task-clock                #    0.507 CPUs utilized          
+        7943594987      instructions              #    1.89  insn per cycle         
+               809      context-switches          #    0.689 K/sec                  
+        1796804425      branches                  # 1530.449 M/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+          37934223      branch-misses             #    2.11% of all branches        
+             13428      page-faults               #    0.011 M/sec                  
+        2274720855      L1-dcache-loads           # 1937.519 M/sec                  
+        4204002335      cycles                    #    3.582 GHz                    
+          53458383      L1-dcache-load-misses     #    2.35% of all L1-dcache hits  
+        4524291389      instructions              #    1.08  insn per cycle         
+           5026336      LLC-loads                 #    4.281 M/sec                  
+        1028820701      branches                  #  876.635 M/sec                  
+            367231      LLC-load-misses           #    7.31% of all LL-cache hits   
+          40126110      branch-misses             #    3.90% of all branches        
+
+         755000939      L1-dcache-loads           #  643.319 M/sec                  
+       2.316784097 seconds time elapsed
+
+          82105957      L1-dcache-load-misses     #   10.87% of all L1-dcache hits  
+       1.085472000 seconds user
+           8299530      LLC-loads                 #    7.072 M/sec                  
+       0.092809000 seconds sys
+           1885275      LLC-load-misses           #   22.72% of all LL-cache hits   
+
+
+
+       2.316849799 seconds time elapsed
+
+       0.998927000 seconds user
+       0.179399000 seconds sys
+
+
+srun: warning: can't run 2 processes on 4 nodes, setting nnodes to 2
+
+
+ Performance counter stats for 'out/mpi':
+
+ Performance counter stats for 'out/mpi':
+
+           1178.29 msec task-clock                #    0.501 CPUs utilized          
+           1181.83 msec task-clock                #    0.508 CPUs utilized          
+               975      context-switches          #    0.827 K/sec                  
+               796      context-switches          #    0.674 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+                 0      cpu-migrations            #    0.000 K/sec                  
+             11880      page-faults               #    0.010 M/sec                  
+             13451      page-faults               #    0.011 M/sec                  
+        4213918440      cycles                    #    3.576 GHz                    
+        4208618424      cycles                    #    3.561 GHz                      (50.11%)
+        8002598347      instructions              #    1.90  insn per cycle         
+        4660739813      instructions              #    1.11  insn per cycle           (62.32%)
+        1808618733      branches                  # 1534.956 M/sec                  
+        1071464464      branches                  #  906.611 M/sec                    (61.70%)
+          37957373      branch-misses             #    2.10% of all branches        
+          39835952      branch-misses             #    3.72% of all branches          (61.62%)
+        2295046310      L1-dcache-loads           # 1947.782 M/sec                  
+         764089660      L1-dcache-loads           #  646.529 M/sec                    (62.30%)
+          53516891      L1-dcache-load-misses     #    2.33% of all L1-dcache hits  
+          82083585      L1-dcache-load-misses     #   10.74% of all L1-dcache hits    (62.91%)
+           5070588      LLC-loads                 #    4.303 M/sec                  
+           9014122      LLC-loads                 #    7.627 M/sec                    (50.84%)
+            369257      LLC-load-misses           #    7.28% of all LL-cache hits   
+           1557354      LLC-load-misses           #   17.28% of all LL-cache hits     (50.51%)
+
+
+       2.353341396 seconds time elapsed
+
+       2.325419373 seconds time elapsed
+
+       1.102506000 seconds user
+       0.981186000 seconds user
+       0.081066000 seconds sys
+       0.203416000 seconds sys
+
+
+
+

@@ -1,0 +1,238 @@
+/var/spool/slurmd/job252059/slurm_script: line 11: module: command not found
+/var/spool/slurmd/job252059/slurm_script: line 15: module: command not found
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+srun: error: broadwell-000: tasks 4,14: Exited with exit code 13
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+srun: error: broadwell-000: tasks 2,6,10,15,18-19,29-30: Exited with exit code 13
+srun: error: broadwell-001: tasks 40,53,61: Exited with exit code 8
+srun: error: broadwell-002: tasks 66,78,95: Exited with exit code 8
+srun: error: broadwell-000: task 17: Exited with exit code 2
+srun: error: broadwell-001: task 48: Exited with exit code 13
+srun: error: broadwell-003: tasks 96,104,125,127: Exited with exit code 8
+srun: error: broadwell-003: task 122: Exited with exit code 13
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: No such file or directory
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+srun: error: broadwell-002: tasks 65,67,70-71,75,77,87: Exited with exit code 8
+slurmstepd: error: execve(): out/mpi: Exec format error
+srun: error: slurm_send_node_msg: [socket:[64368164]] slurm_bufs_sendto(msg_type=RESPONSE_SLURM_RC) failed: Unexpected missing socket error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: broadwell-003: tasks 98,100-101,107,109,111,113,117,119: Exited with exit code 8
+slurmstepd: error: execve(): out/mpi: Exec format error
+srun: error: slurm_send_node_msg: [socket:[64364261]] slurm_bufs_sendto(msg_type=RESPONSE_SLURM_RC) failed: Unexpected missing socket error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: broadwell-001: tasks 33,49,55,59: Exited with exit code 2
+slurmstepd: error: execve(): out/mpi: Exec format error
+srun: error: slurm_send_node_msg: [socket:[64364263]] slurm_bufs_sendto(msg_type=RESPONSE_SLURM_RC) failed: Unexpected missing socket error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+srun: error: broadwell-000: tasks 0-1,8-9,13,16,20-21,23-24,27-28,31: Exited with exit code 2
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: slurm_send_node_msg: [socket:[64364265]] slurm_bufs_sendto(msg_type=RESPONSE_SLURM_RC) failed: Unexpected missing socket error
+slurmstepd: error: execve(): out/mpi: Exec format error
+slurmstepd: error: execve(): out/mpi: Exec format error
+srun: error: broadwell-002: tasks 65,67,70-71,75,77,87: Exited with exit code 8
+slurmstepd: error: execve(): out/mpi: Exec format error
+srun: error: Task 65 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 67 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: Exec format error
+srun: error: Task 70 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: Exec format error
+srun: error: Task 71 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: Exec format error
+srun: error: Task 75 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 77 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: Exec format error
+srun: error: Task 87 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: slurm_send_node_msg: [socket:[64364267]] slurm_bufs_sendto(msg_type=RESPONSE_SLURM_RC) failed: Unexpected missing socket error
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: broadwell-001: tasks 33,49,55,59: Exited with exit code 2
+slurmstepd: error: execve(): out/mpi: Exec format error
+srun: error: Task 33 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 49 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 55 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 59 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: slurm_send_node_msg: [socket:[64364269]] slurm_bufs_sendto(msg_type=RESPONSE_SLURM_RC) failed: Unexpected missing socket error
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: broadwell-003: tasks 98,100-101,107,109,111,113,117,119: Exited with exit code 8
+slurmstepd: error: execve(): out/mpi: Permission denied
+srun: error: Task 98 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 100 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: Permission denied
+srun: error: Task 101 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 107 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 109 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 111 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 113 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 117 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 119 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: slurm_send_node_msg: [socket:[64364271]] slurm_bufs_sendto(msg_type=RESPONSE_SLURM_RC) failed: Unexpected missing socket error
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: Permission denied
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: broadwell-000: tasks 0-1,8-9,13,16,20-21,23-24,27-28,31: Exited with exit code 2
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 0 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 1 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 8 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 9 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 13 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 16 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 20 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 21 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 23 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 24 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 27 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 28 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: Task 31 reported exit for a second time.
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: slurm_send_node_msg: [socket:[64364273]] slurm_bufs_sendto(msg_type=RESPONSE_SLURM_RC) failed: Unexpected missing socket error
+slurmstepd: error: execve(): out/mpi: No such file or directory
+srun: error: broadwell-001: tasks 33,49,55,59: Exited with exit code 2
+srun: error: Task 33 reported exit for a second time.
+srun: error: Task 49 reported exit for a second time.
+srun: error: Task 55 reported exit for a second time.
+srun: error: Task 59 reported exit for a second time.
+srun: error: broadwell-002: tasks 65,67,70-71,75,77,87: Exited with exit code 8
+srun: error: Task 65 reported exit for a second time.
+srun: error: Task 67 reported exit for a second time.
+srun: error: Task 70 reported exit for a second time.
+srun: error: Task 71 reported exit for a second time.
+srun: error: Task 75 reported exit for a second time.
+srun: error: Task 77 reported exit for a second time.
+srun: error: Task 87 reported exit for a second time.
+srun: error: broadwell-003: tasks 98,100-101,107,109,111,113,117,119: Exited with exit code 8
+srun: error: Task 98 reported exit for a second time.
+srun: error: Task 100 reported exit for a second time.
+srun: error: Task 101 reported exit for a second time.
+srun: error: Task 107 reported exit for a second time.
+srun: error: Task 109 reported exit for a second time.
+srun: error: Task 111 reported exit for a second time.
+srun: error: Task 113 reported exit for a second time.
+srun: error: Task 117 reported exit for a second time.
+srun: error: Task 119 reported exit for a second time.
+srun: error: broadwell-000: tasks 0-1,8-9,13,16,20-21,23-24,27-28,31: Exited with exit code 2
+srun: error: Task 0 reported exit for a second time.
+srun: error: Task 1 reported exit for a second time.
+srun: error: Task 8 reported exit for a second time.
+srun: error: Task 9 reported exit for a second time.
+srun: error: Task 13 reported exit for a second time.
+srun: error: Task 16 reported exit for a second time.
+srun: error: Task 20 reported exit for a second time.
+srun: error: Task 21 reported exit for a second time.
+srun: error: Task 23 reported exit for a second time.
+srun: error: Task 24 reported exit for a second time.
+srun: error: Task 27 reported exit for a second time.
+srun: error: Task 28 reported exit for a second time.
+srun: error: Task 31 reported exit for a second time.
+srun: error: broadwell-001: tasks 34,37,41,43,46,50,57,62: Exited with exit code 8
+srun: error: broadwell-002: tasks 80-81,84: Exited with exit code 13
+srun: error: broadwell-003: tasks 102,115,123: Exited with exit code 2
+srun: error: broadwell-000: tasks 3,26: Exited with exit code 13
+srun: error: broadwell-001: tasks 45,52,58: Exited with exit code 13
+srun: error: broadwell-002: tasks 83,89,91: Exited with exit code 2
+srun: error: broadwell-003: tasks 112,121,124: Exited with exit code 13
+srun: error: broadwell-000: tasks 5,7,11-12,22,25: Exited with exit code 8
+srun: error: broadwell-001: tasks 32,42,51: Exited with exit code 13
+srun: error: broadwell-003: tasks 97,99,103,105-106,108,110,114,116,120,126: Exited with exit code 2
+srun: error: broadwell-001: tasks 35-36,38-39,44,47,54,56,60,63: Exited with exit code 2
+srun: error: broadwell-003: task 118: Exited with exit code 13
+srun: error: broadwell-002: tasks 64,68-69,72-73,76,79,82,85-86,88,90,92-94: Exited with exit code 2
+srun: error: broadwell-002: task 74: Exited with exit code 13

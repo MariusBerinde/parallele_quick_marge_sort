@@ -1,0 +1,25 @@
+# prova 1
+gcc -Wall -g -O3   src/main.c src/sort.c -o out/main
+./out/main
+[big_test_merge_sort] vettore di partenza disordinato
+[big_test_merge_sort] merge sort ok, tempo di esecuzione ordinamento : 998.270752 s effettuato con 4294967296 elementi
+# prova 2
+gcc -Wall -g -O3   src/main.c src/sort.c -o out/main
+./out/main
+[big_test_merge_sort] vettore di partenza disordinato
+[big_test_merge_sort] merge sort ok, tempo di esecuzione ordinamento : 1053.472778 s effettuato con 4294967296 elementi
+# prova 3
+gcc -Wall -g -O3   src/main.c src/sort.c -o out/main
+./out/main
+[big_test_merge_sort] vettore di partenza disordinato
+[big_test_merge_sort] merge sort ok, tempo di esecuzione ordinamento : 998.357910 s effettuato con 4294967296 elementi
+# prova 4
+gcc -Wall -g -O3   src/main.c src/sort.c -o out/main
+./out/main
+[big_test_merge_sort] vettore di partenza disordinato
+[big_test_merge_sort] merge sort ok, tempo di esecuzione ordinamento : 1002.155090 s effettuato con 4294967296 elementi
+# prova 5
+gcc -Wall -g -O3   src/main.c src/sort.c -o out/main
+./out/main
+[big_test_merge_sort] vettore di partenza disordinato
+[big_test_merge_sort] merge sort ok, tempo di esecuzione ordinamento : 1114.780273 s effettuato con 4294967296 elementi

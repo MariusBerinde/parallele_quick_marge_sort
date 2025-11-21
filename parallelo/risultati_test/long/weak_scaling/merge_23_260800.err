@@ -1,0 +1,11 @@
+/var/spool/slurmd/job260800/slurm_script: line 11: module: command not found
+/var/spool/slurmd/job260800/slurm_script: line 15: module: command not found
+In file included from src/mpi.c:10:
+src/lib.h:29:13: warning: inline function ‘select_median_of_3’ declared but never defined
+   29 | inline void select_median_of_3(long* restrict data, long basso, long alto);
+      |             ^~~~~~~~~~~~~~~~~~
+srun: warning: can't run 1 processes on 5 nodes, setting nnodes to 1
+srun: warning: can't run 1 processes on 5 nodes, setting nnodes to 1
+srun: warning: can't run 1 processes on 5 nodes, setting nnodes to 1
+srun: warning: can't run 1 processes on 5 nodes, setting nnodes to 1
+srun: warning: can't run 1 processes on 5 nodes, setting nnodes to 1

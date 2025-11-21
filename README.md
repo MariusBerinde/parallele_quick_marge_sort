@@ -1,11 +1,11 @@
 # Dettagli 
 Questo repository contiene lo sviluppo degli algoritmi **quick sort** e **merge sort**.
 Degli algoritmi usati esistono due versioni un che funziona con i tipi long e una per i tipi int , i file che hanno la sigla **_int** contengono questa versione.
-La cartella sequenziale lo sviluppo della versione sequeziale dei suddetti algoritmi, è stata utilizzata principalmente per esporare come questi algoritmi possano essere scritti in C 
+La cartella sequenziale lo sviluppo della versione sequenziale dei suddetti algoritmi, è stata utilizzata principalmente per esporare come questi algoritmi possano essere scritti in C 
 e come usare i make file.
-La cartella parallelo contiene le implementazioni parallele dei sudddetti algoritmi, in particolare 
-La cartella scripts contiene gli scripts usati per il lancio dei test usado sbatch.
-**main** contiene i benckmark della versione implementata con openmpi mentre merge contiene implementazione e benckmark della versione implementata con **mpi**.
+La cartella parallelo contiene le implementazioni parallele dei suddetti algoritmi, in particolare 
+La cartella scripts contiene gli scripts usati per il lancio dei test usando sbatch.
+**main** contiene i benckmark della versione implementata con openmp mentre merge contiene implementazione e benckmark della versione implementata con **mpi**.
 
 Il make file presente serve per i test in locale .
 

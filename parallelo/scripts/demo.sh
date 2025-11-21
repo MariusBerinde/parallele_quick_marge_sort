@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=merge_sort          # Nome del job
-#SBATCH --output=../risultati_test/merge_sort%j.out  # File output (%j = job ID)
-#SBATCH --error=../risultati_test/merge_sort_error_%j.err    # File errori
+#SBATCH --output=../risultati_test/%x_%j.out  # File output (%j = job ID)
+#SBATCH --error=../risultati_test/%x_%j.err    # File errori
 #SBATCH --nodes=2                    # Numero di nodi
 #SBATCH --ntasks-per-node=32          # Task (processi MPI) per nodo
 #SBATCH --cpus-per-task=1            # CPU per task
